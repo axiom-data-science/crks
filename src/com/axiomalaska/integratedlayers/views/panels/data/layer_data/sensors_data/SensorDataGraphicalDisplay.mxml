@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:NavigatorContent xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" label="{is_web_cam ? 'Images' : 'Chart'}"
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" xmlns:base="com.axiomalaska.charts.base.*" xmlns:axes="com.axiomalaska.charts.axes.*" xmlns:scale="com.axiomalaska.charts.scale.*" xmlns:implementations="com.axiomalaska.charts.implementations.*" xmlns:ns="com.axiomalaska.integratedlayers.views.panels.data.layer_data.sensors_data.*" xmlns:ns1="com.axiomalaska.integratedlayers.views.panels.data.layer_data.sensors_data.web_cam_display.*">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.Sensor;
+			import com.axiomalaska.integratedlayers.utilities.ResultSetHelper;
+			import com.axiomalaska.integratedlayers.views.panels.data.layer_data.sensors_data.web_cam_display.SensorWebCam;
+			import com.axiomalaska.models.ResultSet;
+			import com.axiomalaska.models.VariableDataDescriptor;
+			import com.axiomalaska.models.VariableDataDescriptorIndexType;
+			import com.axiomalaska.models.VariableDescriptor;
+			import com.axiomalaska.models.VariableDescriptorType;
+			
+			import mx.collections.ArrayCollection;
+			
+			private var _result_set:ResultSet;
+			
+			[Bindable]
+			private var is_web_cam:Boolean;
+			
+			[Bindable]
+			private var is_error:Boolean;
+			
+			[Bindable]
+			public function set result_set($result_set:ResultSet):void{
+				if(_result_set != $result_set){
+					_result_set = $result_set;
+					
+					
+					if(ResultSetHelper.resultSetHasData(result_set)){
+						is_error = false;
+						is_web_cam = false;
+						var web_cams:Array = ResultSetHelper.getVariableDescriptorTypeIndex(
+							result_set,
+							[VariableDescriptorType.WEB_CAM_URL],
+							[VariableDataDescriptorIndexType.SINGLE]
+						);
+						
+						if(web_cams){
+							is_web_cam = true;
+						}
+					}else{
+						is_error = true;
+					}
+				}
+				
+			}
+			
+			
+			public function get result_set():ResultSet
+			{
+				return _result_set;
+			}
+			
+			private function buildInterface():void{
+				
+			}
+
+
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+
+	</fx:Declarations>
+	
+	<ns:SensorChart visible="{!is_web_cam &amp;&amp; !is_error}" result_set="{!is_web_cam ? result_set : new ResultSet()}" />
+	<ns1:SensorWebCam visible="{is_web_cam &amp;&amp; !is_error}" result_set="{is_web_cam ? result_set : new ResultSet()}" />
+	<s:HGroup visible="{is_error}" width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
+		<s:Label text="This sensor is not returning current data.  Please try again later." fontSize="14" color="0x666666">
+			<s:filters>
+				<s:DropShadowFilter alpha=".2" />
+			</s:filters>
+		</s:Label>
+	</s:HGroup>
+	
+	
+</s:NavigatorContent>

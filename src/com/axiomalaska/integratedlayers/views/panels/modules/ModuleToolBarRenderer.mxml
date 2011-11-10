@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="false" width="100%" height="100%"
+				click="currentState = 'click';onClick();"
+				mouseOver="currentState = 'hover'" mouseOut="currentState = 'normal'" mouseDown="currentState = 'down'" xmlns:maps="com.google.maps.*" xmlns:modules="views.panels.modules.*" xmlns:components="com.axiomalaska.integratedlayers.views.components.*" xmlns:fxg="assets.fxg.*" xmlns:buttons="views.components.buttons.*" xmlns:modules1="com.axiomalaska.integratedlayers.views.panels.modules.*"
+				>
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.crks.dto.Layer;
+			import com.axiomalaska.crks.dto.LayerGroup;
+			import com.axiomalaska.crks.dto.Module;
+			import com.axiomalaska.crks.dto.PortalModule;
+			import com.google.maps.LatLng;
+			import com.google.maps.LatLngBounds;
+			import com.google.maps.MapEvent;
+			import com.google.maps.MapType;
+			import com.google.maps.overlays.Polygon;
+			
+			import com.axiomalaska.integratedlayers.events.ModuleEvent;
+			
+			
+			override public function set data($data:Object):void{
+				super.data = $data;
+				if($data){
+					module = $data as Module;
+				}
+			}
+			
+			[Bindable]
+			private var module:Module;
+			
+			private function onClick():void{
+				dispatchEvent(new ModuleEvent(ModuleEvent.SHOW_MODULE,module));
+			}
+			
+
+
+			
+			//protected function 
+			
+
+
+		]]>
+	</fx:Script>
+	<s:states>
+		<s:State name="normal" />
+		<s:State name="hover" stateGroups="mouse_on" />
+		<s:State name="down" stateGroups="mouse_on" />
+		<s:State name="click" stateGroups="mouse_on" />
+	</s:states>
+	<s:Group width="100%" height="100%">
+		<s:Graphic width="100%" height="100%">
+			<s:Rect width="36" height="40" alpha="0" alpha.mouse_on="1">
+				<s:fill>
+					<s:SolidColor color="0x330000" />
+				</s:fill>
+			</s:Rect>
+		</s:Graphic>
+		
+	</s:Group>
+
+
+	
+	<!--
+	<buttons:IconButtonComponent>
+		<buttons:icon>
+			<s:Graphic buttonMode="true">
+				<fxg:leafsimple width="20" height="20" />
+			</s:Graphic>
+		</buttons:icon>
+	</buttons:IconButtonComponent>
+	-->
+	
+	<s:Group width="100%" height="100%" buttonMode="true">
+		<!--<s:Graphic>
+			<s:Ellipse width="20" height="20" left="4" top="4">
+				<s:fill>
+					<s:SolidColor color="0xCCCCCC" color.mouse_on="0xE0E0E0" />
+				</s:fill>
+			</s:Ellipse>
+			<s:filters>
+				<s:DropShadowFilter blurX="2" blurY="2" alpha=".3" alpha.mouse_on=".6" />
+				<mx:BevelFilter blurX="5" blurY="5" strength=".3" strength.mouse_on=".5" />
+			</s:filters>
+		</s:Graphic>-->
+		<s:HGroup width="100%" height="100%" verticalAlign="middle" horizontalAlign="center" buttonMode="true">
+			<modules1:ModuleIcon module="{module}" />
+		</s:HGroup>
+		
+	</s:Group>
+	<s:PopUpAnchor id="hoverContent" displayPopUp.hover="true" bottom="0" left="-50">
+		<s:BorderContainer width="300" cornerRadius="5" borderWeight="8" borderColor="0x330000" dropShadowVisible="true" minHeight="50">
+			<s:layout>
+				<s:HorizontalLayout paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="10" gap="10" />
+			</s:layout>
+				<s:VGroup width="100%">
+					<s:Label fontSize="14" fontWeight="bold" text="{module.label}" width="100%" color="0x333333" />
+					<s:Label fontSize="11" text="{module.layerGroups.length + ' layer groups'}" width="100%" color="0x666666" />
+					<s:HGroup width="100%" visible="{module.hasTimeComponent}" includeInLayout="{module.hasTimeComponent}">
+						<s:Label text="{module.startTimeUtc.toUTCString() + ' - ' + module.endTimeUtc.toUTCString()}" width="100%" fontSize="11" color="0x666666" />
+					</s:HGroup>
+				</s:VGroup>
+				
+				<components:SpacialExtentOverviewMap width="120" height="120" spacial_extent_item="{module}" />
+		</s:BorderContainer>
+	</s:PopUpAnchor>
+	
+</s:ItemRenderer>

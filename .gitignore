@@ -1,0 +1,6 @@
+bin
+bin-debug
+bin-release
+target
+build.properties
+libs

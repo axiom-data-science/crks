@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Graphic version="1.0" viewHeight="15.75" viewWidth="15.75" ai:appVersion="14.0.0.367" d:id="1" xmlns="http://ns.adobe.com/fxg/2008" xmlns:ai="http://ns.adobe.com/ai/2008" xmlns:d="http://ns.adobe.com/fxg/2008/dt">
+  <Group x="-0.0625" y="-0.0625" d:id="2" d:type="layer" d:userLabel="Layer 1">
+    <Group ai:knockout="0">
+      <Path winding="nonZero" ai:knockout="0" data="M7.92725 14.8545C4.10742 14.8545 1 11.7471 1 7.92676 1 4.10742 4.10742 1 7.92725 1 11.7466 1 14.854 4.10742 14.854 7.92676 14.854 11.7471 11.7466 14.8545 7.92725 14.8545L7.92725 14.8545Z" >
+        <fill>
+          <SolidColor color="#ffffff"/>
+        </fill>
+      </Path>
+      <Path winding="nonZero" ai:knockout="0" data="M7.92725 2C11.1953 2 13.854 4.65918 13.854 7.92676 13.854 11.1953 11.1953 13.8545 7.92725 13.8545 4.65918 13.8545 2 11.1953 2 7.92676 2 4.65918 4.65918 2 7.92725 2M7.92725 0C3.54883 0 0 3.54883 0 7.92676 0 12.3047 3.54883 15.8545 7.92725
+ 15.8545 12.3047 15.8545 15.854 12.3047 15.854 7.92676 15.854 3.54883 12.3047 0 7.92725 0L7.92725 0Z" >
+        <fill>
+          <SolidColor color="#333333"/>
+        </fill>
+      </Path>
+    </Group>
+    <Path winding="nonZero" ai:knockout="0" data="M7.93262 8.70703L11.5171 1.53809C10.4087 1.05859 9.18848 0.790039 7.90381 0.790039 6.6377 0.790039 5.43262 1.0498 4.33691 1.51563L7.93262 8.70703Z" >
+      <fill>
+        <SolidColor color="#333333"/>
+      </fill>
+    </Path>
+  </Group>
+  <Private>
+    <ai:PrivateElement d:ref="#1">
+      <ai:SaveOptions>
+        <ai:Dictionary>
+          <ai:DictEntry name="preserveTextPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="preserveFilterPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="clipToActiveArtboard" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="downsampleLinkedImages" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="preserveGradientPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="rasterizeResolution" value="72" valueType="Integer"/>
+          <ai:DictEntry name="writeImages" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="includeXMP" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="aiEditCap" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="includeSymbol" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="versionKey" value="1" valueType="Integer"/>
+        </ai:Dictionary>
+      </ai:SaveOptions>
+      <ai:DocData base="windarrow.assets/images"/>
+      <ai:Artboards originOffsetH="0" originOffsetV="20" rulerCanvasDiffH="20" rulerCanvasDiffV="-20" zoom="24">
+        <ai:Artboard active="1" bottom="4.25" index="0" right="15.75" top="20"/>
+        <ai:ArtboardsParam all="0" range="" type="0"/>
+      </ai:Artboards>
+    </ai:PrivateElement>
+    <ai:PrivateElement d:ref="#2">
+      <ai:LayerOptions colorType="ThreeColor">
+        <ai:ThreeColor blue="257" green="128.502" red="79.31"/>
+      </ai:LayerOptions>
+    </ai:PrivateElement>
+  </Private>
+</Graphic>

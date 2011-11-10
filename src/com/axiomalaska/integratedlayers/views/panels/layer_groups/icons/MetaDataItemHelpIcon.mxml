@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" currentState="normal" buttonMode="true"  toolTip="{'Click for more information on ' + meta_data_item.label}" click="onHelpClick()" xmlns:fxg="assets.fxg.*">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.crks.interfaces.IMetaDataItem;
+			
+			import com.axiomalaska.integratedlayers.events.HelpEvent;
+			
+			[Dispatcher]
+			public var dispatcher:IEventDispatcher;
+			
+			[Bindable]
+			public var meta_data_item:IMetaDataItem;
+			
+			//import views.panels.help.HelpPopup;
+			public function onHelpClick():void{
+				dispatcher.dispatchEvent(new HelpEvent(HelpEvent.SHOW_HELP_CONTENT,meta_data_item));
+				
+			}
+			
+			
+			[Bindable]
+			public var size:Number;
+			
+		]]>
+	</fx:Script>
+	<s:states>
+		<s:State name="hovered" />
+		<s:State name="normal" />
+	</s:states>
+	<!--<fxg:helpsimple includeIn="normal" />
+	<fxg:helpbutton includeIn="hovered" />-->
+	<fxg:helpbutton id="icon" width="{size}" height="{size}" />
+</s:Group>

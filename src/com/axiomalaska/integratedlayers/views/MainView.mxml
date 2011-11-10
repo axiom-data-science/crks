@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<components:IconPanel xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" 
+			   xmlns:ns="views.panels.time_slider.*" xmlns:ns1="library://ns.patrickmowrer.com" xmlns:maps="com.google.maps.*" xmlns:legend="com.axiomalaska.integratedlayers.views.panels.legend.*" xmlns:google="com.axiomalaska.map.types.google.*" xmlns:components="com.axiomalaska.components.*" xmlns:layers="com.axiomalaska.integratedlayers.views.panels.layers.*" xmlns:modules="views.panels.modules.*" xmlns:map="com.axiomalaska.integratedlayers.map.*" xmlns:ns2="views.panels.layer_groups.*" xmlns:fxg="assets.fxg.*"
+			   backgroundColor="{uint('0x' + applicationData.portal.backgroundColor2)}" background1="{uint('0x' + applicationData.portal.backgroundColor)}" background2="{uint('0x' + applicationData.portal.backgroundColor2)}" xmlns:ns8="com.axiomalaska.integratedlayers.views.panels.data.layer_data.*" xmlns:help="views.panels.help.*" xmlns:ns9="com.axiomalaska.integratedlayers.views.panels.data.layer_data.sensors_data.*" xmlns:ns11="com.axiomalaska.integratedlayers.views.panels.data.layer_data.wms_point_data.*" xmlns:ns10="com.axiomalaska.integratedlayers.views.panels.data.layer_data.virtual_sensor.*" xmlns:buttons="views.components.buttons.*" xmlns:components1="com.axiomalaska.integratedlayers.views.components.*" xmlns:controls="controls.*" xmlns:tabs="com.axiomalaska.integratedlayers.views.components.navigation.tabs.*" xmlns:data="com.axiomalaska.integratedlayers.views.panels.data.*" xmlns:ns12="com.axiomalaska.integratedlayers.views.panels.time_slider.*" xmlns:modules1="com.axiomalaska.integratedlayers.views.panels.modules.*" xmlns:ns13="com.axiomalaska.integratedlayers.views.panels.layer_groups.*" xmlns:buttons1="com.axiomalaska.integratedlayers.views.components.buttons.*">
+ 
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.map.BaseLayerType;
+			import com.axiomalaska.map.events.BoundingBoxEvent;
+			import com.axiomalaska.map.overlay.WMS;
+			import com.axiomalaska.crks.dto.Layer;
+			
+			import com.axiomalaska.integratedlayers.events.HelpEvent;
+			import com.axiomalaska.integratedlayers.events.LayerPanelEvent;
+			import com.axiomalaska.integratedlayers.events.ModuleEvent;
+			import com.axiomalaska.integratedlayers.events.VirtualSensorEvent;
+			import com.axiomalaska.integratedlayers.events.WMSDataEvent;
+			
+			import com.axiomalaska.integratedlayers.models.presentation_data.ApplicationData;
+			import com.axiomalaska.integratedlayers.models.presentation_data.LegendData;
+			import com.axiomalaska.integratedlayers.models.presentation_data.MapData;
+			import com.axiomalaska.integratedlayers.models.presentation_data.TimeData;
+			
+			import mx.graphics.ImageSnapshot;
+			import mx.managers.FocusManager;
+			import mx.managers.PopUpManager;
+			
+			import com.axiomalaska.integratedlayers.views.panels.tools.MapPrint;
+			[Bindable]
+			[Inject("applicationData", bind="true")]
+			public var applicationData:ApplicationData;
+			
+			[Bindable]
+			[Inject("legendData", bind="true")]
+			public var legendData:LegendData;
+			
+			[Bindable]
+			[Inject("mapData", bind="true")]
+			public var mapData:MapData;
+			
+			[Bindable]
+			[Inject("timeData", bind="true")]
+			public var timeData:TimeData;
+			
+			protected function layerSearchFocus():void{
+				if(!applicationData.layers_panel_active){
+					layerActivate();
+				}
+			}
+
+			protected function layerActivate():void
+			{
+				
+				if(applicationData.layers_panel_active){
+					dispatchEvent(new LayerPanelEvent(LayerPanelEvent.LAYER_PANEL_DEACTIVATE));
+				}else{
+					if(applicationData.active_module){
+						dispatchEvent(new ModuleEvent(ModuleEvent.HIDE_MODULE,applicationData.active_module));
+					}
+					dispatchEvent(new LayerPanelEvent(LayerPanelEvent.LAYER_PANEL_ACTIVATE));
+					focusManager.setFocus(search);
+				}
+			}
+
+
+
+			protected function bounding_box_mode_change($evt:Event):void
+			{
+				mapData.bounding_box_mode = !mapData.bounding_box_mode;
+				if(mapData.bounding_box_mode){
+					mapData.wms_info_mode = false;
+					dispatchEvent(new WMSDataEvent(WMSDataEvent.WMS_INFO_MODE_END));
+					mapData.virtual_sensor_mode = false;
+					dispatchEvent(new VirtualSensorEvent(VirtualSensorEvent.VIRTUAL_SENSOR_MODE_END));
+					dispatchEvent(new BoundingBoxEvent(BoundingBoxEvent.BOUNDING_BOX_MODE_START));
+				}else{
+					dispatchEvent(new BoundingBoxEvent(BoundingBoxEvent.BOUNDING_BOX_MODE_END));
+				}
+			}
+			
+			protected function wms_info_mode_change($evt:Event):void{
+				mapData.wms_info_mode = !mapData.wms_info_mode;
+				if(mapData.wms_info_mode){
+					mapData.bounding_box_mode = false;
+					dispatchEvent(new BoundingBoxEvent(BoundingBoxEvent.BOUNDING_BOX_MODE_END));
+					mapData.virtual_sensor_mode = false;
+					dispatchEvent(new VirtualSensorEvent(VirtualSensorEvent.VIRTUAL_SENSOR_MODE_END));
+					dispatchEvent(new WMSDataEvent(WMSDataEvent.WMS_INFO_MODE_START));
+				}else{
+					dispatchEvent(new WMSDataEvent(WMSDataEvent.WMS_INFO_MODE_END));
+				}
+			}
+			
+			protected function virtual_sensor_mode_change($evt:Event):void{
+				if(!mapData.virtual_sensor_mode){
+					mapData.bounding_box_mode = false;
+					dispatchEvent(new BoundingBoxEvent(BoundingBoxEvent.BOUNDING_BOX_MODE_END));
+					mapData.wms_info_mode = false;
+					dispatchEvent(new WMSDataEvent(WMSDataEvent.WMS_INFO_MODE_END));
+					dispatchEvent(new VirtualSensorEvent(VirtualSensorEvent.VIRTUAL_SENSOR_MODE_START));
+				}else{
+					dispatchEvent(new VirtualSensorEvent(VirtualSensorEvent.VIRTUAL_SENSOR_MODE_END));
+				}
+			}
+			
+			
+			[Embed(source="E:/flex/AxiomMaps/src/assets/images/google-maps-marquee-download-off.png")]
+			[Bindable]
+			public var downloadOff:Class;
+
+			[Embed(source="E:/flex/AxiomMaps/src/assets/images/google-maps-marquee-download-on.png")]
+			[Bindable]
+			public var downloadOn:Class;
+			
+			[Embed(source="E:/flex/AxiomMaps/src/assets/images/google-maps-point-download-off.png")]
+			[Bindable]
+			public var pointDownloadOff:Class;
+			
+			[Embed(source="E:/flex/AxiomMaps/src/assets/images/google-maps-point-download-on.png")]
+			[Bindable]
+			public var pointDownloadOn:Class;
+			
+			[Bindable]
+			[Embed(source="E:/flex/AxiomMaps/src/assets/images/google-maps-virtual-sensor-tool-on.png")]
+			public var virtualSensorOn:Class;
+			
+			[Bindable]
+			[Embed(source="E:/flex/AxiomMaps/src/assets/images/google-maps-virtual-sensor-tool-off.png")]
+			public var virtualSensorOff:Class;
+			
+			[Bindable]
+			[Embed(source="E:/flex/AxiomMaps/src/assets/images/google-maps-screenshot-tool-off.png")]
+			public var screenShotOff:Class;
+			
+			private var mapPrint:MapPrint = new MapPrint();
+
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<components:titleBarIcons>
+		<s:HGroup width="100%" height="100%" verticalAlign="middle" visible="{!applicationData.loading}">
+			<s:HGroup width="100%" height="100%" verticalAlign="middle">
+				<s:Label text="{applicationData.portal.label}" fontWeight="bold" fontSize="18" color="0xFFFFFF" />
+				<mx:Image source="@Embed('E:/flex/AxiomMaps/src/assets/images/help-small.png')" buttonMode="true" click="dispatchEvent(new HelpEvent(HelpEvent.SHOW_APPLICATION_HELP));"/>
+			</s:HGroup>
+			
+			<!-- HACK! NEEDS TO MOVE IN TO DB -->
+			<s:Label 
+					visible="{applicationData.portal.id == 10}"
+					includeInLayout="{applicationData.portal.id == 10}"
+					text="Copper River Knowledge System home page" 
+					buttonMode="true" color="0xFFFFCC" fontWeight="bold" fontSize="11"
+					click="navigateToURL(new URLRequest('http://www.crks.org'),'_blank')" /> 
+		</s:HGroup>
+	</components:titleBarIcons>
+	<s:HGroup width="100%" height="100%" paddingBottom="5" paddingLeft="10" paddingRight="10" gap="12">
+		<s:VGroup width="100%" height="100%">
+			<components:IconPanel width="100%" height="100%" borderAlpha="0">
+				
+					<components:titleBarIcons>
+						<s:HGroup width="100%" horizontalAlign="right" verticalAlign="middle"  visible="{!applicationData.loading}">
+							<!--
+							<s:TabBar buttonMode="true" dataProvider="{data_view}" fontSize="14" cornerRadius="0" skinClass="skins.TabsSkin" />
+							-->
+							
+
+								<modules1:ModuleToolBar />
+							<s:HGroup toolTip="Search layers">
+								<fxg:searchbutton buttonMode="true" click="layerActivate()" />
+								<s:TextInput text="@{applicationData.layer_search_term}" focusIn="layerSearchFocus()" click="layerSearchFocus()" change="{applicationData.searchLayerGroups()}" id="search" width="250" />
+							</s:HGroup>
+								<!--<s:Label text="All layers" fontWeight="bold" color="0xFFFFFF" buttonMode="true" click="layerActivate()" />-->
+
+								
+							
+						</s:HGroup>
+					</components:titleBarIcons>
+					<mx:ViewStack width="100%" height="100%" id="data_view">
+						<s:NavigatorContent width="100%" height="100%" label="Map">
+							<s:layout>
+								<s:VerticalLayout gap="0" />
+							</s:layout>
+							<s:Group width="100%" height="100%">
+								<map:IntegratedGoogleMap id="map" width="100%" height="100%" center="65,-150" key="LOCAL" base_layer="{applicationData.portal.baseLayerCode ? applicationData.portal.baseLayerCode : BaseLayerType.TERRAIN_BW}">
+									<!--map:filters>
+										<s:DropShadowFilter inner="true" />
+									</map:filters-->
+								</map:IntegratedGoogleMap>
+								<s:HGroup width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
+									<!-- <controls:Spinner visible="{mapData.tiles_loading}" />  -->
+								</s:HGroup>
+								<s:Group width="100%" height="100%">
+									<s:HGroup width="100%" paddingLeft="75" paddingTop="15">
+										<mx:Image 
+											source="{mapData.bounding_box_mode ? downloadOn : downloadOff}" click="bounding_box_mode_change(event)"
+											toolTip="Download vector data within bounds" buttonMode="true"
+											visible="{Boolean(legendData.vector_legend_items_collection.length > 0)}" 
+											includeInLayout="{Boolean(legendData.vector_legend_items_collection.length > 0)}"
+										/>
+										<mx:Image 
+											source="{mapData.wms_info_mode ? pointDownloadOn : pointDownloadOff}" click="wms_info_mode_change(event)" 
+											toolTip="Explore point feature data for vector layers" buttonMode="true"
+											visible="{Boolean(legendData.vector_legend_items_collection.length > 0)}" 
+											includeInLayout="{Boolean(legendData.vector_legend_items_collection.length > 0)}"
+										/>
+										<mx:Image 
+											source="{mapData.virtual_sensor_mode ? virtualSensorOn : virtualSensorOff}" click="virtual_sensor_mode_change(event)" buttonMode="true"
+											toolTip="Drop virtual sensor on map" 
+											visible="{Boolean(legendData.raster_legend_items_collection.length > 0)}" 
+											includeInLayout="{Boolean(legendData.raster_legend_items_collection.length > 0)}"
+										/>
+										<mx:Image
+											source="{screenShotOff}"
+											toolTip="Export a printable version of map"
+											click="mapPrint.map = map;mapPrint.layers = applicationData.active_layers_collection;mapPrint.open();"
+											buttonMode="true"
+											visible="{Boolean(map.base_layer != BaseLayerType.GINA &amp;&amp; map.base_layer != BaseLayerType.RELIEF)}"
+										/>
+									</s:HGroup>
+									
+								</s:Group>
+							</s:Group>
+							<s:VGroup width="100%" bottom="0">
+								<s:VGroup width="100%" visible="{Boolean(mapData.active_data_views.length > 0)}" includeInLayout="{Boolean(mapData.active_data_views.length > 0)}" minHeight="0">				
+									<!--<tabs:TerrificTabBar fontSize="10" dataProvider="{vs}" />
+								<mx:ViewStack width="100%" height="300" id="vs">-->
+									<ns11:WMSDataPanel wms_info="{mapData.wms_info_data}"
+										visible="{Boolean(mapData.wms_info_data)}" includeInLayout="{Boolean(mapData.wms_info_data)}" height="250" />
+									<ns10:VirtualSensorDataPanel virtual_sensor_location="{applicationData.active_virtual_sensor}" 
+										visible="{Boolean(applicationData.active_virtual_sensor)}" includeInLayout="{Boolean(applicationData.active_virtual_sensor)}" height="300"/>
+									<ns9:StationDataPanel station="{applicationData.active_station}" height="350"
+										visible="{Boolean(applicationData.active_station)}" includeInLayout="{Boolean(applicationData.active_station)}"/>
+								<!--</mx:ViewStack>-->
+								</s:VGroup>
+								<!--
+								
+								<data:DataPanelTabs height="300" dataProvider="{mapData.active_data_views}" 
+													visible="{Boolean(mapData.active_data_views.length > 0)}" includeInLayout="{Boolean(mapData.active_data_views.length > 0)}" />
+								
+								-->
+								<ns12:SkinnableCompoundTimeSlider
+									minDate="@{timeData.minimum_date}" maxDate="@{timeData.maximum_date}"
+									sliceDate="@{timeData.time_slice}"
+									boundedDates="@{timeData.time_bounds}"
+									slice_layers_collection="{applicationData.active_raster_layers_collection}" 
+									bounded_layers_collection="{applicationData.active_vector_layers_collection}"
+									/>
+							</s:VGroup>
+						</s:NavigatorContent>
+						<s:NavigatorContent width="100%" height="100%" label="Data">
+							<mx:DataGrid width="100%" height="100%" />
+						</s:NavigatorContent>
+					</mx:ViewStack>
+					<mx:Canvas width="100%" height="100%"  visible="{Boolean(applicationData.active_module)}">
+						<modules1:ModulesPanel id="modules" width="350" right="0" />
+					</mx:Canvas>
+					<mx:Canvas width="100%" height="100%">
+						<!--<layers:LayersPanel id="layers" right="0" />-->
+						<ns13:LayerGroupsPanel id="layers" right="0" visible="{Boolean(applicationData.layers_panel_active)}" width="350" />
+					</mx:Canvas>
+					<buttons1:PanelCollapseButton buttonMode="true" right="-2" top="50" backgroundColor="{uint('0x' + applicationData.portal.backgroundColor2)}" 
+												 click="{applicationData.legend_panel_active = !applicationData.legend_panel_active}"
+												 currentState="{applicationData.legend_panel_active ? 'open' : 'closed'}"
+												 toolTip="{applicationData.legend_panel_active ? 'Collapse legend panel' : 'Open legend panel'}"
+												 />
+				
+			</components:IconPanel>
+			<!--<ns:CompoundTimeSlider width="100%" />-->
+
+			<!--
+			<ns:BoundedTimeSlider backgroundAlpha="0" title="Vector bounds" />
+			<ns:InstanceTimeSlider backgroundAlpha="0" title="Raster instance" />
+			-->
+		</s:VGroup>
+		
+		<legend:LegendPanel id="legend" width="350" height="100%"
+							visible="{!applicationData.loading &amp;&amp; applicationData.legend_panel_active}" includeInLayout="{!applicationData.loading &amp;&amp; applicationData.legend_panel_active}" />
+	</s:HGroup>
+	<components1:LoaderModal visible="{applicationData.loading}" background_color1="{uint('0x' + applicationData.portal.backgroundColor)}" background_color2="{uint('0x' + applicationData.portal.backgroundColor2)}" />
+</components:IconPanel>

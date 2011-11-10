@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" currentState="normal" buttonMode="true"  toolTip="{'Click for more information on ' + layer_group.label}" click="onHelpClick();" xmlns:fxg="assets.fxg.*">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.crks.dto.LayerGroup;
+			
+			import com.axiomalaska.integratedlayers.views.panels.help.LayerGroupHelp;
+			
+			
+			private var layerGroupHelp:LayerGroupHelp;
+			
+			private function onHelpClick():void{
+				if(!layerGroupHelp){
+					layerGroupHelp = new LayerGroupHelp();
+				}
+				layerGroupHelp.layer_group = layer_group;
+				layerGroupHelp.open();
+				//layerGroupHelp.setModule(layer_group.module);
+			}
+			
+			[Bindable]
+			public var layer_group:LayerGroup;
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:states>
+		<s:State name="hovered" />
+		<s:State name="normal" />
+	</s:states>
+	<fxg:helpsimple includeIn="normal" />
+	<fxg:helpbutton includeIn="hovered" />
+</s:Group>

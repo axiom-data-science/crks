@@ -1,0 +1,126 @@
+/* CSS file */
+
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+@namespace axiom_components "com.axiomalaska.components.*";
+@namespace terrific_tabs "com.axiomalaska.integratedlayers.views.components.navigation.tabs.*";
+@namespace axiom_timeline "com.axiomalaska.timeline.*";
+@namespace axiom_timecharts "com.axiomalaska.timeline.charts.*";
+@namespace axiom_linecharts "com.axiomalaska.timeline.charts.line.*";
+@namespace axiom_chart_axes "com.axiomalaska.timeline.charts.axes.*";
+@namespace axiom_timeline_labels "com.axiomalaska.timeline.charts.axes.labels.*";
+
+
+s|Panel.topLevel #titleDisplay{
+	color:#FFFFFF;
+}
+
+s|Panel{
+	skinClass: ClassReference("skins.ToplevelPanelSkin");
+}
+
+axiom_components|IconPanel{
+	background1	:#333333;
+	background2:#666666;
+	drop-shadow-visible:false;
+	border-visible:false;
+	border-alpha:0;
+}
+
+axiom_components|IconPanel#layerTypeSection{
+	background1:#CCCCCC;
+	background2:#999999
+}
+
+axiom_components|IconPanel#layerTypeSection #titleDisplay{
+	color:#333333;
+	font-size:13;
+}
+
+
+s|Panel.topLevel s|Panel #titleDisplay{
+	color:#666666;
+}
+
+s|Button#minimize_button{
+	skinClass: ClassReference("skins.MinimizeButtonSkin");	
+}
+
+/*
+s|ComboBox{
+	fontSize:11;
+	fontWeight:bold;
+}
+*/
+
+s|List s|Scroller{
+	horizontalScrollPolicy: off;
+	paddingRight:5;
+}
+
+s|CheckBox{
+	skinClass: ClassReference("skins.CheckBoxLabelWrapSkin");
+}
+
+
+terrific_tabs|TerrificTabBar {
+	skinClass:ClassReference("com.axiomalaska.integratedlayers.views.components.navigation.tabs.skins.TerrificTabBarSkin");
+}
+
+terrific_tabs|TerrificTabBarButton {
+	skinClass:ClassReference("com.axiomalaska.integratedlayers.views.components.navigation.tabs.skins.TerrificTabBarButtonSkin");
+}
+
+
+.main axiom_timeline_labels|SkinnableAxisLabel{
+	color:#666666;
+	fontSize:10;
+	fontWeight:normal;
+}
+
+.lineChart axiom_timeline_labels|SkinnableAxisLabel{
+	fontSize:11;
+	fontWeight:bold;
+}
+
+/*
+axiom_chart_axes|SkinnableTimeAxis{
+	backgroundVisible:true;
+}
+*/
+
+axiom_chart_axes|SkinnableTimeAxis.lineChartReference{
+	backgroundVisible:false;
+}
+
+axiom_timeline|SkinnableTimeline.lineChartReference{
+	backgroundVisible:false;
+}
+
+
+axiom_chart_axes|SkinnableTimeAxis.lineChartReference axiom_timeline_labels|SkinnableAxisLabel{
+	fontSize:10;
+	fontWeight:normal;
+	color:#333333;
+}
+
+
+
+axiom_chart_axes|SkinnableVerticalAxis axiom_timeline_labels|SkinnableAxisLabel{
+	fontSize:10;
+	fontWeight:normal;
+	color:#999999;
+}
+
+.overview_chart axiom_linecharts|SkinnableLineChart{
+	lineColor:#999999;
+	lineWeight:3;
+}
+
+
+
+
+
+
+

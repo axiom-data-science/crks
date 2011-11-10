@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<components:IconPanel 
+		xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" 
+		 xmlns:components="com.axiomalaska.components.*" xmlns:legend="com.axiomalaska.integratedlayers.views.panels.legend.*" xmlns:fxg="assets.fxg.*" borderAlpha="0"
+		 >
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.crks.helpers.LayerTypes;
+			
+			import com.axiomalaska.integratedlayers.events.LayerGroupEvent;
+			import com.axiomalaska.integratedlayers.events.LegendEvent;
+			
+			import com.axiomalaska.integratedlayers.models.presentation_data.ApplicationData;
+			import com.axiomalaska.integratedlayers.models.presentation_data.LegendData;
+			
+			import com.axiomalaska.integratedlayers.views.panels.layer_groups.renderers.LibraryLayerGroupRenderer;
+			
+			[Bindable]
+			[Inject("legendData")]
+			public var legendData:LegendData;
+
+			[Bindable]
+			[Inject("applicationData")]
+			public var applicationData:ApplicationData;
+			
+
+			protected function onRemoveAllLayers():void
+			{
+				dispatchEvent(new LayerGroupEvent(LayerGroupEvent.REMOVE_ALL_LAYER_GROUPS,null));
+			}
+			
+			protected function onHideAllLayers():void{
+				dispatchEvent(new LayerGroupEvent(LayerGroupEvent.HIDE_ALL_LAYER_GROUPS));
+			}
+			
+			protected function onShowAllLayers():void{
+				dispatchEvent(new LayerGroupEvent(LayerGroupEvent.SHOW_ALL_LAYER_GROUPS));
+			}
+			
+
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<components:layout>
+		<s:VerticalLayout />
+	</components:layout>
+	<components:titleBarIcons>
+		<s:HGroup width="100%" horizontalAlign="left">
+			<!--<s:TabBar dataProvider="{vs}" cornerRadius="0" skinClass="skins.TabsSkin"  />-->
+			<s:Label text="Layer Manager" fontSize="14" color="0xFFFFFF" fontWeight="bold" />
+		</s:HGroup>
+	</components:titleBarIcons>
+	<mx:ViewStack id="vs" width="100%" height="100%">
+	<s:NavigatorContent width="100%" label="Layer manager">
+		<s:layout>
+			<s:VerticalLayout />
+		</s:layout>
+		<s:HGroup width="100%" paddingLeft="5" paddingRight="5" paddingBottom="5" paddingTop="5" verticalAlign="middle">
+			<s:HGroup verticalAlign="middle" buttonMode="true" click="onRemoveAllLayers()" toolTip="Remove all layers from map" visible="{Boolean(applicationData.active_layers_collection.length > 0)}" >
+				<fxg:deletebutton />
+				<s:Label text="Remove all layers"  fontWeight="bold" fontSize="11" />
+			</s:HGroup>
+			<s:HGroup verticalAlign="middle" buttonMode="true" click="onHideAllLayers()" toolTip="Hide all layers on map" visible="{Boolean(applicationData.active_layers_collection.length > 0)}" >
+				<fxg:visibilitybutton color="0x660000" />
+				<s:Label text="Hide all layers"  fontWeight="bold" fontSize="11" />
+			</s:HGroup>
+			<s:HGroup verticalAlign="middle" buttonMode="true" click="onShowAllLayers()" toolTip="Show all layers on map" visible="{Boolean(applicationData.active_layers_collection.length > 0)}" >
+				<fxg:visibilitybutton color="0x339900" />
+				<s:Label text="Show all layers"  fontWeight="bold" fontSize="11" />
+			</s:HGroup>
+		</s:HGroup>
+
+		
+		<legend:LegendSectionPanel title="Sensor Layers" layers_draggable="false" legend_item_collection="{legendData.sensor_legend_items_collection}" layer_type="{LayerTypes.DATA_LAYER_TYPE}" />
+		<legend:LegendSectionPanel title="Vector Layers" legend_item_collection="{legendData.vector_legend_items_collection}" layer_type="{LayerTypes.VECTOR_LAYER_TYPE}" />
+		<legend:LegendSectionPanel title="Coverage Layers" legend_item_collection="{legendData.raster_legend_items_collection}" layer_type="{LayerTypes.RASTER_LAYER_TYPE}" />
+	</s:NavigatorContent>
+	<!--s:NavigatorContent label="Legend">
+		
+	</s:NavigatorContent-->
+	</mx:ViewStack>
+	
+</components:IconPanel>

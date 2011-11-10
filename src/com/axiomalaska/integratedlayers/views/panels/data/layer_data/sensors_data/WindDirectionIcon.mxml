@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" visible="{Boolean(direction)}" includeInLayout="{Boolean(direction)}" xmlns:fxg="assets.fxg.*">
+	<fx:Script>
+		<![CDATA[
+			
+			[Bindable]
+			public var direction:Number;
+			
+			[Bindable]
+			public var arrowColor:uint = 0x333333;
+			
+			private function directionLabel($direction:Number):String{
+				var str:String;
+				if($direction){
+					if($direction >= 337.5 || $direction <= 22.5){
+						str = 'N';
+					}else if($direction >= 22.5 && $direction <= 67.5){
+						str = 'NE';
+					}else if($direction >= 67.5 && $direction <= 112.5){
+						str = 'E';
+					}else if($direction >= 112.5 && $direction <= 157.5){
+						str = 'SE'
+					}else if($direction >= 157.5 && $direction <= 202.5){
+						str = 'S'
+					}else if($direction >= 202.5 && $direction <= 247.5){
+						str = 'SW';
+					}else if($direction >= 247.5 && $direction <= 292.5){
+						str = 'W';
+					}else if($direction >= 292.5 && $direction <= 337.5){
+						str = 'NW';
+					}
+				}
+				
+				
+				return str;
+			}
+			
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" />
+	</s:layout>
+	<s:Graphic rotation="{direction}">
+		<fxg:windarrow width="15" height="15" />
+		<!--<s:filters>
+			<s:DropShadowFilter alpha=".2" />
+		</s:filters>-->
+	</s:Graphic>
+	<s:Label text="{'fr. ' + directionLabel(direction)}" fontSize="10" fontFamily="Arial" color="0x666666" />
+</s:Group>

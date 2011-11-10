@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Graphic version="1.0" viewHeight="37.1563" viewWidth="36.7031" ai:appVersion="14.0.0.367" d:id="1" xmlns="http://ns.adobe.com/fxg/2008" xmlns:ai="http://ns.adobe.com/ai/2008" xmlns:d="http://ns.adobe.com/fxg/2008/dt">
+  <Group x="-0.254395" y="0.00292969" d:id="2" d:type="layer" d:userLabel="Layer 1">
+    <Group>
+      <Group d:id="3">
+        <Path winding="nonZero" ai:knockout="0" data="M36.7036 18.3525C36.7036 28.4863 28.4868 36.7031 18.3521 36.7031 8.21582 36.7031 0 28.4863 0 18.3525 0 8.21387 8.21582 0 18.3521 0 28.4868 0 36.7036 8.21387 36.7036 18.3525Z" >
+          <fill>
+            <LinearGradient y="18.3516" scaleX="36.7036" rotation="-0">
+              <GradientEntry color="#ffffff" ratio="0"/>
+              <GradientEntry color="#dedfe0" ratio="0.17033"/>
+              <GradientEntry color="#b2b2b2" ratio="1"/>
+            </LinearGradient>
+          </fill>
+        </Path>
+      </Group>
+      <Group x="0.424805" y="0.423828" d:id="4">
+        <Path winding="nonZero" ai:knockout="0" data="M35.853 17.9287C35.853 27.8281 27.8276 35.8525 17.9272 35.8525 8.02637 35.8525 0 27.8281 0 17.9287 0 8.02441 8.02637 0 17.9272 0 27.8276 0 35.853 8.02441 35.853 17.9287Z" >
+          <fill>
+            <LinearGradient x="17.9268" y="35.8525" scaleX="35.8521" rotation="-90">
+              <GradientEntry color="#ffffff" ratio="0"/>
+              <GradientEntry color="#dedfe0" ratio="0.17033"/>
+              <GradientEntry color="#b2b2b2" ratio="1"/>
+            </LinearGradient>
+          </fill>
+        </Path>
+      </Group>
+      <Group x="3.89795" y="1.16504" d:id="5">
+        <Path winding="nonZero" ai:knockout="0" data="M29.1924 10.9404C30.542 17.0781 22.6885 18.9189 14.667 18.9189 6.64307 18.9189 -1.13965 17.3643 0.138672 10.9404 1.31885 5.0166 6.64307 0 14.667 0 22.6885 0 27.8955 5.03906 29.1924 10.9404Z" >
+          <fill>
+            <LinearGradient x="14.6722" scaleX="18.9194" rotation="90">
+              <GradientEntry color="#ffffff" ratio="0.00549451"/>
+              <GradientEntry color="#e9eaeb" ratio="0.415318"/>
+              <GradientEntry color="#cfcfcf" ratio="1"/>
+            </LinearGradient>
+          </fill>
+        </Path>
+      </Group>
+    </Group>
+    <Path ai:knockout="0" data="M27.9907 28.4785C27.0942 28.3135 27.0161 26.9375 25.4321 27.2002 24.7876 27.3076 24.7056 27.748 24.3755 28.1055 24.2993 28.1855 24.2329 27.998 24.1509 28.1055 24.186 28.0596 24.2036 28.2861 24.1509 28.3262 23.6431 28.7588 23.0337 28.8105
+ 22.8735 29.5342 22.5669 28.3574 23.8931 27.501 24.1509 27.125 23.3735 26.9375 22.4927 27.5771 21.6665 27.8018 22.1392 27.1143 22.7114 26.6738 23.5513 26.4482 23.9282 26.3428 24.395 26.4785 24.7544 26.2969 25.4536 25.9365 25.561 24.4248 25.2837
+ 23.583 24.938 22.5723 23.8989 22.6729 23.8481 21.625 23.4438 21.9502 22.9731 22.207 22.2642 22.2275 21.7485 23.1953 21.9126 24.7031 22.0415 25.9951 21.3892 26.6201 20.5962 27.1143 20.3091 28.1055 19.9985 27.8584 20.1567 26.9404 20.3833 26.749
+ 19.3677 27.2002 18.1528 27.2764 16.8438 27.7246 17.3838 26.8604 18.7329 26.8008 19.5571 26.2188 19.2368 25.8096 18.3813 25.9395 17.6729 25.9199 18.1016 25.2695 19.4497 25.5361 20.4595 25.4678 21.145 24.999 21.104 23.8027 21.2134 22.7549 20.2739
+ 21.7129 19.0767 20.9248 19.1821 18.8379 18.3872 18.3574 17.3916 18.0664 16.6201 17.5596 14.1455 17.7832 12.0498 16.916 10.5918 18.0068 8.44238 19.623 7.87646 23.3779 7.12451 25.7686 7.01416 26.1553 6.83984 25.4648 6.82617 25.3936 6.61328 24.2197
+ 7.32764 22.4951 7.73145 21.0986 8.16699 19.6006 8.63672 18.1543 9.08887 17.1094 7.99219 15.1523 9.10059 11.7686 12.1016 12.5127 14.9834 10.0674 18.3013 7.37598 22.7954 7.84375 27.3833 8.31934 31.2642 11.3076 30.854 17.0313 30.6958 19.2363 29.5571
+ 21.0947 28.0688 22.0781 27.5083 22.4463 26.606 22.5693 26.3364 23.3574 26.0142 24.292 26.4087 25.29 26.4126 26.2969 27.3931 26.9063 27.645 27.707 27.9907 28.4785Z" >
+      <fill>
+        <SolidColor/>
+      </fill>
+    </Path>
+  </Group>
+  <Private>
+    <ai:PrivateElement d:ref="#1">
+      <ai:SaveOptions>
+        <ai:Dictionary>
+          <ai:DictEntry name="clipToActiveArtboard" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="rasterizeResolution" value="72" valueType="Integer"/>
+          <ai:DictEntry name="downsampleLinkedImages" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="preserveFilterPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="preserveTextPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="preserveGradientPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="aiEditCap" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="writeImages" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="versionKey" value="1" valueType="Integer"/>
+          <ai:DictEntry name="includeSymbol" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="includeXMP" value="0" valueType="Boolean"/>
+        </ai:Dictionary>
+      </ai:SaveOptions>
+      <ai:DocData base="bird.assets/images"/>
+      <ai:Artboards originOffsetH="1.634" originOffsetV="39" rulerCanvasDiffH="19.985" rulerCanvasDiffV="-20.422" zoom="12">
+        <ai:Artboard active="1" bottom="1.844" index="0" left="1.634" right="38.337" top="39"/>
+        <ai:ArtboardsParam all="0" range="" type="0"/>
+      </ai:Artboards>
+    </ai:PrivateElement>
+    <ai:PrivateElement d:ref="#2">
+      <ai:LayerOptions colorType="ThreeColor">
+        <ai:ThreeColor blue="257" green="128.502" red="79.31"/>
+      </ai:LayerOptions>
+    </ai:PrivateElement>
+    <ai:PrivateElement ai:hashcode="d1b767ba30834b46b74e1a14098ca88f" d:ref="#3">
+      <ai:Path data="M 36.704 18.353C 36.704 28.486 28.487 36.703 18.352 36.703C 8.216 36.703 0 28.486 0 18.353C 0 8.214 8.216 0 18.352 0C 28.487 0 36.704 8.214 36.704 18.353Z" knockout="0">
+        <ai:ArtStyle/>
+        <ai:Fill colorType="Gradient">
+          <ai:Gradient gradientType="linear" length="36.704" originX="0" originY="18.352">
+            <ai:GradientStops>
+              <ai:GradientStop colorType="GrayColor" midPoint="17.033" rampPoint="0">
+                <ai:GrayColor/>
+              </ai:GradientStop>
+              <ai:GradientStop colorType="GrayColor" rampPoint="100">
+                <ai:GrayColor gray="0.3"/>
+              </ai:GradientStop>
+            </ai:GradientStops>
+          </ai:Gradient>
+        </ai:Fill>
+      </ai:Path>
+    </ai:PrivateElement>
+    <ai:PrivateElement ai:hashcode="4382f87ad4a9f846629ba4d25d92a777" d:ref="#4">
+      <ai:Path data="M 36.278 18.353C 36.278 28.252 28.252 36.276 18.352 36.276C 8.451 36.276 0.425 28.252 0.425 18.353C 0.425 8.448 8.451 0.424 18.352 0.424C 28.252 0.424 36.278 8.448 36.278 18.353Z" knockout="0">
+        <ai:ArtStyle/>
+        <ai:Fill colorType="Gradient">
+          <ai:Gradient angle="90" gradientType="linear" length="35.852" originX="17.927" originY="35.853">
+            <ai:GradientStops>
+              <ai:GradientStop colorType="GrayColor" midPoint="17.033" rampPoint="0">
+                <ai:GrayColor/>
+              </ai:GradientStop>
+              <ai:GradientStop colorType="GrayColor" rampPoint="100">
+                <ai:GrayColor gray="0.3"/>
+              </ai:GradientStop>
+            </ai:GradientStops>
+          </ai:Gradient>
+        </ai:Fill>
+      </ai:Path>
+    </ai:PrivateElement>
+    <ai:PrivateElement ai:hashcode="f55f5ef6f9b9017beaec36eace01e0f1" d:ref="#5">
+      <ai:Path data="M 33.09 12.105C 34.44 18.243 26.586 20.084 18.565 20.084C 10.541 20.084 2.758 18.529 4.037 12.105C 5.217 6.182 10.541 1.165 18.565 1.165C 26.586 1.165 31.793 6.204 33.09 12.105Z" knockout="0">
+        <ai:ArtStyle/>
+        <ai:Fill colorType="Gradient">
+          <ai:Gradient angle="-90" gradientType="linear" length="18.919" originX="14.672" originY="0">
+            <ai:GradientStops>
+              <ai:GradientStop colorType="GrayColor" midPoint="41.209" rampPoint="0.549">
+                <ai:GrayColor/>
+              </ai:GradientStop>
+              <ai:GradientStop colorType="GrayColor" rampPoint="100">
+                <ai:GrayColor gray="0.19"/>
+              </ai:GradientStop>
+            </ai:GradientStops>
+          </ai:Gradient>
+        </ai:Fill>
+      </ai:Path>
+    </ai:PrivateElement>
+  </Private>
+</Graphic>

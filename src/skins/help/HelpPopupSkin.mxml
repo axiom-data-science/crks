@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx">
+	<!-- host component -->
+	<fx:Script>
+		<![CDATA[
+			
+			[Bindable]
+			public var cornerRadius:Number = 10;
+			
+		]]>
+	</fx:Script>
+	<fx:Metadata>
+		[HostComponent("com.axiomalaska.integratedlayers.views.panels.help.HelpPopupDisplay")]
+	</fx:Metadata>
+	
+	<!-- SkinParts
+	name=contentDisplay, type=spark.components.Group, required=true
+	name=relatedItemsDisplay, type=spark.components.Group, required=true
+	name=navigationDisplay, type=spark.components.Group, required=true
+	name=mapDisplay, type=spark.components.Group, required=true
+	-->
+	
+	<s:Rect width="100%" height="100%" radiusX="{cornerRadius}" radiusY="{cornerRadius}">
+		<s:fill>
+			<s:SolidColor color="0xFFFFFF" />
+		</s:fill>
+		<s:filters>
+			<s:DropShadowFilter blurX="5" blurY="5" alpha=".4" />
+		</s:filters>
+	</s:Rect>
+	
+
+	<s:Group width="100%" height="100%">
+		<s:layout>
+			<s:VerticalLayout gap="0" />
+		</s:layout>
+		<s:Group id="titleDisplay" width="100%">
+			<s:Rect width="100%" height="100%" topLeftRadiusX="{cornerRadius}" topLeftRadiusY="{cornerRadius}" topRightRadiusX="{cornerRadius}" topRightRadiusY="{cornerRadius}">
+				
+				<s:fill> 
+					<s:LinearGradient rotation="90">
+						<s:GradientEntry color="0x333333" />
+						<s:GradientEntry color="0x000000" />
+					</s:LinearGradient>
+				</s:fill>
+			</s:Rect>
+			<s:HGroup width="100%" height="100%" verticalAlign="top" paddingBottom="12" paddingLeft="15" paddingRight="10" paddingTop="12" gap="15">
+				<s:Label text="{hostComponent.title}" width="100%" fontSize="16" fontFamily="Arial" color="0xFFFFFF" fontWeight="bold" />
+				<s:Group id="titleBarContentDisplay" height="100%" />
+				<mx:Image source="@Embed('E:/flex/AxiomMaps/src/assets/images/close.white.png')" buttonMode="true" click="{hostComponent.close();}" />
+			</s:HGroup>
+		</s:Group>
+	
+		<s:Group width="100%" height="100%">
+			<s:Group left="20" right="20" top="20" bottom="20">
+				<s:layout>
+					<s:VerticalLayout />
+				</s:layout>
+				<s:Group width="100%" height="100%" id="contentDisplay" />
+			</s:Group>
+		</s:Group>
+
+	</s:Group>
+	
+</s:Skin>

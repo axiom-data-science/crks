@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					  xmlns:s="library://ns.adobe.com/flex/spark" 
+					  xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="com.axiomalaska.components.*" xmlns:legend="com.axiomalaska.integratedlayers.views.panels.legend.*"
+					  width="100%" height="100%" minHeight="0"
+					  includeInLayout="{Boolean(currentState == 'active')}" currentState="{legend_item_collection.length > 0 ? 'active' : 'inactive'}" xmlns:ns="views.panels.layer_groups.*" xmlns:ns1="views.panels.layer_groups.icons.*" xmlns:ns2="com.axiomalaska.integratedlayers.views.panels.layer_groups.icons.*" 
+					  >
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.integratedlayers.events.LegendEvent;
+			import com.axiomalaska.crks.dto.LayerGroup;
+			import com.axiomalaska.crks.interfaces.ILegendItem;
+			
+			import mx.collections.ArrayCollection;
+			[Bindable]
+			public var legend_item_collection:ArrayCollection;
+			
+			[Bindable]
+			public var title:String;
+
+			
+			[Bindable]
+			public var layer_type:String;
+			
+			[Bindable]
+			public var layers_draggable:Boolean = true;
+			
+
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:states>
+		<s:State name="active" />
+		<s:State name="inactive" />
+	</s:states>
+	<components:IconPanel id="layerTypeSection" title="{title}" width="100%" height="100%" includeIn="active">
+		<components:layout>
+			<s:VerticalLayout />
+		</components:layout>
+		<components:titleBarIcons>
+			<ns2:LayerTypeIcon layer_type="{layer_type}" />
+		</components:titleBarIcons>
+		<s:VGroup width="100%" height="100%">
+			<legend:LegendList dataProvider="{legend_item_collection}" dragEnabled="{layers_draggable}" dragMoveEnabled="{layers_draggable}" />
+		</s:VGroup>
+	</components:IconPanel>
+</s:VGroup>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:PopUpAnchor xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.crks.dto.DataLayer;
+
+			protected function vgroup1_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+			}
+
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.StationsDataLayer;
+			import com.axiomalaska.integratedlayers.views.panels.data.layer_data.sensors_data.legend.DataLayerFilterPopup;
+			import com.axiomalaska.crks.dto.Layer;
+			import com.axiomalaska.crks.dto.VectorLayer;
+			
+			import mx.events.FlexEvent;
+			import mx.events.FlexMouseEvent;
+			
+			import com.axiomalaska.integratedlayers.views.panels.data.download.WFSLayerDownloadPopup;
+			[Bindable]
+			public var layer:Layer;
+			
+			private function onDownloadLayerData():void{
+				var dd:WFSLayerDownloadPopup = new WFSLayerDownloadPopup();
+				dd.layer = layer as VectorLayer;
+				dd.open();
+			}
+
+
+
+
+			protected function onFilterDataLayer():void
+			{
+				var df:DataLayerFilterPopup = new DataLayerFilterPopup();
+				df.stations_layer = layer.mapLayer as StationsDataLayer;
+				df.open();
+			}
+
+		]]>
+	</fx:Script>
+	<s:BorderContainer width="200" cornerRadius="5" borderAlpha=".5" dropShadowVisible="true" minHeight="0" mouseDownOutside="displayPopUp = false;" >
+		<s:layout>
+			<s:VerticalLayout paddingLeft="10" paddingBottom="5" paddingRight="10" paddingTop="8" gap="10" verticalAlign="middle" />
+		</s:layout>
+		<s:HGroup width="100%">
+			<s:Label text="Layer tools" fontSize="12" fontWeight="bold" width="100%" />
+			<s:Label text="x" fontSize="10" click="displayPopUp = false;" buttonMode="true" />
+		</s:HGroup>
+		<s:HGroup width="100%" verticalAlign="middle">
+			<s:Label text="Layer opacity" fontSize="11" />
+			<s:HSlider width="100%" maximum="100" minimum="0" value="@{layer.alpha}" />	
+		</s:HGroup>
+		<s:HGroup width="100%" verticalAlign="middle"  buttonMode="true" click="onDownloadLayerData()" visible="{layer is VectorLayer}" includeInLayout="{layer is VectorLayer}">
+			<mx:Image source="@Embed('E:/flex/AxiomMaps/src/assets/images/button_download_small.png')" />
+			<s:Label text="Download layer data" color="0x006699" fontSize="11" />
+		</s:HGroup>
+		<s:VGroup width="100%" verticalAlign="middle" buttonMode="true" click="onFilterDataLayer()" includeInLayout="{layer is DataLayer}" visible="{layer is DataLayer}">
+			<s:Label text="Filter layer data" color="0x006699" fontSize="11" />
+		</s:VGroup>
+		
+		
+		<!--<s:HGroup width="100%" verticalAlign="middle">
+			<s:Label text="Fill color" />
+			<mx:ColorPicker />
+		</s:HGroup>-->
+		
+	</s:BorderContainer>
+</s:PopUpAnchor>

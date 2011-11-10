@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<buttons:IconButton xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="views.components.buttons.*"
+					   skinClass="skins.buttons.IconButtonSkin" buttonMode="true" useHandCursor="true" xmlns:buttons="com.axiomalaska.integratedlayers.views.components.buttons.*">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+</buttons:IconButton>

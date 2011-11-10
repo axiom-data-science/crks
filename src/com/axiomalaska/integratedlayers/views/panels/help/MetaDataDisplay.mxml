@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<help:SkinnableMetaDataDisplay xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					  xmlns:s="library://ns.adobe.com/flex/spark" 
+					  xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:help="com.axiomalaska.integratedlayers.views.panels.help.*" 
+					  currentState="{help_meta_data.loading === false ? 'loaded' : 'loading'}" currentStateChange="invalidateSkinState();">
+	<help:states>
+		<s:State name="loading" />
+		<s:State name="loaded" />
+	</help:states>
+</help:SkinnableMetaDataDisplay>

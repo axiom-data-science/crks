@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Graphic version="1.0" viewHeight="20" viewWidth="20" ai:appVersion="14.0.0.367" d:id="1" xmlns="http://ns.adobe.com/fxg/2008" xmlns:ai="http://ns.adobe.com/ai/2008" xmlns:d="http://ns.adobe.com/fxg/2008/dt">
+  <Library/>
+  <Group x="1.21436" y="-0.385742" d:id="2" d:type="layer" d:userLabel="Layer 1">
+    <Path winding="nonZero" ai:knockout="0" data="M4.65771 9.85986L15.9106 19.1494 15.9106 0.572266 4.65771 9.85986Z" >
+      <fill>
+        <SolidColor/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M12.0386 0.385742L0.785645 9.67383 12.0386 18.9639" >
+      <stroke>
+        <SolidColorStroke caps="none" weight="1" joints="miter" miterLimit="4"/>
+      </stroke>
+    </Path>
+  </Group>
+</Graphic>

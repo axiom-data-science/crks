@@ -1,0 +1,16 @@
+<swiz:BeanProvider 
+	xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:swiz="http://swiz.swizframework.org"
+	xmlns:service="service.*" 
+	xmlns:controller="controller.*" xmlns:services="com.axiomalaska.integratedlayers.services.*" xmlns:controllers="com.axiomalaska.integratedlayers.controllers.*">
+	<fx:Script>
+		<![CDATA[
+			
+		]]>
+	</fx:Script>
+	
+	<controllers:WmsDataController id="wmsDataController" />
+	<services:WMSService id="wmsService" />
+	<swiz:ServiceHelper id="serviceHelper" />
+	
+</swiz:BeanProvider>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					  xmlns:s="library://ns.adobe.com/flex/spark" 
+					  xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="com.axiomalaska.components.*" width="100%" height="100%" xmlns:tabs="com.axiomalaska.integratedlayers.views.components.navigation.tabs.*">
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.events.CollectionEvent;
+			import mx.events.CollectionEventKind;
+			
+			private var _dataProvider:ArrayCollection;
+			
+			[Bindable]
+			public function set dataProvider($dataProvider:ArrayCollection):void{
+				if($dataProvider != _dataProvider){
+					if(!_dataProvider){
+						$dataProvider.addEventListener(CollectionEvent.COLLECTION_CHANGE,dpChange);
+					}
+					_dataProvider = $dataProvider; 
+				}
+			}
+			
+			public function get dataProvider():ArrayCollection{
+				return _dataProvider;
+			}
+			
+			private function dpChange($evt:CollectionEvent):void{
+				if($evt.kind == CollectionEventKind.ADD){
+					vs.addElement($evt.items[0]);
+				}
+			}
+			
+			
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<tabs:TerrificTabBar />
+	<mx:ViewStack width="100%" height="100%" id="vs" />
+</s:VGroup>

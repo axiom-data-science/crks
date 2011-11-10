@@ -1,0 +1,138 @@
+<project name="CRKS Build">
+
+	<property file="build.properties" />
+	
+    <target name="addlicense">
+        <taskdef resource="net/sf/antcontrib/antcontrib.properties" />
+        <loadfile srcfile="LICENSE" property="license"/>
+        <propertyregex property="license.2ndLine"
+			input="${license}"
+			regexp="(.*)${line.separator}(.*)${line.separator}.*"
+			select="\2"
+			casesensitive="false"
+        />
+        <replaceregexp flags="s" match="(.*)" replace="${license}\1">
+            <fileset dir="src" includes="**/*.as">
+                <not>
+                    <contains text="${license.2ndLine}"/>
+                </not>
+            </fileset>
+        </replaceregexp>
+    </target>
+	
+	<target name="deploy-flex-test">
+           <property name="flex.host" value="${build.test.flex.host}" />        
+           <property name="flex.user" value="${build.test.flex.user}" />
+           <property name="flex.pass" value="${build.test.flex.pass}" />
+           <property name="flex.path" value="${build.test.flex.path}" />
+           <antcall target="compileCRKSToTarget" /> 
+			<antcall target="deploy-flex" />
+   </target>
+
+   <target name="deploy-flex-live">
+           <property name="flex.host" value="${build.live.flex.host}" />        
+           <property name="flex.user" value="${build.live.flex.user}" />
+           <property name="flex.pass" value="${build.live.flex.pass}" />
+           <property name="flex.path" value="${build.live.flex.path}" />
+           <antcall target="compileCRKSToTarget" />  
+   		<antcall target="deploy-flex" />
+   </target>
+           
+   <target name="deploy-flex">
+   	
+           <sshexec host="${flex.host}"
+                   username="${flex.user}"
+                   password="${flex.pass}"
+                   command="mkdir -p ${flex.path}; rm -rf ${flex.path}/*;"
+           			trust="true"
+           />
+   	<!-- rm -rf ${flex.path}; mkdir ${flex.path} -->
+           
+           <scp todir="${flex.user}:${flex.pass}@${flex.host}:${flex.path}" trust="true">
+                   <fileset dir="target" />    
+           </scp>
+   </target>
+	
+	
+	<taskdef resource="flexTasks.tasks" />
+	<property name="FLEX_HOME"
+		value="C:\Program Files (x86)\Adobe\Adobe Flash Builder 4 Plug-in\sdks\4.0.0" />
+	<tstamp>
+		<format property="NOW" pattern="yyyy.MM.dd.hhmmss" />
+	</tstamp>
+	
+	<target name="compileCRKSToTarget">
+		<property name="swf" value="crks" />
+		<property name="appFile" value="CRKS" />
+		<property name="dest" value="target" />
+		<property name="mapKey"	value="ABQIAAAA8dLnkCwQF9PKxbG7BauU1hSX_OQBE3zDF49tjtnUxYdf2qWI8xTlMTodaLXNXXAYgPGg7noWKHK5tQ" />
+		<property name="pageTitle" value="Copper River Knowledge System Mapping Application" />
+		<property name="servicesDomain" value="http://192.168.1.199" />
+		<property name="servicesPath" value="/crks-service" />
+		<property name="portalId" value="10" />
+		<property name="jsPath" value="" />
+		<antcall target="compile" />
+	</target>
+
+	<target name="compile">
+		<property name="swfFile" value="${swf}.${NOW}" />
+		<property name="htmlfile" value="index.html" />
+
+		<!-- Clean the dest dir -->
+		<delete dir="${dest}" />
+		<mkdir dir="${dest}" />
+
+		<!-- Compile the app -->
+		<mxmlc file="src/${appFile}.mxml" show-actionscript-warnings="false"
+			output="${dest}\${swfFile}.swf" debug="false" optimize="true"
+			target-player="10.0.0">
+			<define name="CONFIG::APP" value='"${swf}"' />
+			<define name="CONFIG::SERVICES_PATH" value='"${servicesPath}"' />
+			<define name="CONFIG::SERVICES_DOMAIN" value='"${servicesDomain}"' />
+			<define name="CONFIG::RELEASE_VERSION" value='"true"' />
+			<keep-as3-metadata name="URLMapping" />
+			<compiler.library-path dir="E:\flex\library\swc" append="true">
+				<include name="map_flex_1_20.swc"/> 
+				<include name="swiz-framework-v1.0.0.swc"/> 
+				<include name="greensock.swc"/>
+			</compiler.library-path>
+
+			<!--include-sources dir="src" includes="*" / -->
+		</mxmlc>
+
+
+
+		<!-- Transfer support files -->
+		<copy todir="${dest}">
+			<fileset dir="html-template">
+				<include name="**/*.*" />
+				<exclude name="index.build-template.html" />
+				<exclude name="index.template.html" />
+			</fileset>
+		</copy>
+
+		<!-- Build the wrapper -->
+		<copy file="html-template/index.build-template.html" tofile="${dest}/${htmlfile}" />
+		<replace file="${dest}/${htmlfile}" token="$${swf}" value="${swfFile}" />
+		<replace file="${dest}/${htmlfile}" token="$${application}"
+			value="${swf}" />
+		<replace file="${dest}/${htmlfile}" token="$${width}" value="100%" />
+		<replace file="${dest}/${htmlfile}" token="$${height}" value="100%" />
+		<replace file="${dest}/${htmlfile}" token="$${bgcolor}" value="#FFFFFF" />
+		<replace file="${dest}/${htmlfile}" token="$${version_major}"
+			value="10" />
+		<replace file="${dest}/${htmlfile}" token="$${version_minor}"
+			value="0" />
+		<replace file="${dest}/${htmlfile}" token="$${version_revision}"
+			value="0" />
+		<replace file="${dest}/${htmlfile}" token="$${title}" value="${pageTitle}" />
+		<replace file="${dest}/${htmlfile}" token="$${mapkey}" value="${mapKey}" />
+		<replace file="${dest}/${htmlfile}" token="$${portal_id}"
+			value="${portalId}" />
+		<replace file="${dest}/${htmlfile}" token="$${js_path}" value="${jsPath}" />
+		<replace file="${dest}/${htmlfile}" token="$${useBrowserHistory}"
+			value="--" />
+	</target>
+
+
+</project>

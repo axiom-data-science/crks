@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" xmlns:charts="com.axiomalaska.timeline.charts.*" xmlns:line="com.axiomalaska.timeline.charts.line.*" xmlns:timeline="com.axiomalaska.timeline.*" xmlns:visualscripts="com.blogspot.visualscripts.*" xmlns:axes="com.axiomalaska.timeline.charts.axes.*">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.models.ResultSet;
+			import com.axiomalaska.models.VariableData;
+			import com.axiomalaska.models.VariableDescriptor;
+			import com.axiomalaska.models.VariableType;
+			
+			import mx.collections.ArrayCollection;
+			
+			private var _resultSet:ResultSet;
+			
+			[Bindable]
+			public function set resultSet($resultSet:ResultSet):void{
+				_resultSet = $resultSet;
+				if(resultSet){
+					var descriptor:VariableDescriptor = resultSet.descriptors[0];
+					var _arr:Array = [];
+					for(var i:int=0;i < resultSet.data[descriptor.primaryKey].values.length;i ++){
+						var obj:Object = {};
+						
+						for(var j:int =0;j < resultSet.data.length;j ++){
+							if((resultSet.data[j] as VariableData).metadata.dataType == VariableType.DATE){
+								obj.date = (resultSet.data[j] as VariableData).values[i];
+							}else{
+								obj.value = (resultSet.data[j] as VariableData).values[i];
+							}
+						}
+						_arr.push(obj);
+					}
+					
+					startDate = _arr[0].date
+					endDate = _arr[_arr.length - 1].date;
+					minDate = startDate;
+					maxDate = endDate;
+					
+					data = new ArrayCollection(_arr);
+					
+				}
+			}
+			public function get resultSet():ResultSet{
+				return _resultSet;
+			}
+			
+			[Bindable]
+			private var data:ArrayCollection;
+			
+			[Bindable]
+			private var startDate:Date;
+			
+			[Bindable]
+			private var endDate:Date;
+			
+			[Bindable]
+			private var minDate:Date;
+			
+			[Bindable]
+			private var maxDate:Date;
+			
+			protected function _updateIntervalValues():void{
+				
+				var val0:Number = intervalSlider.thumb1Value;
+				var val1:Number = intervalSlider.thumb2Value;
+				startDate = new Date(val0);
+				endDate = new Date(val1);
+				//trace(thumb1X);
+			}
+			
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:layout>
+		<s:VerticalLayout gap="0" />
+	</s:layout>
+	<s:Group width="100%" height="100%">
+		<axes:SkinnableTimeAxis styleName="lineChartDynamic" startdate="{startDate}" enddate="{endDate}" width="100%" height="100%" />
+		<s:HGroup width="100%" height="100%" paddingBottom="30">
+			<charts:SkinnableChart id="chart" width="100%" height="100%">
+				<charts:chartSeries>
+					<line:SkinnableLineChart dataProvider="{data}" id="lc" startdate="{startDate}" enddate="{endDate}" width="100%" height="100%" />
+				</charts:chartSeries>
+				<charts:verticalAxis>
+					<axes:SkinnableVerticalAxis width="100%" height="100%" />
+				</charts:verticalAxis>
+			</charts:SkinnableChart>
+		</s:HGroup>		
+	</s:Group>
+
+	<s:Group width="100%">
+		
+		<s:Group width="100%" height="30">
+			<charts:SkinnableChart styleName="overview_chart" width="100%" height="100%" top="10">
+				<charts:chartSeries>
+					<line:SkinnableLineChart dataProvider="{data}" startdate="{minDate}" enddate="{maxDate}" width="100%" height="100%" />
+				</charts:chartSeries>
+			</charts:SkinnableChart>
+			<s:VGroup width="100%" height="100%" verticalAlign="bottom" top="10">
+				<axes:SkinnableTimeAxis styleName="lineChartReference" startdate="{minDate}" enddate="{maxDate}" height="100%" width="100%" />
+			</s:VGroup>
+			<s:VGroup width="100%" height="100%" verticalAlign="top">
+				<visualscripts:IntervalSlider id="intervalSlider" change="_updateIntervalValues()"  
+						width="100%" height="5" snapInterval="0" liveDragging="true"
+						minimum="{minDate.getTime()}" maximum="{maxDate.getTime()}"
+						thumb1Value="{startDate.getTime()}" thumb2Value="{endDate.getTime()}"
+					/>
+			</s:VGroup>
+		</s:Group>
+	</s:Group>
+	
+</s:Group>

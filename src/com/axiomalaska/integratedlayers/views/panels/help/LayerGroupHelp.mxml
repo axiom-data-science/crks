@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<help:MetaDataDisplay xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   xmlns:mx="library://ns.adobe.com/flex/mx" 
+				   width="100%" height="100%" skinClass="skins.help.MetaDataSkin"
+				   mouseDownOutside="close();" xmlns:help="com.axiomalaska.integratedlayers.views.panels.help.*" xmlns:modules="views.panels.modules.*" xmlns:components="com.axiomalaska.integratedlayers.views.components.*"
+				   meta_data_item="{layer_group}">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.crks.dto.LayerGroup;
+			
+			import com.axiomalaska.integratedlayers.events.HelpEvent;
+			import com.axiomalaska.integratedlayers.events.LayerGroupEvent;
+			
+			[Dispatcher]
+			public var dispatcher:IEventDispatcher;
+			
+			[Bindable]
+			public var layer_group:LayerGroup;
+			
+
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<help:navigation>
+
+		<s:HGroup width="100%" verticalAlign="middle">
+			<s:Label text="{layer_group.module.label}" color="0x006699" fontWeight="bold" buttonMode="true" click="dispatcher.dispatchEvent(new HelpEvent(HelpEvent.SHOW_HELP_CONTENT,layer_group.module));" />
+			<s:Label text=" » " />
+			<s:Label text="{layer_group.label}" color="0x666666" fontWeight="bold" />
+		</s:HGroup>
+
+
+	</help:navigation>
+	<help:content>
+		<s:VGroup width="100%" height="100%">
+			<help:MetaDataUrl help_meta_data="{help_meta_data}" />
+			<help:MetaDataSource meta_data_item="{meta_data_item}" />
+			<help:MetaDataTemporal help_meta_data="{help_meta_data}" />
+			<help:MetaDataLoadOnMap buttonMode="true" 
+				label="{layer_group.layers.length > 1 ? 'Load this layer group on map' : 'Load this layer on map'}" 
+				click="dispatcher.dispatchEvent(new LayerGroupEvent(LayerGroupEvent.LOAD_LAYER_GROUP,layer_group));" />
+			<help:MetaDataDescription help_meta_data="{help_meta_data}" />
+		</s:VGroup>
+	</help:content>
+	<help:map>
+		<components:SpacialExtentOverviewMap spacial_extent_item="{meta_data_item}" height="180" width="100%"/>
+	</help:map>
+	<help:relatedItems>
+		<s:VGroup height="100%" width="100%" visible="{Boolean(layer_group.layers.source.length > 1)}" includeInLayout="{Boolean(layer_group.layers.source.length > 1)}">
+			<s:HGroup width="100%" verticalAlign="middle">
+				<s:Label text="Layers" fontSize="13" fontWeight="bold" />
+				<s:TextInput width="100%" visible="{Boolean(layer_group.layers.source.length > 5)}" includeInLayout="{Boolean(layer_group.layers.source.length > 5)}"
+							 change="layer_group.searchLayers()" text="@{layer_group.searchTerm}"/>
+			</s:HGroup>
+			<s:List
+				dataProvider="{layer_group.layers}" 
+				itemRenderer="com.axiomalaska.integratedlayers.views.panels.layers.renderers.MetaDataLayerRenderer"
+				width="100%" height="100%" allowMultipleSelection="true"
+				contentBackgroundAlpha="0" borderAlpha="0" borderVisible="false">
+				<s:layout>
+					<s:VerticalLayout horizontalAlign="justify" variableRowHeight="true" gap="1" paddingRight="5" />
+				</s:layout>
+			</s:List>
+		</s:VGroup>
+	</help:relatedItems>
+</help:MetaDataDisplay>

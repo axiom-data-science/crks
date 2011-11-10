@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:NavigatorContent	xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					  xmlns:s="library://ns.adobe.com/flex/spark" 
+					  xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="com.axiomalaska.components.*" 
+					  width="100%" height="100%" label="Sensor data"
+					  >
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.integratedlayers.events.SensorEvent;
+			import com.axiomalaska.integratedlayers.models.DataRequest;
+			import com.axiomalaska.integratedlayers.models.RequestValue;
+			import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.Sensor;
+			import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.Station;
+			import com.axiomalaska.models.VariableType;
+			import com.axiomalaska.crks.dto.AmfDataService;
+			
+			import mx.collections.ArrayCollection;
+			import mx.events.IndexChangedEvent;
+			
+			private var _tabsToAdd:Array = [];
+			
+			
+			
+			
+			private var _station:Station;
+			
+			[Bindable]
+			public function set station($station:Station):void{
+				if(_station != $station){
+					_station = $station;
+					
+					//vs.removeAllElements();
+					
+					var ct:int = 0;
+					if(_station.sensors && _station.sensors.length > 0){
+
+						has_sensors = true;
+						
+						
+						
+						for each(var sensor:Sensor in _station.sensors){
+							
+							var sdd:SensorDataLoad = new SensorDataLoad();
+							sdd.station = _station;
+							sdd.sensor = sensor;
+							_tabsToAdd.push(sdd);
+							
+							ct ++;
+							
+						}
+						
+					}else{
+						has_sensors = false;
+					}
+					
+				}
+				
+				addTabsToAdd();
+				
+			}
+			public function get station():Station{
+				return _station;
+			}
+			
+			
+			public var selected_sensor:Sensor;
+			
+			private function addTabsToAdd():void{
+				if(vs && _tabsToAdd && _tabsToAdd.length > 0){
+										
+					vs.removeAllElements();
+					var defaultIndex:int = 0;
+					var ct:int = 0;
+					for each(var tabToAdd:SensorDataLoad in _tabsToAdd){
+						vs.addElement(tabToAdd);
+						if(selected_sensor && tabToAdd.sensor == selected_sensor){
+							defaultIndex = ct;
+						}
+						ct ++;
+					}
+					vs.selectedIndex = defaultIndex;
+					lb.selectedIndex = defaultIndex;
+					(vs.getItemAt(defaultIndex) as SensorDataLoad).getSensorData();
+					_tabsToAdd = [];
+				}
+			}
+
+			protected function onSensorChange($evt:IndexChangedEvent):void
+			{
+				var sdd:SensorDataLoad = vs.selectedChild as SensorDataLoad;
+				sdd.requested = false;
+				selected_sensor = sdd.sensor;
+				sdd.getSensorData();
+			}
+			
+			[Bindable]
+			private var has_sensors:Boolean = false;
+			
+
+		]]>
+	</fx:Script>
+	<components:IconPanel width="100%" height="100%">
+		<components:titleBarIcons>
+			<s:HGroup width="100%">
+				<s:Label text="{station.label}" color="0xFFFFFF" fontSize="13" fontWeight="bold" width="100%" />
+				<s:Label fontSize="14" fontWeight="bold" color="0xFFFFFF" text="X" buttonMode="true" 
+						 click="dispatchEvent(new SensorEvent(SensorEvent.REMOVE_SENSOR_DATA))"  />
+			</s:HGroup>
+		</components:titleBarIcons>
+		<s:VGroup width="100%" height="100%" paddingLeft="5" paddingTop="5" paddingRight="5" paddingBottom="5">
+			<s:Scroller width="100%">
+				<s:HGroup width="100%">
+					<mx:LinkBar dataProvider="{vs}" id="lb" fontSize="10" />
+				</s:HGroup>
+			</s:Scroller>
+			<mx:ViewStack width="100%" height="100%" id="vs" change="onSensorChange(event)" creationComplete="addTabsToAdd();" />
+		</s:VGroup>
+		<s:HGroup width="100%" height="100%" verticalAlign="middle" id="no_sensors" includeInLayout="{!has_sensors}" visible="{!has_sensors}" horizontalAlign="center">
+			<s:Label text="No sensors defined at this station" />
+		</s:HGroup>
+	</components:IconPanel>
+</s:NavigatorContent>

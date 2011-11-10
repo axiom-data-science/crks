@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="30" backgroundColor="0xEDEDED" creationComplete="init(event)" verticalAlign="middle" paddingLeft="5" paddingRight="5">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.map.interfaces.ILayer;
+			
+			public var dragShadow:HBox = new HBox();
+			public var yDest:Number;
+			public var xDest:Number;
+			
+			[Bindable]
+			public var title:String;
+			
+			
+			
+			
+			public var active:Boolean = true;
+			private var _layer:ILayer;
+			
+			[Bindable]
+			private var _selected:Boolean;
+			
+			public function set selected($selected:Boolean):void{
+				_selected = $selected;
+			}
+			public function get selected():Boolean{
+				return _selected;
+			}
+			
+			
+			
+			[Bindable]
+			public function set layer($layer:ILayer):void{
+				_layer = $layer;
+
+			}
+			public function get layer():ILayer{
+				return _layer;
+			}
+			
+			private function onSelectChange($evt:Event):void{
+				_selected = selector_cb.selected;
+				dispatchEvent(new Event(Event.CHANGE));
+				//trace('----> DISPATCHING CHANGE');
+			}
+			
+			
+			private function init($evt:Event):void{
+				dragShadow.width = this.width;
+				dragShadow.height = this.height;
+				dragShadow.setStyle('backgroundColor','0xCCCCCC');
+				if(layer.style){
+					var _st:Object = layer.style;
+					
+					var _icon:Sprite = new Sprite();
+					_icon.graphics.lineStyle(_st.strokeSize,_st.stroke);
+					_icon.graphics.beginFill(_st.color);
+					_icon.graphics.drawCircle(_st.size/2,0,_st.size);
+					iconHolder.addChild(_icon);
+					
+				}
+			}
+		]]>
+	</fx:Script>
+	
+	<s:CheckBox id="selector_cb" selected="{_selected}" change="onSelectChange(event)" />
+	<mx:UIComponent id="iconHolder" />	
+	<s:Label text="{title}" paddingLeft="8" />
+</mx:HBox>

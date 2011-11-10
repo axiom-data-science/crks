@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx" width="100%">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.integratedlayers.events.DataLayerEvent;
+			import com.axiomalaska.integratedlayers.events.LayerGroupEvent;
+			import com.axiomalaska.integratedlayers.events.LegendEvent;
+			import com.axiomalaska.integratedlayers.map.IntegratedWMSGoogleLayer;
+			import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.RealTimeDataMarker;
+			import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.SensorTypes;
+			import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.StationsDataLayer;
+			import com.axiomalaska.integratedlayers.models.presentation_data.sensors.SensorLegendPM;
+			import com.axiomalaska.integratedlayers.views.panels.help.ModuleHelp;
+			import com.axiomalaska.crks.dto.DataLayer;
+			import com.axiomalaska.crks.dto.Layer;
+			import com.axiomalaska.crks.dto.LayerGroup;
+			
+			
+			import mx.collections.Sort;
+			
+			import spark.events.IndexChangeEvent;
+			
+			[Dispatcher]
+			public var dispatcher:IEventDispatcher;
+			
+			[Bindable]
+			[Inject]
+			public var sensorLayerData:SensorLegendPM;
+			
+			[Bindable]
+			public var stations_layer:StationsDataLayer;
+			
+
+			
+			
+			private function onChangeVisibleMarkerLimit():void{
+				dispatcher.dispatchEvent(new DataLayerEvent(DataLayerEvent.UPDATE_DATA_LAYER_VIEW));
+			}
+			
+			private function onReloadSensors():void{
+				dispatcher.dispatchEvent(new DataLayerEvent(DataLayerEvent.RELOAD_ACTIVE_REALTIME_SENSORS));
+			}
+			
+			
+			private function onScalarSensorActiveChange():void{
+				dispatcher.dispatchEvent(new DataLayerEvent(DataLayerEvent.UPDATE_SCALAR_SELECTED_REALTIME_SENSOR));
+			}
+			
+			private function onScalarSensorChange($evt:IndexChangeEvent):void{
+				sensorLayerData.selected_scalar_preview_sensor = stations_layer.sensors_type_map[scalarSensorList.getItemAt($evt.newIndex)];
+				dispatcher.dispatchEvent(new DataLayerEvent(DataLayerEvent.UPDATE_SCALAR_SELECTED_REALTIME_SENSOR));
+			}
+			
+			private function onVectorSensorActiveChange():void{
+				dispatcher.dispatchEvent(new DataLayerEvent(DataLayerEvent.UPDATE_VECTOR_SELECTED_REALTIME_SENSOR));
+			}
+			
+			
+			protected function onVectorSensorChange($evt:IndexChangeEvent):void
+			{
+				sensorLayerData.selected_vector_preview_sensor = stations_layer.sensors_type_map[vectorSensorList.getItemAt($evt.newIndex)];
+				dispatcher.dispatchEvent(new DataLayerEvent(DataLayerEvent.UPDATE_VECTOR_SELECTED_REALTIME_SENSOR));
+			}
+			
+			protected function sensorLabel($type:String):String{
+				var str:String;
+				if(stations_layer.sensors_type_map.hasOwnProperty($type)){
+					str = stations_layer.sensors_type_map[$type].label;
+				}
+				return str;
+			}
+			
+			[Bindable]
+			private var acSort:Sort = new Sort();
+			
+			
+			
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<s:ArrayCollection source="{SensorTypes.getScalarSensorTypes()}" id="scalarSensorList" sort="{acSort}" />
+		<s:ArrayCollection source="{SensorTypes.getVectorSensorTypes()}" id="vectorSensorList" />
+	</fx:Declarations>
+
+	
+	<s:HGroup width="100%" verticalAlign="middle">
+		<s:VGroup width="100%">
+			<s:HGroup width="100%" verticalAlign="middle">
+				<s:CheckBox id="scalarActive" selected="@{sensorLayerData.scalar_realtime_active}" 
+							change="onScalarSensorActiveChange();" fontSize="12" />
+				<s:DropDownList dataProvider="{scalarSensorList}" selectedItem="{sensorLayerData.selected_scalar_preview_sensor.sensorType}" 
+							enabled="{sensorLayerData.scalar_realtime_active}" width="100%" change="onScalarSensorChange(event)" labelFunction="sensorLabel" fontSize="10" />
+				
+				
+			</s:HGroup>
+			<s:HGroup width="100%" verticalAlign="middle">
+				<s:CheckBox selected="@{sensorLayerData.vector_realtime_active}" 
+							change="onVectorSensorActiveChange();" fontSize="12" />
+				<s:DropDownList dataProvider="{vectorSensorList}" selectedItem="{sensorLayerData.selected_vector_preview_sensor.sensorType}" 
+							enabled="{sensorLayerData.vector_realtime_active}" width="100%" change="onVectorSensorChange(event)" fontSize="10" labelFunction="sensorLabel" />
+			</s:HGroup>
+		</s:VGroup>
+
+	</s:HGroup>
+	<!--<s:HGroup width="100%" verticalAlign="middle">
+	<s:Label text="Visible sensor limit" /> 
+	<s:ComboBox selectedItem="@{sensorLayerData.visible_sensor_limit}" width="60" change="onChangeVisibleMarkerLimit()">
+	<s:dataProvider>
+	<s:ArrayCollection>
+	<fx:Number>50</fx:Number>
+	<fx:Number>100</fx:Number>
+	<fx:Number>150</fx:Number>
+	<fx:Number>300</fx:Number>
+	<fx:Number>600</fx:Number>							
+	</s:ArrayCollection>
+	</s:dataProvider>
+	</s:ComboBox>
+	
+	</s:HGroup>-->
+	
+	<s:HGroup width="100%" verticalAlign="middle" paddingBottom="20">
+		
+		<s:Label text="Reload sensor data every" fontSize="11" />
+		<s:DropDownList selectedItem="@{sensorLayerData.poll_timeout}" width="60" fontSize="10">
+			<s:dataProvider>
+				<s:ArrayCollection >
+					<fx:Number>2</fx:Number>
+					<fx:Number>5</fx:Number>
+					<fx:Number>10</fx:Number>
+					<fx:Number>15</fx:Number>
+					<fx:Number>30</fx:Number>
+					<fx:Number>60</fx:Number>
+				</s:ArrayCollection>
+			</s:dataProvider>
+		</s:DropDownList>
+		<s:Label text="minutes" fontSize="11" />
+		<s:Button label="Reload now" click="onReloadSensors()" fontSize="10" />
+		
+	</s:HGroup>
+</s:VGroup>

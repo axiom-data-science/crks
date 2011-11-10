@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:labels="com.axiomalaska.charts.axes.labels.*">
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("com.axiomalaska.charts.axes.HorizontalTimeAxis")]
+	</fx:Metadata>
+	
+	<fx:Declarations>		
+		<fx:Component id="segmentLabel">
+			<labels:AxiomChartAxisLabel skinClass="com.axiomalaska.charts.skins.HorizontalTimeAxisLabelSkin" />
+		</fx:Component>	
+	</fx:Declarations>
+	
+	<!-- SkinParts
+	name=labelDisplay, type=spark.components.Group, required=false
+	name=segmentLabel, type=mx.core.IFactory, required=true
+	name=graphicalElement, type=com.axiomalaska.charts.skins.graphical_elements.AxiomChartGraphicalElement, required=false
+	name=graphicalElement, type=com.axiomalaska.charts.skins.graphical_elements.AxiomChartGraphicalElement, required=false
+	-->
+	<s:Group id="labelDisplay" left="0" right="0" bottom="0" top="0" />
+</s:Skin>

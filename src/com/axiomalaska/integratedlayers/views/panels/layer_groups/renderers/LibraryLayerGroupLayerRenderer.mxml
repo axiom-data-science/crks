@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" width="100%"
+				autoDrawBackground="false" xmlns:fxg="assets.fxg.*" xmlns:ns="views.panels.layer_groups.*" xmlns:ns1="views.panels.layer_groups.icons.*" xmlns:legend="com.axiomalaska.integratedlayers.views.panels.legend.*">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.crks.dto.Layer;
+			
+			import com.axiomalaska.integratedlayers.events.LegendEvent;
+			override public function set data($data:Object):void{
+				super.data = $data;
+				if($data){
+					layer = $data as Layer;
+				}
+			}
+			
+			[Bindable]
+			private var layer:Layer;
+
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:HorizontalLayout paddingBottom="2" paddingTop="2" paddingLeft="8" paddingRight="5" />
+	</s:layout>
+	<s:Graphic>
+		<s:Ellipse width="4" height="4" top="2">
+			<s:fill>
+				<s:SolidColor color="0x999999" />
+			</s:fill>
+		</s:Ellipse>
+	</s:Graphic>
+	<s:Label fontSize="10" text="{layer.label}" width="100%" />	
+
+</s:ItemRenderer>

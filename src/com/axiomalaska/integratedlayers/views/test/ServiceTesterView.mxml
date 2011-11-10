@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" xmlns:fxg="assets.fxg.*">
+	<fx:Script>
+		<![CDATA[
+			
+			import com.axiomalaska.models.VariableType;
+			import com.axiomalaska.crks.dto.AmfDataService;
+			
+			import com.axiomalaska.integratedlayers.events.ServiceEvent;
+			
+			import com.axiomalaska.integratedlayers.models.AMFArgument;
+			import com.axiomalaska.integratedlayers.models.RequestValue;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.validators.ValidationResult;
+			import mx.validators.Validator;
+			
+			import org.swizframework.console.SwizConsole;
+			
+			[Bindable]
+			[Inject("amfDataService", bind="true")]
+			public var amfDataService:AmfDataService;			
+			
+			private function addArgument():void{
+				var obj:RequestValue = new RequestValue();
+				if(!amfDataService.arguments){
+					amfDataService.arguments = new ArrayCollection();
+				}
+				amfDataService.arguments.addItem(obj);
+			}
+			
+			private function onServiceRun():void{
+				
+				var errors:Array = Validator.validateAll(validatorArray);
+				if(errors.length < 1){
+					var hasArgs:Boolean = false;
+					for each(var arg:RequestValue in (amfDataService.arguments as ArrayCollection)){
+						if(arg.valueType && arg.name){
+							hasArgs = true;
+						}
+					}
+					
+					if(!hasArgs){
+						amfDataService.arguments = null;
+					}
+					dispatchEvent(new ServiceEvent(ServiceEvent.CALL_SERVICE,amfDataService));
+					
+				}else{
+					var str:String = '';
+					for each(var err:Object in errors){
+						str += err.message + "\n";
+					}
+					Alert.show(str);
+				}
+			}
+			
+
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<fx:Array id="validatorArray">
+			<mx:StringValidator source="{amf_url}" id="urlValidator" property="text" requiredFieldError="URL Required" />
+			<mx:StringValidator source="{destination_id}" id="destinationValidator" property="text" requiredFieldError="Destination ID Required" />
+			<mx:StringValidator source="{method}" id="methodValidator" property="text" requiredFieldError="Method Required" />
+		</fx:Array>
+	</fx:Declarations>
+	<mx:Form width="100%" height="100%" verticalGap="20">
+		
+		<mx:FormItem label="AMF URL" required="true">
+			<s:TextInput id="amf_url" text="@{amfDataService.url}" width="300" />
+			<s:TextInput text="http://proxy.axiomalaska.com/sensorobservations/messagebroker/amf2" width="300" fontSize="9" fontStyle="italic" editable="false" selectable="true" borderVisible="false"/>
+		</mx:FormItem>
+		
+		<mx:FormItem label="DESTINATION ID" required="true">
+			<s:TextInput id="destination_id" text="@{amfDataService.destination}" width="300" />
+			<s:TextInput text="SensorObservationsService" width="300" fontSize="9" fontStyle="italic" editable="false" selectable="true" borderVisible="false"/>
+		</mx:FormItem>
+		
+		<mx:FormItem label="METHOD" required="true">
+			<s:TextInput id="method" text="@{amfDataService.method}" width="300" />
+			<s:TextInput text="getObservations" fontSize="9" fontStyle="italic" editable="false" selectable="true" borderVisible="false"/>
+		</mx:FormItem>
+		
+		
+		<mx:FormItem label="ARGUMENTS" width="100%">
+			<mx:Text fontStyle="italic" width="100%" textAlign="left">
+				<mx:htmlText><![CDATA[- Arguments packaged into array of <a href="http://svn.axiomalaska.com/svn/java/resultset/src/main/java/com/axiom/services/netcdf/data/RequestValue.java" target="_blank"><font color="#006699"><b>RequestValue</b></font></a> objects and passed as a single argument to method.<br />- Arguments that do not include a key are not included.<br />- If no valid arguments are created, nothing is passed to the method (0 arguments).]]></mx:htmlText>
+			</mx:Text>
+			<s:DataGroup width="100%" dataProvider="{amfDataService.arguments as ArrayCollection}">
+				<s:layout>
+					<s:VerticalLayout gap="10" />
+				</s:layout>
+				<s:itemRenderer>
+					<fx:Component>
+						<s:ItemRenderer width="100%" autoDrawBackground="false">
+							<fx:Script>
+								<![CDATA[
+									import com.axiomalaska.models.VariableType;
+									
+									import com.axiomalaska.integratedlayers.models.RequestValue;
+									
+									import mx.collections.ArrayCollection;
+									import mx.events.FlexEvent;
+									import mx.events.ListEvent;
+									
+									import spark.events.IndexChangeEvent;
+									
+									
+									override public function set data($data:Object):void{
+										super.data = $data;
+										if($data){
+											argument = $data as RequestValue;
+										}
+									}
+									
+									[Bindable]
+									public var argument:RequestValue;
+									
+									[Bindable]
+									public var timeValue:String = '00:00:00';
+									
+									[Bindable]
+									public var dateTimeValue:Date;
+									
+									
+									[Bindable]
+									public var dataTypes:ArrayCollection = new ArrayCollection(
+										[
+											{label:VariableType.STRING},
+											{label:VariableType.DOUBLE},
+											{label:VariableType.INT},
+											{label:VariableType.DATE}
+										]
+									);
+									
+									protected function onDelete($evt:MouseEvent):void
+									{
+										// TODO Auto-generated method stub
+										outerDocument.amfDataService.arguments.removeItemAt(outerDocument.amfDataService.arguments.getItemIndex(argument));
+									}
+									
+									protected function onTypeChange($evt:Event):void{
+										if($evt is IndexChangeEvent){
+											argument.valueType = dataTypes.getItemAt(($evt as IndexChangeEvent).newIndex).label;
+										}else{
+											argument.valueType = dataType.selectedItem.label;
+										}
+										//reset argument value so that typed value can be set to match new type
+										//hack
+										argument.setTypedValue();
+									}
+									
+									protected function makeDateValue():void{
+										var arr:Array = timeValue.split(':');
+										if(arr.length == 3){
+											argument.dateValue = new Date(dateInput.selectedDate.fullYearUTC,dateInput.selectedDate.monthUTC,dateInput.selectedDate.dateUTC,arr[0],arr[1],arr[2]);
+										}else{
+											argument.dateValue = null;
+										}
+										//argument.value = dateTimeValue;
+									}
+									
+								]]>
+							</fx:Script>
+							<s:layout>
+								<s:HorizontalLayout paddingTop="5" paddingBottom="5" verticalAlign="middle" />
+							</s:layout>
+							<fxg:deletebutton buttonMode="true" click="onDelete(event)" />
+							<s:Label text="Key (name)" />
+							<s:TextInput text="@{argument.name}" />
+							<s:Label text="Value" />
+							<s:TextInput text="@{argument.value}" 
+										 visible="{Boolean(argument.valueType != VariableType.DATE)}" 
+										 includeInLayout="{Boolean(argument.valueType != VariableType.DATE)}" />
+							<s:VGroup 
+								visible="{Boolean(argument.valueType == VariableType.DATE)}" 
+								includeInLayout="{Boolean(argument.valueType == VariableType.DATE)}" verticalAlign="middle">
+								
+								<s:HGroup verticalAlign="middle">
+									<mx:DateField id="dateInput" change="makeDateValue()" />
+									<s:TextInput id="timeInput" text="@{timeValue}" change="makeDateValue()" />
+								</s:HGroup>
+								
+								<s:HGroup>
+									<s:Label text="DateTime (UTC): " fontSize="9" />
+									<s:Label text="{argument.dateValue.toUTCString()}" fontSize="9" />
+								</s:HGroup>
+								
+							</s:VGroup>
+							
+							<s:DropDownList id="dataType" dataProvider="{dataTypes}" width="200" selectedIndex="0" valueCommit="onTypeChange(event)" change="onTypeChange(event)" />
+							
+							
+						</s:ItemRenderer>
+					</fx:Component>
+				</s:itemRenderer>
+			</s:DataGroup>
+			<mx:FormItem>
+				<s:Button label="+ Argument" click="addArgument();" />
+			</mx:FormItem>
+		</mx:FormItem>
+		<s:Button label="RUN SERVICE" click="onServiceRun()" />
+		
+		
+		
+		
+		
+	</mx:Form>
+</s:VGroup>

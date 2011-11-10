@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<help:HelpPopupDisplay
+		  xmlns:fx="http://ns.adobe.com/mxml/2009" skinClass="skins.help.HelpPopupSkin" 
+		  xmlns:s="library://ns.adobe.com/flex/spark"
+		  xmlns:mx="library://ns.adobe.com/flex/mx" width="750" height="550" mouseDownOutside="close();" xmlns:help="com.axiomalaska.integratedlayers.views.panels.help.*"
+		  title="{meta_data_item.label}">
+
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.crks.dto.Layer;
+			import com.axiomalaska.crks.dto.LayerGroup;
+			import com.axiomalaska.crks.dto.Module;
+			import com.axiomalaska.crks.helpers.HelpMetaData;
+			import com.axiomalaska.crks.interfaces.IMetaDataItem;
+			
+			import com.axiomalaska.integratedlayers.events.HelpDataEvent;
+			
+			import mx.core.FlexGlobals;
+			import mx.managers.PopUpManager;
+			
+			
+			private var timer:Timer;
+			
+			private var _meta_data_item:IMetaDataItem;
+			
+			[Dispatcher]
+			public var dispatcher:IEventDispatcher;
+			
+			[Bindable]
+			override public function set meta_data_item($meta_data_item:IMetaDataItem):void{
+				//trace('TIMER!');
+				if($meta_data_item !== _meta_data_item){
+					metaDataContent.removeAllElements();
+					if(timer && timer.running){
+						timer.stop();
+					}
+					_meta_data_item = $meta_data_item;
+
+					timer = new Timer(150,1);
+					timer.addEventListener(TimerEvent.TIMER,loadMetaDataDisplay);
+					timer.start();
+
+				}
+				_meta_data_item = $meta_data_item;
+				
+			}
+			override public function get meta_data_item():IMetaDataItem{
+				return _meta_data_item;
+			}
+			
+			private function loadMetaDataDisplay($evt:TimerEvent = null):void{
+				
+				var mds:SkinnableMetaDataDisplay;
+				if(meta_data_item is Module){
+					mds = new ModuleHelp();
+					(mds as ModuleHelp).module = meta_data_item as Module;	
+				}else if(meta_data_item is LayerGroup){
+					mds = new LayerGroupHelp();
+					(mds as LayerGroupHelp).layer_group = meta_data_item as LayerGroup;	
+				}else if(meta_data_item is Layer){
+					mds = new LayerHelp();
+					(mds as LayerHelp).layer = meta_data_item as Layer;
+				}
+				metaDataContent.addElement(mds);
+				var hmd:HelpMetaData = new HelpMetaData();
+				hmd.source_item = meta_data_item;
+				mds.help_meta_data = hmd;
+				dispatcher.dispatchEvent(new HelpDataEvent(HelpDataEvent.GET_META_DATA,hmd));
+			}
+			
+		]]>
+	</fx:Script>
+	<help:content>
+		<s:Group width="100%" height="100%" id="metaDataContent" />
+	</help:content>
+</help:HelpPopupDisplay>

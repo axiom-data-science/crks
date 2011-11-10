@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<components:IconPanel xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					  xmlns:s="library://ns.adobe.com/flex/spark" 
+					  xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="com.axiomalaska.components.*" 
+					  title="Search layers" width="300" height="100%" backgroundAlpha=".7" borderAlpha="0" borderVisible="false">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.integratedlayers.models.presentation_data.ApplicationData;
+			[Bindable]
+			[Inject("applicationData", bind="true")]
+			public var applicationData:ApplicationData;
+			
+			public function close():void{
+				dispatchEvent(new LayerPanelEvent(LayerPanelEvent.LAYER_PANEL_DEACTIVATE));
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<components:layout>
+		<s:VerticalLayout paddingLeft="5" paddingRight="5" paddingTop="5" paddingBottom="5" gap="5" />
+	</components:layout>
+	<components:titleBarIcons>
+		<s:HGroup width="100%" height="100%" verticalAlign="middle">
+			<s:Label text="{title}" fontWeight="bold" color="0xFFFFFF" fontSize="13" width="100%" />
+			<s:Label text="x" fontWeight="bold" color="0xFFFFFF" buttonMode="true" click="close()" />
+		</s:HGroup>
+	</components:titleBarIcons>
+	<s:TextInput text="@{applicationData.layer_search_term}" change="{applicationData.searchLayers()}" width="100%" />
+	<s:List dataProvider="{applicationData.layers}" width="100%" height="100%" itemRenderer="com.axiomalaska.integratedlayers.views.panels.layers.LayerRenderer" 
+			borderAlpha="0" borderVisible="false" contentBackgroundAlpha="0">
+		<s:layout>
+			<s:VerticalLayout variableRowHeight="true" horizontalAlign="justify" />
+		</s:layout>
+	</s:List>
+</components:IconPanel>

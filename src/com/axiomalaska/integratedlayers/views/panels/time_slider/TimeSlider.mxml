@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HSlider xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			xmlns:s="library://ns.adobe.com/flex/spark" trackSkin="skins.time_slider.TimeSliderTrackSkin"
+			xmlns:mx="library://ns.adobe.com/flex/mx" width="100%"
+			liveDragging="true" dataTipFormatFunction="formatDataTip">
+	<fx:Script>
+		<![CDATA[
+			
+			
+			
+			private function formatDataTip($value:Number):String{
+				return formatDate(new Date($value));
+			}
+			
+			private function formatDate($date:Date):String{
+				function padStr($str:String):String{
+					if($str.length < 2){
+						$str = '0' + $str;
+					}
+					return $str;
+				}
+				
+				return padStr($date.getUTCMonth() + 1) + '/' + padStr($date.getUTCDate()) + '/' + $date.getUTCFullYear();
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+</mx:HSlider>

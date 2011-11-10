@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Script>
+		<![CDATA[
+			import assets.fxg.module_icons.cloud;
+			import assets.fxg.module_icons.contaminants;
+			import assets.fxg.module_icons.coverage;
+			import assets.fxg.module_icons.fish;
+			import assets.fxg.module_icons.forest;
+			import assets.fxg.module_icons.human_use;
+			import assets.fxg.module_icons.land_use;
+			import assets.fxg.module_icons.mountains;
+			import assets.fxg.module_icons.shore_zone;
+			import assets.fxg.module_icons.transportation;
+			import assets.fxg.module_icons.water;
+			import assets.fxg.weathericon;
+			
+			import com.axiomalaska.integratedlayers.models.presentation_data.ModuleIcons;
+			import com.axiomalaska.crks.dto.Module;
+			
+			import spark.core.SpriteVisualElement;
+			import spark.primitives.Graphic;
+			
+			private var _module:Module;
+			
+			[Bindable]
+			public function set module($module:Module):void{
+				_module = $module;
+				if(module){
+					
+					if(module.iconCode){
+						
+						switch(module.iconCode){
+							
+							case ModuleIcons.coverages:
+								icon = new coverage();
+								break;
+							
+							case ModuleIcons.forest:
+								icon = new forest();
+								break;
+							
+							case ModuleIcons.weather_sensors:
+								icon = new cloud();
+								break;
+								
+							case ModuleIcons.water:
+								icon = new water();
+								break;
+							
+							case ModuleIcons.land_features:
+								icon = new mountains();
+								break;
+							
+							case ModuleIcons.land_use:
+								icon = new land_use();
+								break;
+							
+							case ModuleIcons.fish:
+								icon = new fish();
+								break;
+							
+							case ModuleIcons.transportation:
+								icon = new transportation();
+								break;
+							
+							case ModuleIcons.human_use:
+								icon = new human_use();
+								break;
+							
+							case ModuleIcons.contaminants:
+								icon = new contaminants();
+								break;
+							
+							case ModuleIcons.shore_zone:
+								icon = new shore_zone();
+								break;
+							
+							
+							
+								
+							
+							
+							
+						
+						}
+						
+					}
+					
+					if(!icon){
+						icon = new coverage();
+					}
+					
+					icon.mouseChildren = false;
+					icon.width = 30;
+					icon.height = 30;
+					
+					if(icon){
+						addElement(icon);
+					}
+					
+					/*
+					if(module.label.match(/sensor/i)){
+						icon = sensor;
+					}else if(module.label.match(/land use/i)){
+						icon = landuse;
+					}else if(module.label.match(/hydrology/i)){
+						icon = hydro;
+					}else if(module.label.match(/forest/i)){
+						icon = forest;
+					}else if(module.label.match(/fish/i)){
+						icon = fish;
+					}else{
+						icon = weather;
+					}
+					*/
+				}
+			}
+			public function get module():Module{
+				return _module;
+			}
+
+			[Bindable]
+			private var icon:SpriteVisualElement;
+			
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+</s:Group>

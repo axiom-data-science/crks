@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Graphic version="1.0" viewHeight="25" viewWidth="25" ai:appVersion="14.0.0.367" d:id="1" xmlns="http://ns.adobe.com/fxg/2008" xmlns:ai="http://ns.adobe.com/ai/2008" xmlns:d="http://ns.adobe.com/fxg/2008/dt">
+  <Library/>
+  <Group x="-0.810547" d:id="2" d:type="layer" d:userLabel="Layer 1">
+    <Group x="0.93457" visible="false">
+      <Group>
+        <Group>
+          <Group ai:knockout="0">
+            <Path winding="nonZero" ai:knockout="0" data="M12.3335 24.168C5.80859 24.168 0.5 18.8594 0.5 12.3335 0.5 5.80859 5.80859 0.5 12.3335 0.5 18.8594 0.5 24.168 5.80859 24.168 12.3335 24.168 18.8594 18.8594 24.168 12.3335 24.168L12.3335 24.168Z" >
+              <fill>
+                <RadialGradient x="11.7998" y="20.6182" scaleX="24.5867" scaleY="24.5867">
+                  <GradientEntry color="#d1edfb" ratio="0"/>
+                  <GradientEntry color="#3da3db" ratio="1"/>
+                </RadialGradient>
+              </fill>
+            </Path>
+            <Group ai:knockout="0">
+              <Path winding="nonZero" ai:knockout="0" data="M12.3335 1C18.583 1 23.668 6.08447 23.668 12.3335 23.668 18.584 18.583 23.668 12.3335 23.668 6.08398 23.668 1 18.584 1 12.3335 1 6.08447 6.08398 1 12.3335 1M12.3335 0C5.52148 0 0 5.52197 0 12.3335 0 19.1445 5.52148 24.668 12.3335 24.668
+ 19.1455 24.668 24.668 19.1445 24.668 12.3335 24.668 5.52197 19.1455 0 12.3335 0L12.3335 0Z" >
+                <fill>
+                  <SolidColor color="#003366"/>
+                </fill>
+              </Path>
+            </Group>
+          </Group>
+        </Group>
+        <Group x="1.02881" y="1.02783">
+          <Group blendMode="screen" ai:knockout="0">
+            <Path winding="nonZero" ai:knockout="0" data="M11.3057 1.02881C17.3657 1.02881 22.3276 5.82471 22.5972 11.8203 22.606 11.6494 22.6099 11.4785 22.6099 11.3057 22.6099 5.07227 17.5386 0 11.3057 0 5.07178 0 0 5.07227 0 11.3057 0 11.4785 0.00488281 11.6494 0.0131836 11.8203 0.283203 5.82471
+ 5.24463 1.02881 11.3057 1.02881Z" >
+              <fill>
+                <LinearGradient x="11.3047" y="-1.05811" scaleX="16.4387" rotation="90">
+                  <GradientEntry color="#ffffff" ratio="0"/>
+                  <GradientEntry ratio="1"/>
+                </LinearGradient>
+              </fill>
+            </Path>
+          </Group>
+        </Group>
+        <Group x="1.07227" y="1.02783">
+          <Group blendMode="screen" ai:knockout="0">
+            <Path winding="nonZero" ai:knockout="0" data="M11.2612 13.0034C15.5469 13.0034 19.4766 12.0015 22.5225 10.3433 22.0313 4.55908 17.1699 0 11.2612 0 5.35205 0 0.490234 4.55908 0 10.3433 3.0459 12.0015 6.9751 13.0034 11.2612 13.0034Z" >
+              <fill>
+                <LinearGradient x="11.2612" y="-0.399414" scaleX="16.4324" rotation="90">
+                  <GradientEntry color="#ffffff" ratio="0"/>
+                  <GradientEntry ratio="1"/>
+                </LinearGradient>
+              </fill>
+            </Path>
+          </Group>
+        </Group>
+      </Group>
+    </Group>
+    <Group y="0.416992">
+      <Group x="0.097168" ai:knockout="0">
+        <Path winding="nonZero" ai:knockout="0" data="M0.559082 6.62354L13.2495 12.9688 25.938 6.62354 13.2495 0.279297 0.559082 6.62354Z" >
+          <fill>
+            <SolidColor color="#003366"/>
+          </fill>
+          <stroke>
+            <SolidColorStroke color="#ffffff" caps="none" weight="0.5" joints="miter" miterLimit="4"/>
+          </stroke>
+        </Path>
+      </Group>
+      <Group y="11.0117" ai:knockout="0">
+        <Path winding="nonZero" ai:knockout="0" data="M13.3467 4.28516L5.51465 0.370117 0.65625 1.95703 13.3467 8.2998 26.0352 1.95703 21.5732 0.271973 13.3467 4.28516Z" >
+          <fill>
+            <SolidColor color="#003366"/>
+          </fill>
+          <stroke>
+            <SolidColorStroke color="#ffffff" caps="none" weight="0.5" joints="miter" miterLimit="4"/>
+          </stroke>
+        </Path>
+      </Group>
+    </Group>
+  </Group>
+  <Private>
+    <ai:PrivateElement d:ref="#1">
+      <ai:SaveOptions>
+        <ai:Dictionary>
+          <ai:DictEntry name="clipToActiveArtboard" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="downsampleLinkedImages" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="rasterizeResolution" value="72" valueType="Integer"/>
+          <ai:DictEntry name="preserveGradientPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="preserveFilterPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="preserveTextPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="versionKey" value="1" valueType="Integer"/>
+          <ai:DictEntry name="includeSymbol" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="aiEditCap" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="writeImages" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="includeXMP" value="0" valueType="Boolean"/>
+        </ai:Dictionary>
+      </ai:SaveOptions>
+      <ai:DocData base="coveragelayericon.assets/images"/>
+      <ai:Artboards originOffsetH="0" originOffsetV="25" rulerCanvasDiffH="12.5" rulerCanvasDiffV="-12.5" zoom="12">
+        <ai:Artboard active="1" index="0" right="25" top="25"/>
+        <ai:ArtboardsParam all="0" range="" type="0"/>
+      </ai:Artboards>
+    </ai:PrivateElement>
+    <ai:PrivateElement d:ref="#2">
+      <ai:LayerOptions colorType="ThreeColor">
+        <ai:ThreeColor blue="257" green="128.502" red="79.31"/>
+      </ai:LayerOptions>
+    </ai:PrivateElement>
+  </Private>
+</Graphic>

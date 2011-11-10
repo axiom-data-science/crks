@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<axes:HorizontalAxis xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					 xmlns:s="library://ns.adobe.com/flex/spark" 
+					 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:axes="com.axiomalaska.charts.axes.*"
+					 axisItemIntervalCalculator="{timeSegmentIntervalCalculator}" skinClass="com.axiomalaska.charts.skins.HorizontalTimeAxisSkin">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.charts.base.AxiomChartPlottableItem;
+			
+			public function timeSegmentIntervalCalculator():Number{
+				var _interval:Number;
+				
+				var diff:Number = Math.abs(scale.maxValue - scale.minValue);
+				var st:Number;
+				var sd:Date;
+				if(diff < hour){
+					_interval = hour/4;
+					st = scale.minValue - _interval;
+					sd = new Date(st);
+					axisStartValue = new Date(sd.getFullYear(),sd.getMonth(),sd.getDate(),sd.getHours(),0).time;
+					plottableItemLabelFormatFunction = formatTimeLong;
+				}else if(diff < hour * 6){
+					_interval = hour/2;
+					st = scale.minValue - _interval;
+					sd = new Date(st);
+					axisStartValue = new Date(sd.getFullYear(),sd.getMonth(),sd.getDate(),0,0).time;
+					plottableItemLabelFormatFunction = formatTimeLong;
+				}else if(diff < day){
+					_interval = hour;
+					st = scale.minValue - _interval;
+					sd = new Date(st);
+					axisStartValue = new Date(sd.getFullYear(),sd.getMonth(),sd.getDate(),0,0).time;
+					plottableItemLabelFormatFunction = formatTimeLong;
+				}else if(diff < day * 7){
+					_interval = hour * 12;
+					st = scale.minValue - _interval;
+					sd = new Date(st);
+					axisStartValue = new Date(sd.getFullYear(),sd.getMonth(),sd.getDate(),0,0).time;
+					plottableItemLabelFormatFunction = formatTime;
+				}else if(diff < day * 14){
+					_interval = hour * 36;
+					st = scale.minValue - _interval;
+					sd = new Date(st);
+					axisStartValue = new Date(sd.getFullYear(),sd.getMonth(),sd.getDate(),0,0).time;
+					plottableItemLabelFormatFunction = formatTime;
+				}else if(diff < month){	
+					_interval = week;
+					st = scale.minValue - _interval;
+					sd = new Date(st);
+					axisStartValue = new Date(sd.getFullYear(),sd.getMonth(),sd.getDate(),0,0).time;
+					plottableItemLabelFormatFunction = formatDay;
+				}else if(diff < year){
+					_interval = month;
+					st = scale.minValue - _interval;
+					sd = new Date(st);
+					axisStartValue = new Date(sd.getFullYear(),sd.getMonth(),0,0,0).time;
+					plottableItemLabelFormatFunction = formatMonth;
+				}else if(diff < year * 5){
+					_interval = month * 6;
+					st = scale.minValue - _interval;
+					sd = new Date(st);
+					axisStartValue = new Date(sd.getFullYear(),sd.getMonth(),0,0,0).time;
+					plottableItemLabelFormatFunction = formatMonth;
+				}else if(diff < decade){
+					_interval = year;
+					st = scale.minValue - _interval;
+					sd = new Date(st);
+					axisStartValue = new Date(sd.getFullYear(),0,0,0,0).time;
+					plottableItemLabelFormatFunction = formatYear;
+				}else if(diff < decade * 3){
+					_interval = altyear;
+					st = scale.minValue - _interval;
+					sd = new Date(st);
+					axisStartValue = new Date(sd.getFullYear(),0,0,0,0).time;
+					plottableItemLabelFormatFunction = formatYear;
+				}else{
+					_interval = decade;
+					st = scale.minValue - _interval;
+					sd = new Date(st);
+					axisStartValue = new Date(sd.getFullYear(),0,0,0,0).time;
+					plottableItemLabelFormatFunction = formatYear;
+				}
+				
+				
+				
+				return _interval;
+			}
+			
+			
+			private var minute:Number = 60*1000;
+			private var hour:Number = 60*minute;
+			private var day:Number = 24 * hour;
+			private var week:Number = 7 * day;
+			private var month:Number = 31 * day;
+			private var year:Number = day * 365;
+			private var altyear:Number = year * 2;
+			private var decade:Number = year * 10;
+			private var altdecade:Number = decade * 2;			
+			private var _dayLabels:Array = ['Sun','Mon','Tues','Wed','Thurs','Fri','Sat']
+			private var _monthLabels:Array = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+						
+			public function formatYear($value:Number):String{
+				var d:Date = new Date(new Date($value).fullYearUTC,0);
+				return d.fullYear.toString();
+			}
+						
+			public function formatMonth($value:Number):String{
+				var $date:Date = new Date($value);
+				var d:Date = new Date($date.fullYearUTC,$date.monthUTC);
+				return _monthLabels[d.getMonth()] + ' ' + d.getFullYear();
+			}
+						
+			public function formatDay($value:Number):String{
+				var $date:Date = new Date($value);
+				var d:Date = new Date($date.fullYearUTC,$date.monthUTC,$date.dateUTC);
+				return _monthLabels[d.getMonth()] + ' ' + d.getDate();
+			}
+			
+			public function formatTime($value:Number):String{
+				var $date:Date = new Date($value);
+				return ($date.getMonth() + 1) + '/' + $date.getDate() + ' ' + _padTime($date.getHours()) + ':' + _padTime($date.getMinutes());
+			}
+			
+			public function formatTimeLong($value:Number):String{
+				var $date:Date = new Date($value);
+				return ($date.getMonth() + 1) + '/' + $date.getDate() + ' ' + _padTime($date.getHours()) + ':' + _padTime($date.getMinutes());
+			}
+			
+			public function _padTime($num:Number,$targetLength:int = 2,$padChar:String = '0'):String{
+				var str:String = String($num);
+				while(str.length < $targetLength){
+					str = $padChar + str;
+				}
+				return str;
+			}
+		]]>
+	</fx:Script>	
+</axes:HorizontalAxis>

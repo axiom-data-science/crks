@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:List xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%"
+		minHeight="0" borderVisible="false"
+		dragComplete="onReorderDone(event);" dragStart="onReorderStart(event);"
+		itemRendererFunction="legendItemRendererFunction">
+	
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.integratedlayers.events.LegendEvent;
+			import com.axiomalaska.integratedlayers.views.panels.layer_groups.renderers.ActiveCoverageLayerRenderer;
+			import com.axiomalaska.integratedlayers.views.panels.layer_groups.renderers.ActiveLayerGroupDataLayerRenderer;
+			import com.axiomalaska.integratedlayers.views.panels.layer_groups.renderers.ActiveLayerGroupRenderer;
+			import com.axiomalaska.integratedlayers.views.panels.layer_groups.renderers.ActiveLayerGroupSingleLayerRenderer;
+			import com.axiomalaska.integratedlayers.views.panels.layer_groups.renderers.ActiveSensorLayerGroupLayerRenderer;
+			import com.axiomalaska.crks.dto.DataLayer;
+			import com.axiomalaska.crks.dto.LayerGroup;
+			import com.axiomalaska.crks.dto.RasterLayer;
+			
+			import mx.events.DragEvent;
+			protected function onReorderDone($evt:DragEvent):void{
+				dispatchEvent(new LegendEvent(LegendEvent.LEGEND_REORDER_COMPLETE,null));
+				dropEnabled=false;
+			}
+			
+			private function onReorderStart($evt:DragEvent):void{
+				dropEnabled=true;
+			}
+			
+			protected function legendItemRendererFunction($layer_group:LayerGroup):ClassFactory{
+				var cl:Class = com.axiomalaska.integratedlayers.views.panels.layer_groups.renderers.ActiveLayerGroupRenderer;
+
+				if($layer_group.layers.getItemAt(0) is DataLayer){
+					cl = com.axiomalaska.integratedlayers.views.panels.layer_groups.renderers.ActiveSensorLayerGroupLayerRenderer;
+				}else if($layer_group.layers.getItemAt(0) is RasterLayer){
+					cl = com.axiomalaska.integratedlayers.views.panels.layer_groups.renderers.ActiveCoverageLayerRenderer;
+				}else if($layer_group.layers.getItemAt(0) is DataLayer){
+					cl = com.axiomalaska.integratedlayers.views.panels.layer_groups.renderers.ActiveLayerGroupDataLayerRenderer;
+				}else if($layer_group.layers.length == 1){
+					cl = com.axiomalaska.integratedlayers.views.panels.layer_groups.renderers.ActiveLayerGroupSingleLayerRenderer;
+				}
+				return new ClassFactory(cl);
+			}
+
+		]]>
+	</fx:Script>
+	<!--s:layout>
+	<s:VerticalLayout clipAndEnableScrolling="true" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" gap="0" variableRowHeight="true" horizontalAlign="justify"  />
+	</s:layout -->
+	<s:layout>
+		<s:VerticalLayout clipAndEnableScrolling="true" requestedMinRowCount="1" horizontalAlign="justify" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" gap="2" />
+	</s:layout>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+</s:List>

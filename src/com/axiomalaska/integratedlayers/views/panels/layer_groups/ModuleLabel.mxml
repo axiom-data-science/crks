@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 width="100%" xmlns:fxg="assets.fxg.*" xmlns:ns="views.panels.layer_groups.icons.*" xmlns:ns1="com.axiomalaska.integratedlayers.views.panels.layer_groups.icons.*">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.crks.dto.Module;
+			
+			import com.axiomalaska.integratedlayers.events.ModuleEvent;
+			[Bindable]
+			public var module:Module;
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:HorizontalLayout verticalAlign="middle" />
+	</s:layout>
+	<ns1:MetaDataItemHelpIcon meta_data_item="{module}" size="13" />
+	<s:Label text="{module.label}" fontSize="10" fontFamily="Arial" color="0x666666" width="100%"  
+			 toolTip="{'Click to select from all layers in ' + module.label}" buttonMode="true" click="dispatchEvent(new ModuleEvent(ModuleEvent.SHOW_MODULE,module))"/>
+</s:Group>

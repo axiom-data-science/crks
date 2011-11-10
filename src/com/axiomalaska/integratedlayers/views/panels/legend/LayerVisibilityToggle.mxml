@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="10" height="10" currentState="{layer.visible ? 'layer_visible' : 'layer_hidden'}" xmlns:fxg="assets.fxg.*" click="visibilityChange()">
+	
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.crks.dto.Layer;
+			
+			[Bindable]
+			public var layer:Layer;
+			
+			protected function visibilityChange():void
+			{
+				if(currentState == 'layer_visible'){
+					currentState = 'layer_hidden';
+					layer.visible = false;
+				}else{
+					currentState = 'layer_visible';
+					layer.visible = true;
+				}
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:states>
+		<s:State name="layer_visible" />
+		<s:State name="layer_hidden" />
+	</s:states>
+	
+	<fxg:visibilitybutton color.layer_hidden="0x660000" color.layer_visible="0x339900" />
+	
+	
+</s:Group>

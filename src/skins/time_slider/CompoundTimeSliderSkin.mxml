@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:ns="views.panels.time_slider.*" xmlns:timeline="com.axiomalaska.timeline.*">
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("com.axiomalaska.integratedlayers.views.panels.time_slider.SkinnableCompoundTimeSlider")]
+	</fx:Metadata>
+	<fx:Script>
+		<![CDATA[
+
+			
+		]]>
+	</fx:Script>
+	
+	<s:Rect left="0" right="0" top="0" bottom="0" visible="{hostComponent.boundsActive || hostComponent.sliceActive}">
+		<s:fill>
+			<s:SolidColor color="0x000000"></s:SolidColor>
+		</s:fill>
+	</s:Rect>
+
+	
+	<s:Group left="0" right="0" top="30" bottom="0" id="timeLineDisplay" maskType="alpha">
+		<!--<s:mask>
+
+		</s:mask>-->
+	</s:Group>
+	
+	<s:Group left="8" right="8" top="8" bottom="20">
+		<s:layout>
+			<s:VerticalLayout gap="0" />
+		</s:layout>
+		
+		<s:HGroup width="100%" id="boundsSliderContentDisplay" verticalAlign="middle" />
+		
+		<!--  mask="{boundsSpan}" maskType="alpha" -->
+		<s:Group id="contentGroup" width="100%" height="100%">
+
+
+			
+			<s:VGroup width="100%" gap="0">
+				
+				<s:Group width="100%">
+					
+					<s:Rect x="{hostComponent.boundedLowX}" width="{hostComponent.boundedWidth}" height="100%" visible="{hostComponent.boundsSliderContent.visible}">
+						<s:fill>
+							<s:SolidColor color="0x660000"></s:SolidColor>
+						</s:fill>
+					</s:Rect>
+					
+					<s:HGroup width="100%" id="boundedContentDisplay" />
+
+					<s:Rect x="{hostComponent.boundedLowX - 2}" width="4" top="0" bottom="0" visible="{hostComponent.boundsSliderContent.visible}">
+						<s:fill>
+							<s:SolidColor color="0xFF0000" alpha=".7" />
+						</s:fill>
+					</s:Rect>
+					
+					<s:Rect x="{hostComponent.boundedLowX + hostComponent.boundedWidth - 2}" width="4" top="0" bottom="0" visible="{hostComponent.boundsSliderContent.visible}">
+						<s:fill>
+							<s:SolidColor color="0xFF0000" alpha=".7" />
+						</s:fill>
+					</s:Rect>
+				</s:Group>
+				
+				<s:Group width="100%" id="divider" visible="{hostComponent.slice_layers_collection.length > 0 &amp;&amp; hostComponent.bounded_layers_collection.length > 0}">
+					<s:Rect width="100%" height="8">
+						<s:fill>
+							<s:SolidColor color="0x000000" />
+						</s:fill>
+					</s:Rect>
+				</s:Group>
+				
+				<s:Group width="100%">
+					<s:HGroup width="100%" id="sliceContentDisplay" />
+					<s:Rect x="{hostComponent.sliceX - 2}" width="4" top="0" bottom="0" visible="{hostComponent.sliceSliderContent.visible}">
+						<s:fill>
+							<s:SolidColor color="0xFFFFCC" alpha=".7" />
+						</s:fill>
+					</s:Rect>
+				</s:Group>
+				
+			</s:VGroup>
+
+			<!--
+			<s:Rect x="{hostComponent.boundedLowX - 2}" width="4" top="0" bottom="0" visible="{hostComponent.boundsSliderContent.visible}">
+				<s:fill>
+					<s:SolidColor color="0xFF0000" alpha=".7" />
+				</s:fill>
+			</s:Rect>
+			
+			<s:Rect x="{hostComponent.boundedLowX + hostComponent.boundedWidth - 2}" width="4" top="0" bottom="0" visible="{hostComponent.boundsSliderContent.visible}">
+				<s:fill>
+					<s:SolidColor color="0xFF0000" alpha=".7" />
+				</s:fill>
+			</s:Rect>
+			
+			
+			
+			<s:Rect x="{hostComponent.sliceX - 2}" width="4" top="0" bottom="0" visible="{hostComponent.sliceSliderContent.visible}">
+				<s:fill>
+					<s:SolidColor color="0xFFFFCC" alpha=".7" />
+				</s:fill>
+			</s:Rect>-->
+
+		</s:Group>
+		
+		<s:HGroup width="100%" id="sliceSliderContentDisplay" />
+		
+	</s:Group>
+	
+
+	
+	
+</s:Skin>

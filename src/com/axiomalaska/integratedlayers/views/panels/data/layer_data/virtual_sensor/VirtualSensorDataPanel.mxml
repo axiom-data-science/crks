@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:NavigatorContent xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					  xmlns:s="library://ns.adobe.com/flex/spark" 
+					  xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="com.axiomalaska.components.*" width="100%" height="100%"
+					  label="Virtual Sensor">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.integratedlayers.events.VirtualSensorEvent;
+			import com.axiomalaska.integratedlayers.models.VirtualSensorLocation;
+			import com.axiomalaska.integratedlayers.models.VirtualSensorRequest;
+			import com.axiomalaska.crks.dto.RasterLayer;
+			
+			import mx.events.IndexChangedEvent; 
+			
+			private var _virtual_sensor_location:VirtualSensorLocation;
+			
+			[Bindable]
+			public function set virtual_sensor_location($virtual_sensor_location:VirtualSensorLocation):void{
+				_virtual_sensor_location = $virtual_sensor_location;
+				_readyToLoad = true;
+				loadVirtualSensorTabs();
+			}
+			public function get virtual_sensor_location():VirtualSensorLocation{
+				return _virtual_sensor_location;
+			}
+			
+			protected function onChangeVirtualSensorLayer($evt:IndexChangedEvent):void
+			{
+				var vsd:VirtualSensorDataDisplay = vs.selectedChild as VirtualSensorDataDisplay;
+				vsd.getSensorData();
+				
+			}
+			
+			private var _readyToLoad:Boolean = false;
+			
+			private function loadVirtualSensorTabs():void{
+				if(vs && _readyToLoad){
+					if(virtual_sensor_location.layers && virtual_sensor_location.layers.length > 0){
+						vs.removeAllElements();
+						var ct:int = 0;
+						for each(var layer:RasterLayer in virtual_sensor_location.layers){
+							
+							
+							var vsd:VirtualSensorDataDisplay = new VirtualSensorDataDisplay();
+							var virtual_sensor_request:VirtualSensorRequest = new VirtualSensorRequest();
+							virtual_sensor_request.layer = layer;
+							virtual_sensor_request.virtual_sensor_location = virtual_sensor_location;
+							vsd.virtual_sensor_request = virtual_sensor_request;
+							vsd.label = layer.label;
+							vs.addElement(vsd);
+							
+							if(ct == 0){
+								vs.selectedChild = vsd;
+								vsd.getSensorData();
+							}
+							
+							ct ++;
+						}
+						
+						if(ct > 0){
+							lb.selectedIndex = 0;
+						}
+						
+						no_layers.visible = false;
+						no_layers.includeInLayout = false;
+						
+					}else{
+						no_layers.visible = true;
+						no_layers.includeInLayout = true;
+						
+					}
+					_readyToLoad = false;
+				}
+			}
+		]]>
+	</fx:Script>
+	<components:IconPanel width="100%" height="100%">
+	<components:titleBarIcons>
+		<s:HGroup width="100%" verticalAlign="middle">
+			<s:Label fontSize="13" fontWeight="bold" color="0xFFFFFF" text="{'Virtual Sensor Data (' + virtual_sensor_location.latlon.latitude + ',' + virtual_sensor_location.latlon.longitude + ')'}" width="100%" />
+			<s:Label fontSize="14" fontWeight="bold" color="0xFFFFFF" text="X" buttonMode="true" 
+					 click="dispatchEvent(new VirtualSensorEvent(VirtualSensorEvent.VIRTUAL_SENSOR_REMOVE_SENSOR))" />
+		</s:HGroup>
+	</components:titleBarIcons>
+	<s:VGroup width="100%" height="100%" paddingLeft="5" paddingRight="5" paddingBottom="5" paddingTop="5">
+		<s:Scroller width="100%">
+			<s:HGroup width="100%">
+				<mx:LinkBar id="lb" dataProvider="{vs}" width="100%" />
+			</s:HGroup>
+		</s:Scroller>
+		<mx:ViewStack width="100%" height="100%" id="vs" change="onChangeVirtualSensorLayer(event)" creationComplete="loadVirtualSensorTabs()" />
+	</s:VGroup>
+	<s:HGroup width="100%" height="100%" verticalAlign="middle" id="no_layers" includeInLayout="false" visible="false" horizontalAlign="center">
+		<s:Label text="No loaded map layers are virtual sensor enabled" />
+	</s:HGroup>
+	</components:IconPanel>
+</s:NavigatorContent>

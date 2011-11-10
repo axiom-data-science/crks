@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:HGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx" width="100%">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.integratedlayers.models.WFSRequest;
+			import mx.collections.ArrayCollection;
+			
+			
+			[Bindable]
+			public var wfs_request:WFSRequest;
+			
+			[Bindable]
+			public var types_collection:ArrayCollection = new ArrayCollection(
+				[
+					{label:'Excel',value:'excel'},	
+					{label:'CSV',value:'csv'},
+					{label:'Shape files (zip)',value:'SHAPE-ZIP'},
+					{label:'GML2',value:'GML2'},
+					{label:'GML2 (gzip)',value:'GML2-GZIP'},
+					{label:'GML3',value:'gml3'},
+					{label:'JSON',value:'json'}
+				]
+			);
+			
+			private function getDownload():void{
+				navigateToURL(new URLRequest(wfs_request.getFeatureCall()),'_blank');
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:states>
+		<s:State name="loading" />
+		<s:State name="valid" />
+		<s:State name="error" />
+	</s:states>
+	<s:VGroup width="100%" includeIn="valid">
+		<s:HGroup width="100%" verticalAlign="middle">
+			<s:Label text="Output format:" fontSize="14" fontWeight="bold" />
+			<s:DropDownList 
+				id="download_type"
+				dataProvider="{types_collection}"
+				selectedIndex="0"
+				/>
+		</s:HGroup>
+		<s:Button label="Download" buttonMode="true" fontSize="13" click="getDownload()" />
+	</s:VGroup>
+	<s:VGroup width="100%" height="100%" verticalAlign="middle" horizontalAlign="center" includeIn="loading">
+		<mx:ProgressBar label="" width="200" />
+	</s:VGroup>
+	<s:VGroup width="100%" height="100%">
+		<s:Label text="The area you've selected contains too many elements. Please select a smaller area."
+	</s:VGroup>
+</s:HGroup>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:HGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" visible="{Boolean(source_url)}" includeInLayout="{Boolean(source_url)}"
+		 buttonMode="true" click="navigateToURL(new URLRequest(source_url),'_blank');" verticalAlign="top" paddingBottom="7" paddingLeft="10">
+		 
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.integratedlayers.utilities.ResultSetHelper;
+			import com.axiomalaska.models.ResultSet;
+			import com.axiomalaska.models.VariableDescriptor;
+			
+			private var _result_set:ResultSet;
+			
+			[Bindable]
+			public function set result_set($result_set:ResultSet):void{
+				if(_result_set != $result_set){
+					_result_set = $result_set;
+					if(ResultSetHelper.resultSetHasData($result_set)){
+						if(_result_set.descriptors && _result_set.descriptors[0] && (_result_set.descriptors[0] as VariableDescriptor).sourceUrl){
+							source_url = (_result_set.descriptors[0] as VariableDescriptor).sourceUrl;
+						}
+					}
+				}
+			}
+			
+			
+			public function get result_set():ResultSet
+			{
+				return _result_set;
+			}
+			
+			[Bindable]
+			public var source_url:String;
+			
+		]]>
+	</fx:Script>
+	<s:Label text="Source data available at:" color="0x333333" verticalAlign="top" fontSize="10" fontStyle="italic" />
+	<s:Label text="{source_url}" fontSize="10" color="0x006699" verticalAlign="top" />
+	<mx:Image source="@Embed('E:/flex/SwizIntegratedMap/src/assets/images/external.png')" />
+</s:HGroup>

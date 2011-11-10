@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:HGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" xmlns:help="views.panels.help.*" xmlns:help1="com.axiomalaska.integratedlayers.views.panels.help.*">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.crks.helpers.HelpMetaData;
+			[Bindable]
+			public var help_meta_data:HelpMetaData;
+		]]>
+	</fx:Script>
+	<help1:HelpItem label="Date range" value="{help_meta_data.temporal.startdate.toUTCString() + ' - ' + help_meta_data.temporal.enddate.toUTCString()}" />
+</s:HGroup>

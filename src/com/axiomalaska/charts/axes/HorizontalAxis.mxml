@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<axes:SkinnableAxis xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					xmlns:s="library://ns.adobe.com/flex/spark" 
+					xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:axes="com.axiomalaska.charts.axes.*"  
+					width="100%" height="100%"
+					plottablePointFormatFunction="horizontalAxisPointFormat" skinClass="com.axiomalaska.charts.skins.DefaultAxiomAxisSkin">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.charts.scale.ScaleUtils;
+			
+			private function horizontalAxisPointFormat($value:Number):Point{
+				var pt:Point;
+				var xVal:Number = scale.valueToLayout($value);
+				if(xVal > 0){
+					pt = new Point(xVal,0);
+				}
+				return pt;
+			}			
+		]]>
+	</fx:Script>
+</axes:SkinnableAxis>

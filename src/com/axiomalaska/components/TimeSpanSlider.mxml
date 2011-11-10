@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx" initialize="init();" horizontalAlign="center" verticalAlign="middle" currentState="full">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.events.TimeSpanSliderEvent;
+			import com.axiomalaska.models.Temporal;
+			
+			import mx.controls.sliderClasses.SliderThumb;
+			import mx.events.SliderEvent;
+			
+			
+			//Number of millisecondsPerDay to set defaults
+			private const millisecondsPerDay:int = 1000 * 60 * 60 * 24;
+			
+			[Bindable]
+			private var sliderInterval:Number = millisecondsPerDay;
+
+			
+			
+			private var _maxDate:Date;
+			[Bindable]
+			public function set maxDate($maxDate:Date):void{
+				_maxDate = $maxDate;
+				if(!endDate){
+					endDate = maxDate;
+				}
+			}
+			public function get maxDate():Date{
+				return _maxDate;
+			}
+			
+			
+			
+			private var _minDate:Date;
+			[Bindable]
+			public function set minDate($minDate:Date):void{
+				_minDate = $minDate;
+				if(!startDate){
+					startDate = minDate;
+				}
+			}
+			public function get minDate():Date{
+				return _minDate;
+			}
+			
+			
+			[Bindable]
+			public var startDate:Date;
+			
+			[Bindable]
+			public var endDate:Date;
+			
+			//init called on creation complete
+			private function init():void{
+				//Set default dates for the date pickers
+				//startDateField.selectedDate = new Date();
+				//endDateField.selectedDate = new Date(new Date().getTime() + (30 * millisecondsPerDay)); 
+				//call the slider init to set defaults
+				//dateRangeInit();
+			}
+			
+			private function dateRangeInit():void{
+				//Set the slider min and max values.;
+				//dateRange.minimum = startDateField.selectedDate.getTime() - (60 * millisecondsPerDay);
+				//dateRange.maximum = endDateField.selectedDate.getTime() + (60 * millisecondsPerDay);
+				//startDateLabel.text= formatDate(new Date(dateRange.minimum));
+				//endDateLabel.text=formatDate(new Date(dateRange.maximum));
+				//dateRange.values = [startDateField.selectedDate.getTime(), 
+				//	endDateField.selectedDate.getTime()]
+				//dateRange.snapInterval = millisecondsPerDay;
+				//updateSelectableDateRanges();
+			}
+			
+			private function sliderDateChange():void{
+				//set date pickers to value of the sliders on change event
+				startDateField.selectedDate = new Date(dateRange.values[0]);
+				endDateField.selectedDate = new Date(dateRange.values[1]);
+				dateChange();
+			}
+			
+			private function formatDataTip($value:Number):String{
+				return formatDate(new Date($value));
+			}
+			
+			private function formatDate($date:Date):String{
+				function padStr($str:String):String{
+					if($str.length < 2){
+						$str = '0' + $str;
+					}
+					return $str;
+				}
+				
+				return padStr($date.getUTCMonth() + 1) + '/' + padStr($date.getUTCDate()) + '/' + $date.getUTCFullYear();
+			}
+			
+			private function dateSelectorChange():void{
+				dateRange.setThumbValueAt(0,startDateField.selectedDate.getTime());
+				dateRange.setThumbValueAt(1,endDateField.selectedDate.getTime());
+				dateChange();
+			}
+			
+			private function dateChange():void{
+				updateSelectableDateRanges();
+				startDate = startDateField.selectedDate;
+				endDate = endDateField.selectedDate;
+				dispatchEvent(new Event(Event.CHANGE));
+				var temporal:Temporal = new Temporal();
+				temporal.startdate = startDate;
+				temporal.enddate = endDate;
+				dispatchEvent(new TimeSpanSliderEvent(TimeSpanSliderEvent.TIME_SLIDER_SLIDING_UPDATE,temporal));
+			}
+			
+			private function updateSelectableDateRanges():void{
+				startDateField.selectableRange = {
+					rangeStart:new Date(dateRange.minimum),
+					rangeEnd:new Date(dateRange.values[1] - millisecondsPerDay)
+				};
+				
+				endDateField.selectableRange = {
+					rangeStart:new Date(dateRange.values[0] + millisecondsPerDay),
+					rangeEnd:new Date(dateRange.maximum)
+				};
+			}
+			
+
+			protected function onStartSlide(event:SliderEvent):void
+			{
+				var temporal:Temporal = new Temporal();
+				temporal.startdate = startDate;
+				temporal.enddate = endDate;
+				dispatchEvent(new TimeSpanSliderEvent(TimeSpanSliderEvent.TIME_SLIDER_SLIDING_START,temporal));
+			}
+
+
+			protected function onEndSlide(event:SliderEvent):void
+			{
+				var temporal:Temporal = new Temporal();
+				temporal.startdate = startDate;
+				temporal.enddate = endDate;
+				dispatchEvent(new TimeSpanSliderEvent(TimeSpanSliderEvent.TIME_SLIDER_SLIDING_COMPLETE,temporal));
+			}
+
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:states>
+		<s:State name="slider_only" />
+		<s:State name="full" />
+	</s:states>
+	
+	<s:HGroup width="100%" horizontalAlign="center" verticalAlign="middle">
+		<s:Label id="startDateLabel" paddingTop="7" fontSize="11" />
+		<mx:HSlider maximum="{maxDate}" minimum="{minDate}" 
+					id="dateRange" allowThumbOverlap="false" thumbCount="2" showDataTip="true"
+					liveDragging="true" dataTipFormatFunction="formatDataTip"
+					change="sliderDateChange();" width="80%" 
+					showTrackHighlight="true" snapInterval="{sliderInterval}"
+					values="{[minDate.getTime(),maxDate.getTime()]}"
+					thumbPress="onStartSlide(event)" thumbRelease="onEndSlide(event)"/>
+		<s:Label id="endDateLabel" paddingTop="7" fontSize="11" />
+	</s:HGroup>
+	
+	
+	<s:HGroup verticalAlign="middle" paddingTop="5" gap="30" visible.full="true" visible.slider_only="false" includeInLayout.slider_only="false" includeInLayout.full="true">
+		
+		<s:HGroup verticalAlign="middle">
+			<s:Label text="Start Date:"/>
+			<mx:DateField id="startDateField" text="{formatDate(startDateField.selectedDate)}" selectedDate="{startDate}" fontSize="10" color="#333333" change="dateSelectorChange();"/>
+		</s:HGroup>
+		
+		<s:HGroup verticalAlign="middle">
+			<s:Label text="End Date:"/>
+			<mx:DateField id="endDateField" text="{formatDate(endDateField.selectedDate)}" selectedDate="{endDate}" fontSize="10" color="#333333" change="dateSelectorChange();"/>
+		</s:HGroup>
+		
+	</s:HGroup>
+	
+</s:VGroup>

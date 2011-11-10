@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx">
+	<!-- host component -->
+	<fx:Script>
+		<![CDATA[
+			
+			
+			
+		]]>
+	</fx:Script>
+	<fx:Metadata>
+		[HostComponent("com.axiomalaska.timeline.charts.axes.labels.SkinnableAxisLabel")]
+	</fx:Metadata>
+	<!--<s:layout>
+		<s:VerticalLayout verticalAlign="bottom" paddingBottom="5" paddingLeft="10" />
+	</s:layout>-->
+	<s:Label id="label" text="{hostComponent.axisItem.label + '(' + hostComponent.axisItem.point + ')'}" fontFamily="{getStyle('fontFamily')}" fontSize="{getStyle('fontSize')}" fontWeight="{getStyle('fontWeight')}" color="{getStyle('color')}"
+		 verticalAlign="middle" top="0" backgroundColor="0xFF0000"	 
+	/>
+</s:Skin>
+

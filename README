@@ -1,0 +1,14 @@
+The Copper River Knowledge System Flex Client allows users to visualize and discover geospatial data for the Copper River Knowledge System.  Multiple WMS geoserver layers can be loaded and manipulated simultaneously.
+
+## Dependencies
+- Download swc files for following projects and place in libs directory
+- SWIZ Framework version 1.1 (swiz-framework-v1.0.0.swc) http://swizframework.org/
+- Google maps version 1.20 (map_flex_1_20.swc) http://code.google.com/apis/maps/documentation/flash/
+
+
+## Building 
+- Copy build.properties.example to build.properties and replace host environment variables.
+- Get new google api map key for host at http://code.google.com/apis/maps/signup.html
+- Be sure crossdomain.xml (html-template/crossdomain.xml) file is present at root (domain/crossdomain.xml).  If deploying to root, file will be included automatically with build.
+- In build.xml, find compileCRKSToTarget task and replace mapKey (from above), servicesDomain and servicesPath variables.
+- Run ant task deploy-flex-live to deploy project to server

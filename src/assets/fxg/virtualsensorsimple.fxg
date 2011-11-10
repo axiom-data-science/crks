@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Graphic version="1.0" viewHeight="15.0112" viewWidth="15.0112" ai:appVersion="14.0.0.367" d:id="1" xmlns="http://ns.adobe.com/fxg/2008" xmlns:ai="http://ns.adobe.com/ai/2008" xmlns:d="http://ns.adobe.com/fxg/2008/dt">
+  <Library>
+    <Definition name="Clock">
+      <Group>
+        <Path winding="nonZero" ai:knockout="0" data="M-0.000488281 -32C-17.6733 -32 -31.9995 -17.6729 -31.9995 0 -31.9995 17.6729 -17.6733 32 -0.000488281 32 17.6724 32 31.9995 17.6729 31.9995 0 31.9995 -17.6729 17.6724 -32 -0.000488281 -32ZM-0.000488281 25C-13.7856 25 -24.9995 13.7852 -24.9995
+ 0 -24.9995 -13.7852 -13.7856 -25 -0.000488281 -25 13.7847 -25 24.9995 -13.7852 24.9995 0 24.9995 13.7852 13.7847 25 -0.000488281 25Z" >
+          <fill>
+            <SolidColor/>
+          </fill>
+        </Path>
+        <Path winding="nonZero" ai:knockout="0" data="M15.4556 -0.758789L1.48486 -0.758789 1.48486 -17.1572C1.48486 -18.5381 0.36377 -19.6572 -1.01709 -19.6572 -2.39697 -19.6572 -3.51611 -18.5381 -3.51611 -17.1572L-3.51611 3.89063C-3.51611 5.27148 -2.39697 6.39258 -1.01709 6.39258 -0.69873
+ 6.39258 -0.396973 6.32617 -0.117676 6.21777 -0.0405273 6.22266 0.0317383 6.24121 0.109863 6.24121L15.4556 6.24121C17.3882 6.24121 18.9546 4.6748 18.9546 2.74023 18.9546 0.807617 17.3882 -0.758789 15.4556 -0.758789Z" >
+          <fill>
+            <SolidColor/>
+          </fill>
+        </Path>
+      </Group>
+    </Definition>
+  </Library>
+  <Group x="2.46729" y="0.911621" d:id="2" d:type="layer" d:userLabel="Layer 1">
+    <Group>
+      <Path winding="nonZero" ai:knockout="0" data="M2.53662 0.5C3.43018 0.5 3.53516 1.2959 3.53516 1.2959 3.53516 1.2959 3.45264 8.64551 3.46143 9.10352 3.68018 9.14746 4.50098 9.85938 4.52637 11 4.5498 12.0293 3.47119 12.9209 2.51465 12.9453 1.69678 12.9658 0.526855 12.1074 0.500488 11.0244
+ 0.479004 10.0742 1.30127 9.28516 1.6543 9.25684 1.69824 8.79395 1.66064 1.34033 1.66064 1.34033 1.66064 1.34033 1.47803 0.5 2.53662 0.5Z" >
+        <fill>
+          <SolidColor color="#666666"/>
+        </fill>
+        <stroke>
+          <SolidColorStroke color="#666666" caps="none" weight="1" joints="miter" miterLimit="4"/>
+        </stroke>
+      </Path>
+      <Path winding="nonZero" ai:knockout="0" data="M4.04102 11.0244C4.04102 11.8447 3.375 12.5098 2.5542 12.5098 1.7334 12.5098 1.06738 11.8447 1.06738 11.0244 1.06738 10.2012 1.7334 9.53711 2.5542 9.53711 3.375 9.53711 4.04102 10.2012 4.04102 11.0244Z" >
+        <fill>
+          <SolidColor color="#ffffff"/>
+        </fill>
+      </Path>
+      <Path winding="nonZero" ai:knockout="0" data="M3.0459 9.70508L2.1084 9.70508 2.1084 3.44727C2.1084 3.44727 2.33105 3.56689 2.67383 3.54883 3.0166 3.53174 3.0459 3.44727 3.0459 3.44727L3.0459 9.70508Z" >
+        <fill>
+          <SolidColor color="#ffffff"/>
+        </fill>
+      </Path>
+    </Group>
+    <Group x="5.29248" y="5.29932">
+      <Ellipse x="0.000488281" y="0.00195313" width="4.96777" height="4.96777" ai:knockout="0">
+        <fill>
+          <SolidColor color="#ffffff"/>
+        </fill>
+      </Ellipse>
+      <Clock x="2.48584" y="2.48584" scaleX="0.0776853" scaleY="0.0776853" ai:knockout="0"/>
+    </Group>
+  </Group>
+  <Private>
+    <ai:PrivateElement d:ref="#1">
+      <ai:SaveOptions>
+        <ai:Dictionary>
+          <ai:DictEntry name="includeXMP" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="writeImages" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="includeSymbol" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="versionKey" value="1" valueType="Integer"/>
+          <ai:DictEntry name="aiEditCap" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="preserveGradientPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="clipToActiveArtboard" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="downsampleLinkedImages" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="preserveTextPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="preserveFilterPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="rasterizeResolution" value="72" valueType="Integer"/>
+        </ai:Dictionary>
+      </ai:SaveOptions>
+      <ai:DocData base="virtualsensorsimple.assets/images"/>
+      <ai:Artboards originOffsetH="-1.75" originOffsetV="11.75" rulerCanvasDiffH="5.756" rulerCanvasDiffV="-4.245" zoom="33.936">
+        <ai:Artboard active="1" bottom="-3.261" index="0" left="-1.75" right="13.261" top="11.75"/>
+        <ai:ArtboardsParam all="0" range="" type="0"/>
+      </ai:Artboards>
+    </ai:PrivateElement>
+    <ai:PrivateElement d:ref="#2">
+      <ai:LayerOptions colorType="ThreeColor">
+        <ai:ThreeColor blue="257" green="128.502" red="79.31"/>
+      </ai:LayerOptions>
+    </ai:PrivateElement>
+  </Private>
+</Graphic>

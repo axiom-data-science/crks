@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:ns="views.panels.time_slider.*" xmlns:controls="com.dougmccune.controls.*" xmlns:code="http://code.google.com/p/flexlib/" xmlns:ns1="views.panels.layer_groups.icons.*" xmlns:ns2="com.axiomalaska.integratedlayers.views.panels.time_slider.*" xmlns:ns3="com.axiomalaska.integratedlayers.views.panels.layer_groups.icons.*">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.models.Temporal;
+			import com.axiomalaska.crks.dto.Layer;
+			import com.axiomalaska.crks.dto.LayerGroup;
+			import com.axiomalaska.crks.helpers.LayerTypes;
+			
+			import com.axiomalaska.integratedlayers.events.CompoundTimeSliderEvent;
+			
+			import com.axiomalaska.integratedlayers.models.presentation_data.ApplicationData;
+			import com.axiomalaska.integratedlayers.models.presentation_data.LegendData;
+			import com.axiomalaska.integratedlayers.models.presentation_data.TimeData;
+			
+			import mx.collections.ArrayCollection;
+			import mx.events.SliderEvent;
+			
+			[Bindable]
+			[Inject("applicationData", bind="true")]
+			public var applicationData:ApplicationData;
+			
+			[Bindable]
+			[Inject("timeData", bind="true")]
+			public var timeData:TimeData;
+			
+			[Bindable]
+			[Inject("legendData", bind="true")]
+			public var legendData:LegendData;
+			
+			private var oldSliceVal:Number;
+			
+			import mx.events.SliderEvent;
+			protected function onStartSlide():void
+			{
+
+				timeData.time_bounds.startdate = new Date(boundedSlider.values[0]);
+				timeData.time_bounds.enddate = new Date(boundedSlider.values[1]);
+				timeData.time_slice = new Date(sliceSlider.value);
+				dispatchEvent(new CompoundTimeSliderEvent(CompoundTimeSliderEvent.COMPLEX_TIME_SLIDER_SLIDING_START,timeData.time_bounds,timeData.time_slice));
+			}
+			
+			
+			protected function onBoundedSliderChange():void{
+				
+				if(sliceSlider.value > boundedSlider.values[1]){
+					sliceSlider.value = boundedSlider.values[1];
+				}else if(sliceSlider.value < boundedSlider.values[0]){
+					sliceSlider.value = boundedSlider.values[0];
+				}
+				
+				onSliderChange();
+			}
+			
+			
+			protected function onSliceSliderChange():void{
+				
+				
+				if(sliceSlider.value < boundedSlider.values[0]){
+					//boundedSlider.values[0] = sliceSlider.value;
+					boundedSlider.setThumbValueAt(0,sliceSlider.value);
+				}else if(sliceSlider.value > boundedSlider.values[1]){
+					//boundedSlider.values[1] = sliceSlider.value;
+					boundedSlider.setThumbValueAt(1,sliceSlider.value);
+				}
+				
+				onSliderChange();
+				
+			}
+			protected function onSliderChange():void{
+				timeData.time_bounds.startdate = new Date(boundedSlider.values[0]);
+				timeData.time_bounds.enddate = new Date(boundedSlider.values[1]);
+				timeData.time_slice = new Date(sliceSlider.value);
+				dispatchEvent(new CompoundTimeSliderEvent(CompoundTimeSliderEvent.COMPLEX_TIME_SLIDER_SLIDING_UPDATE,timeData.time_bounds,timeData.time_slice));
+
+				
+			}
+			
+			protected function onEndBoundsSlide():void{
+				timeData.time_bounds.startdate = new Date(boundedSlider.values[0]);
+				timeData.time_bounds.enddate = new Date(boundedSlider.values[1]);
+				dispatchEvent(new CompoundTimeSliderEvent(CompoundTimeSliderEvent.BOUNDED_TIME_SLIDER_SLIDING_COMPLETE,timeData.time_bounds,timeData.time_slice));
+				if(sliceSlider.value != oldSliceVal){
+					onEndSliceSlide();
+				}
+			}
+			
+			protected function onEndSliceSlide():void{
+				timeData.time_slice = new Date(sliceSlider.value);
+				dispatchEvent(new CompoundTimeSliderEvent(CompoundTimeSliderEvent.SLICE_TIME_SLIDER_SLIDING_COMPLETE,timeData.time_bounds,timeData.time_slice));
+				oldSliceVal = sliceSlider.value;
+			}
+			
+			protected function vectorRenderer($item:Layer):ClassFactory{
+				if($item.hasTimeComponent){
+					return new ClassFactory(VectorTimeControlRenderer);
+				}
+				return new ClassFactory();
+			}
+			
+			protected function onTimeLayerChange():void{
+				applicationData.active_vector_layers_collection.refresh();
+				applicationData.active_raster_layers_collection.refresh();
+				
+			}
+			
+			
+						
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	
+	
+	<!--controls:HSlider width="100%" /-->
+	<!-- code:HSlider width="100%" thumbCount="2" allowThumbOverlap="false" /-->
+	<!--
+	<ns:BoundedTimeSlider visible="{timeData.time_span_active}" includeInLayout="{timeData.time_span_active}" timeData="{timeData}" width="100%"  />
+	-->
+	<!--
+	<s:Graphic>
+		<s:Rect width="{this.width}" height="{this.height}">
+			<s:fill>
+				<s:SolidColor alpha=".5" color="0xFF0000" />
+			</s:fill>
+		</s:Rect>
+	</s:Graphic>
+	-->
+	<!-- BACKGROUND -->
+	<s:Graphic>
+		<s:Rect visible="{boundedSlider.visible || sliceSlider.visible}" includeInLayout="{boundedSlider.visible || sliceSlider.visible}" 
+				width="{content.width}" height="{content.height}" radiusX="5" radiusY="5">
+			<s:fill>
+				<s:SolidColor alpha=".8" color="0X333333" />
+			</s:fill>
+		</s:Rect>
+	</s:Graphic>
+	
+	<!-- BOUNDED UNDER -->
+	<!---
+	<s:Graphic>
+		<s:Rect x="{boundedSlider.x + content.getStyle('paddingLeft')}" top="0" width="{content.width}" height="{timeSliders.height}">
+			<s:fill>
+				<s:SolidColor alpha=".8" color="0xFF0000" />
+			</s:fill>
+		</s:Rect>
+	</s:Graphic>
+	-->
+	
+	<!-- SLICE UNDER -->
+	<!--
+	<s:Graphic>
+		<s:Rect x="{sliceSlider.value}" width="4" height="{content.height}">
+			<s:fill>
+				<s:SolidColor alpha=".8" color="0x330000" />
+			</s:fill>
+		</s:Rect>
+	</s:Graphic>
+	-->
+	
+	
+	<!-- BOUNDED OVER -->
+	
+	<s:VGroup id="content" width="100%" minHeight="0" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
+		
+
+
+			<s:HGroup width="100%" visible="{timeData.time_span_active}" includeInLayout="{timeData.time_span_active}">
+	
+				<s:HGroup width="100" verticalAlign="middle">
+					<ns3:LayerTypeTimeIcon layer_type="{LayerTypes.VECTOR_LAYER_TYPE}" />
+					<s:Label width="100" maxDisplayedLines="1" fontSize="11" fontWeight="bold" color="0xFFFFFF" text="Vector" />
+				</s:HGroup>
+				
+				<ns2:TimeSlider 
+					id="boundedSlider"
+					thumbSkin="@Embed(source='E:/flex/SwizIntegratedMap/src/assets/images/carrot_down_red.png')"
+					showTrackHighlight="true"
+					thumbCount="2" values="{[
+					(timeData.minimum_date ? timeData.minimum_date.getTime() : 0),
+					(timeData.maximum_date ? timeData.maximum_date.getTime() : 0)
+					]}"  
+					minimum="{timeData.minimum_date.getTime()}" maximum="{timeData.maximum_date.getTime()}"
+					thumbPress="onStartSlide()" thumbRelease="onEndBoundsSlide()" change="onBoundedSliderChange();" 
+					/>
+			</s:HGroup>
+			
+			<s:DataGroup width="100%" dataProvider="{applicationData.active_vector_layers_collection}" 
+						 itemRenderer="com.axiomalaska.integratedlayers.views.panels.time_slider.VectorTimeControlRenderer" 
+						 visible="{timeData.time_span_active}" includeInLayout="{timeData.time_span_active}"
+						 rendererAdd="onTimeLayerChange()" rendererRemove="onTimeLayerChange()">
+				<s:layout>
+					<s:VerticalLayout  />
+				</s:layout>
+			</s:DataGroup>
+			<!--s:List width="100%" dataProvider="{applicationData.active_vector_layers_collection}" itemRendererFunction="vectorRenderer" 
+					visible="{timeData.time_span_active}" includeInLayout="{timeData.time_span_active}" contentBackgroundAlpha="0" minHeight="0">
+				<s:layout>
+					<s:VerticalLayout requestedMinRowCount="1" />
+				</s:layout>
+			</s:List-->
+			
+		
+			
+			<s:DataGroup width="100%" dataProvider="{applicationData.active_raster_layers_collection}" itemRenderer="com.axiomalaska.integratedlayers.views.panels.time_slider.RasterTimeControlRenderer" 
+						 visible="{timeData.time_slice_active}" includeInLayout="{timeData.time_slice_active}" rendererAdd="onTimeLayerChange()" rendererRemove="onTimeLayerChange()">
+				<s:layout>
+					<s:VerticalLayout />
+				</s:layout>
+			</s:DataGroup>
+			
+			<!-- values="{[timeData.maximum_date.getTime(),timeData.maximum_date.getTime()]}" -->
+			<s:HGroup width="100%"  visible="{timeData.time_slice_active}" includeInLayout="{timeData.time_slice_active}" verticalAlign="middle">
+				<s:HGroup width="100" verticalAlign="middle">
+					<ns3:LayerTypeTimeIcon layer_type="{LayerTypes.RASTER_LAYER_TYPE}" />
+					<s:Label width="100" maxDisplayedLines="1" fontSize="11" fontWeight="bold" color="0xFFFFFF" text="Raster" />
+				</s:HGroup>
+				
+				<ns2:TimeSlider 
+					id="sliceSlider"
+					width="100%" 
+					thumbSkin="@Embed(source='E:/flex/SwizIntegratedMap/src/assets/images/carrot_up_red.png')"
+					minimum="{timeData.minimum_date.getTime()}" maximum="{timeData.maximum_date.getTime()}" value="{timeData.time_slice ? timeData.time_slice.getTime() : 0}"
+					thumbPress="onStartSlide()" thumbRelease="onEndSliceSlide()" change="onSliceSliderChange();"
+				/>
+			</s:HGroup>
+
+		
+		<!-- minimum="{timeData.minimum_date.getTime()}" maximum="{timeData.maximum_date.getTime()}" -->
+		
+		<s:BorderContainer id="timeLine" width="100%" backgroundAlpha=".5" minHeight="0"  
+			visible="{timeData.time_span_active || timeData.time_slice_active}" includeInLayout="{timeData.time_span_active || timeData.time_slice_active}" >
+			<s:layout>
+				<s:HorizontalLayout verticalAlign="middle" paddingLeft="5" paddingRight="5" paddingTop="4" paddingBottom="4" />
+			</s:layout>
+			<s:Label text="{timeData.minimum_date.toLocaleDateString() + ' ' + timeData.minimum_date.toLocaleTimeString()}" fontSize="10" width="100%" />
+			<s:Label text="{timeData.maximum_date.toLocaleDateString() + ' ' + timeData.maximum_date.toLocaleTimeString()}" fontSize="10" textAlign="right" width="100%" />
+		</s:BorderContainer>
+		
+	</s:VGroup>
+</s:Group>

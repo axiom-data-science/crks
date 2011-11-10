@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<components:IconPanel xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					  xmlns:s="library://ns.adobe.com/flex/spark" 
+					  xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="com.axiomalaska.components.*" 
+					  height="100%" backgroundAlpha=".7" borderAlpha="0" borderVisible="false" show="onShow()">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.integratedlayers.views.panels.layer_groups.renderers.LibraryLayerGroupRenderer;
+			import com.axiomalaska.integratedlayers.views.panels.layer_groups.renderers.LibraryLayerGroupSingleLayerRenderer;
+			import com.axiomalaska.crks.dto.LayerGroup;
+			
+			import com.axiomalaska.integratedlayers.events.LayerPanelEvent;
+			
+			import com.axiomalaska.integratedlayers.models.presentation_data.ApplicationData;
+			
+			import mx.events.FlexEvent;
+
+			[Bindable]
+			[Inject("applicationData", bind="true")]
+			public var applicationData:ApplicationData;
+			
+			public function close():void{
+				dispatchEvent(new LayerPanelEvent(LayerPanelEvent.LAYER_PANEL_DEACTIVATE));
+			}
+			
+
+
+			protected function onShow():void
+			{
+
+				//focusManager.setFocus(search);
+			}
+			
+			protected function layerGroupListItemRenderer($layer_group:LayerGroup):ClassFactory{
+				
+				var cl:Class = com.axiomalaska.integratedlayers.views.panels.layer_groups.renderers.LibraryLayerGroupRenderer;
+				if($layer_group.layers.length == 1){
+					cl = com.axiomalaska.integratedlayers.views.panels.layer_groups.renderers.LibraryLayerGroupSingleLayerRenderer;
+				}
+				return new ClassFactory(cl);
+			}
+
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<components:layout>
+		<s:VerticalLayout paddingLeft="5" paddingRight="3" paddingTop="5" paddingBottom="5" gap="5" />
+	</components:layout>
+	<components:titleBarIcons>
+		<s:HGroup width="100%" height="100%" verticalAlign="middle" paddingBottom="10" paddingTop="10">
+			<s:Label text="{applicationData.layer_groups_collection.length  + ' layer groups'}" fontWeight="bold" color="0xFFFFFF" fontSize="12" width="100%" />
+			<mx:Image source="@Embed('E:/flex/AxiomMaps/src/assets/images/close.white.png')"  buttonMode="true" click="close()"/>
+		</s:HGroup>
+	</components:titleBarIcons>
+	<!-- <s:TextInput text="@{applicationData.layer_search_term}" change="{applicationData.searchLayerGroups()}" id="search" width="100%" />-->
+	<!--itemRendererFunction="layerGroupListItemRenderer"-->
+	<s:List dataProvider="{applicationData.layer_groups_collection}" width="100%" height="100%" 
+			borderAlpha="0" borderVisible="false" contentBackgroundAlpha="0" itemRenderer="com.axiomalaska.integratedlayers.views.panels.layer_groups.renderers.LibraryLayerGroupRenderer">
+		<s:layout>
+			<s:VerticalLayout variableRowHeight="true" horizontalAlign="justify" paddingRight="5" gap="1" />
+		</s:layout>
+	</s:List>
+</components:IconPanel>

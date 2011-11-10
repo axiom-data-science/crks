@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:HGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%"
+		 verticalAlign="middle" click="navigateToURL(new URLRequest(meta_data_item.dataProvider.url),'_blank');" buttonMode="true"
+		 visible="{Boolean(meta_data_item.dataProvider)}" includeInLayout="{Boolean(meta_data_item.dataProvider)}" xmlns:help="views.panels.help.*" xmlns:help1="com.axiomalaska.integratedlayers.views.panels.help.*">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.crks.interfaces.IMetaDataItem;
+			[Bindable]
+			public var meta_data_item:IMetaDataItem;
+		]]>
+	</fx:Script>
+	<s:Label text="Source:" fontSize="13" fontWeight="bold" />
+	<mx:Image source="{meta_data_item.dataProvider.logo}" visible="{Boolean(meta_data_item.dataProvider.logo)}" includeInLayout="{Boolean(meta_data_item.dataProvider.logo)}" />
+	<help1:HelpItem value="{meta_data_item.dataProvider.label}"  color="0x006699" />
+</s:HGroup>

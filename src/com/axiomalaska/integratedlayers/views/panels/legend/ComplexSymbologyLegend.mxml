@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   xmlns:mx="library://ns.adobe.com/flex/mx" width="100" height="50" 
+				   currentState="loading" cornerRadius="4" borderColor="0xCCCCCC" dropShadowVisible="true"
+				    mouseDown="onMouseDown();"
+				   >
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.crks.dto.Layer;
+			
+			import mx.core.FlexGlobals;
+			import mx.events.EffectEvent;
+			import mx.managers.PopUpManager;
+			
+			private function onMouseDown():void{
+				if(freezeOpen){
+					if(!hasEventListener(MouseEvent.MOUSE_MOVE)){
+						dragPanel();
+						addEventListener(MouseEvent.MOUSE_UP,function($evt:Event):void{
+							stopDrag();
+						});
+					}
+				}
+			}
+			
+			private function dragPanel():void{
+				if(freezeOpen){
+					startDrag();
+				}
+			}
+			
+			private var _isOpen:Boolean;
+			
+			public function open($evt:MouseEvent = null):void{
+				if(!_isOpen){
+					PopUpManager.addPopUp(this,FlexGlobals.topLevelApplication as DisplayObject);
+				}
+				if($evt){
+					reposition($evt);
+				}
+			}
+			
+
+			
+			public function close():void{
+				PopUpManager.removePopUp(this);
+				_isOpen = false;
+			}
+			
+			public function reposition($evt:MouseEvent):void{
+				if(!freezeOpen){
+					setPosition($evt);
+				}
+				
+
+				
+			}
+			
+			private function setPosition($evt:MouseEvent):void{
+				x = $evt.stageX - 30 - width;
+				y = $evt.stageY;
+				checkYColision();
+				checkXColision();
+			}
+			
+			public function checkXColision():void{
+				//
+			}
+			
+			public function checkYColision():void{
+				if((y + height) > (FlexGlobals.topLevelApplication.stage.stageHeight - 20)){
+					y = FlexGlobals.topLevelApplication.stage.stageHeight - 20 - height;
+				}
+			}
+			
+			public function loadLegend($layer:Layer):void{
+
+				legendUrl = $layer.getLegendImageUrl();
+				layer = $layer;
+				
+			}
+			
+			
+			private function onComplete($evt:Event):void{
+				
+				currentState = 'loaded';
+				x = x - ((legend.contentWidth + 20) - width);
+				width = legend.contentWidth + 20;
+				height += legend.contentHeight + 10;
+				checkYColision();
+			}
+			
+			[Bindable]
+			private var legendUrl:String;
+			
+			[Bindable]
+			private var layer:Layer;
+			
+			
+			[Bindable]
+			public var freezeOpen:Boolean = false;
+			
+
+			
+
+
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<s:Fade id="fadeOut" target="{this}" duration="100" alphaFrom="1" alphaTo="0"/>
+		<s:Fade id="fadeIn" target="{this}" duration="100" alphaFrom="0" alphaTo="1" />
+		<!-- s:Sequence 
+			id="imageLoadEffect"
+			target="{this}"	
+		>
+			<s:Fade alphaFrom="1" alphaTo="0" duration="0" />
+			<s:Move xFrom="{x}" xTo="{x - ((legend.contentWidth + 20) - width)}" duration="0" />
+			<s:Resize 
+				widthFrom="{width}" widthTo="{legend.contentWidth + 20}" 
+				heightFrom="{height}" heightTo="{legend.contentHeight + 20}" duration="0" />
+			<s:Fade alphaFrom="0" alphaTo="1" duration="100" />
+		</s:Sequence -->
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:layout>
+		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center" />
+	</s:layout>
+	<s:states>
+		<s:State name="loading" />
+		<s:State name="loaded" />
+	</s:states>
+	<s:HGroup width="100%" paddingTop="0" paddingRight="5" paddingLeft="5">
+		<s:Label fontSize="11" text="{layer.label}" color="0x333333" width="100%" />
+		<s:Label text="x" fontWeight="bold" fontSize="12" buttonMode="true" visible="{freezeOpen}" click="{freezeOpen = false;close();}" />
+	</s:HGroup>
+	<mx:ProgressBar width="15" indeterminate="true" alpha=".5" includeIn="loading" label="" />
+	<!-- progress="onProgress(event)"  httpStatus="legend_httpStatusHandler(event)" -->
+	<mx:Image id="legend" source="{legendUrl}" visible="{currentState == 'loaded'}" includeInLayout="{currentState == 'loaded'}" complete="onComplete(event)" />
+</s:BorderContainer>

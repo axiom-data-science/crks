@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:NavigatorContent
+	xmlns:fx="http://ns.adobe.com/mxml/2009" 
+	xmlns:s="library://ns.adobe.com/flex/spark" 
+	xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" currentState="{virtual_sensor_request.loading === true ? 'loading' : 'loaded'}" xmlns:ns="com.axiomalaska.integratedlayers.views.panels.data.layer_data.result_set_chart.*">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.integratedlayers.events.SensorEvent;
+			import com.axiomalaska.integratedlayers.events.VirtualSensorEvent;
+			
+			import com.axiomalaska.integratedlayers.models.DataRequest;
+			import com.axiomalaska.integratedlayers.models.VirtualSensorRequest;
+			import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.Sensor;
+			
+			[Bindable]
+			public var virtual_sensor_request:VirtualSensorRequest;
+			
+			private var requested:Boolean = false;
+			
+			public function getSensorData():void{
+				if(virtual_sensor_request && !requested){
+					requested = true;
+					dispatchEvent(new VirtualSensorEvent(VirtualSensorEvent.VIRTUAL_SENSOR_REQUEST_DATA,virtual_sensor_request));
+				}
+			}
+			
+
+			
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:VerticalLayout paddingLeft="5" paddingTop="5" paddingRight="5" paddingBottom="5" />
+	</s:layout>
+	<s:states>
+		<s:State name="loading" />
+		<s:State name="loaded" />
+	</s:states>
+	<s:VGroup includeIn="loading" width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
+		<mx:ProgressBar width="200" label="" indeterminate="true" />
+	</s:VGroup>
+	<s:VGroup width="100%" height="100%" includeIn="loaded">
+		<mx:ViewStack id="vs" width="100%" height="100%">
+			<s:NavigatorContent width="100%" height="100%" label="Chart">
+				<ns:LineChartDisplay resultSet="{virtual_sensor_request.result_set}" id="chart" styleName="lineChart" />
+			</s:NavigatorContent>
+			<s:NavigatorContent width="100%" height="100%" label="Data">
+				<mx:DataGrid dataProvider="{virtual_sensor_request.result_set.keyed_collection}" width="100%" height="100%" />
+			</s:NavigatorContent>
+		</mx:ViewStack>
+		<mx:LinkBar dataProvider="{vs}" fontSize="10" />
+		
+	</s:VGroup>
+</s:NavigatorContent>

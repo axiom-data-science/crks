@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:labels="com.axiomalaska.timeline.charts.axes.labels.*" xmlns:background="com.axiomalaska.timeline.charts.axes.background.*">
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("com.axiomalaska.timeline.charts.axes.SkinnableVerticalAxis")]
+	</fx:Metadata>
+	<fx:Declarations>
+		<fx:Component id="segmentLabel">
+			<labels:SkinnableAxisLabel skinClass="com.axiomalaska.timeline.skins.AxisLabelSkin" />
+		</fx:Component>	
+	</fx:Declarations>
+	<!-- SkinParts
+	name=verticalAxisGraphic, type=com.axiomalaska.timeline.charts.axes.VerticalAxisGraphicalElement, required=true
+	-->
+	<s:Group width="100%" height="100%" clipAndEnableScrolling="true" id="labelDisplay">
+		<background:VerticalAxisGraphicalElement id="backgroundElement" width="100%" height="100%">
+			<background:stroke>
+				<s:SolidColorStroke color="0xCCCCCC" weight="1" />
+			</background:stroke>
+		</background:VerticalAxisGraphicalElement>
+	</s:Group>
+</s:Skin>

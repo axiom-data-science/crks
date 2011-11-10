@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:fb="http://ns.adobe.com/flashbuilder/2009">
+    <fx:Metadata>[HostComponent("com.axiomalaska.charts.base.SkinnableAxiomChartContainer")]</fx:Metadata>
+	<s:states>
+		<s:State name="disabled" />
+		<s:State name="normal" />
+	</s:states>
+	
+
+	
+	
+	
+	<s:Group left="0" right="0" top="0" bottom="0">
+		<s:VGroup bottom="{horizontalAxisDisplay.height}" left="0" right="0" top="0"  horizontalAlign="left">
+			<s:Group id="verticalAxisDisplay" height="100%" clipAndEnableScrolling="true" />
+		</s:VGroup>
+		<s:VGroup left="{verticalAxisDisplay.width}" right="0" top="0" bottom="0" verticalAlign="bottom">
+			<s:Group id="horizontalAxisDisplay" width="100%" clipAndEnableScrolling="true" />
+		</s:VGroup>
+		<s:Group top="0" right="0" left="{verticalAxisDisplay.width}" bottom="{horizontalAxisDisplay.height}">
+			<s:Group id="backgroundDisplay" width="100%" height="100%" clipAndEnableScrolling="true" />
+			<s:Group id="chartImplementationDisplay" width="100%" height="100%" />
+			<s:Group id="foregroundDisplay" width="100%" height="100%" mouseChildren="false" mouseEnabled="false" clipAndEnableScrolling="true" />
+		</s:Group>
+	</s:Group>
+	
+	
+	
+	<!-- 		<s:VGroup width="100%" height="100%" 
+	paddingLeft="{getStyle('gutterLeft') ? getStyle('gutterLeft') : verticalAxisDisplay.width}" 
+	paddingBottom="{getStyle('gutterBottom') ? getStyle('gutterBottom') : horizontalAxisDisplay.height}">
+	<s:Group id="chartImplementationDisplay" width="100%" height="100%" />
+	</s:VGroup> -->
+	
+	
+
+
+
+</s:Skin>

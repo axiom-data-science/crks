@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   xmlns:mx="library://ns.adobe.com/flex/mx" width="300" minHeight="0" cornerRadius="5" dropShadowVisible="true" visible="false">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.Sensor;
+			import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.SensorTypes;
+			import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.Station;
+			import com.axiomalaska.utilities.logos.SourceLogos;
+			
+			import mx.events.FlexEvent;
+			
+			[Bindable]
+			public var station:Station;
+
+			private function insertChartLabels():void{
+				if(station){
+					var ct:int = 0;
+					for each(var sensor:Sensor in station.sensors){
+						var l:Label = new Label();
+						sensor_label_container.addElement(l);
+						l.text = sensor.label;
+					}
+				}
+				
+			}
+
+
+
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:VerticalLayout paddingBottom="12" paddingRight="12" paddingLeft="12" paddingTop="12" gap="5" />
+	</s:layout>
+	<s:HGroup width="100%" verticalAlign="top">
+		<mx:Image id="sourceLogo" source="{SourceLogos.findLogoClass(station.source.label)}" />
+		<s:VGroup width="100%" verticalAlign="middle">
+			<s:Label text="{station.source.label}" fontSize="14" fontWeight="bold" color="0x666666" width="100%" />
+			<s:Label text="{station.label}" fontSize="13" color="0x333333" width="100%" />
+		</s:VGroup>
+	</s:HGroup>
+	<s:VGroup id="sensor_label_container" width="100%" creationComplete="insertChartLabels()" />
+	<s:Label text="Click on map marker to see sensor data" fontSize="10" color="0x666666" fontStyle="italic" />
+		
+		
+</s:BorderContainer>

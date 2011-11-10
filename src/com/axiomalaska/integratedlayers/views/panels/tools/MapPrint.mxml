@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<help:HelpPopupDisplay xmlns:fx="http://ns.adobe.com/mxml/2009" width="500" height="350"
+					   xmlns:s="library://ns.adobe.com/flex/spark" skinClass="skins.help.HelpPopupSkin" title="Export map"
+					   xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:help="com.axiomalaska.integratedlayers.views.panels.help.*" currentState="waiting_for_input">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.map.BaseLayerType;
+			import com.axiomalaska.map.types.google.GoogleMap;
+			import com.axiomalaska.crks.dto.Layer;
+			import com.axiomalaska.crks.dto.OgcLayer;
+			import com.google.maps.Map;
+			import com.google.maps.interfaces.IOverlay;
+			import com.pfp.events.JPEGAsyncCompleteEvent;
+			import com.pfp.utils.JPEGAsyncEncoder;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.core.FlexGlobals;
+			import mx.graphics.ImageSnapshot;
+			
+			private var _map:GoogleMap;
+			
+			public function set map($map:GoogleMap):void{
+				_map = $map;
+				if(map.base_layer == BaseLayerType.GINA || map.base_layer == BaseLayerType.RELIEF){
+					currentState = 'error';
+					errorText = 'The base layer you have selected does not support image download. Please select another base layer';
+				}else{
+					currentState = 'waiting_for_input';
+					errorText = null;
+				}
+			}
+			public function get map():GoogleMap{
+				return _map;
+			}
+			
+			private var _layers:ArrayCollection;
+			
+			public function set layers($layers:ArrayCollection):void{
+				_layers = $layers;
+				layersToHide = new ArrayCollection();
+				/*for each(var layer:Layer in layers){
+					if(layer is OgcLayer){
+						if(!(layer as OgcLayer).wmsUrl.match(/axiomalaska/)){
+							layersToHide.addItem(layer);
+						}
+					}
+				}*/
+				
+			}
+			public function get layers():ArrayCollection{
+				return _layers;
+			}
+			
+			private var byteArray:ByteArray;
+			
+			[Bindable]
+			private var layersToHide:ArrayCollection = new ArrayCollection();
+			
+			
+			
+			private function startEncoding():void{
+				
+				if(map){
+
+					
+					currentState = 'encoding';
+					
+					var ogclayer:OgcLayer;
+					
+					var parents:Array = [];
+					
+					for each(ogclayer in layersToHide){
+						var parent:DisplayObjectContainer = (ogclayer.mapLayer as IOverlay).foreground.parent;
+						var index:int = parent.getChildIndex((ogclayer.mapLayer as IOverlay).foreground);
+						parents.push({index:index,parent:parent});
+					}
+					
+					var j:int = 0;
+					for each(ogclayer in layersToHide){
+						var par:Object = parents[j];
+						par.parent.removeChild((ogclayer.mapLayer as IOverlay).foreground);
+					}
+
+					//Security.allowDomain("*");
+					//Security.loadPolicyFile('http://maps.axiomalaska.com/crossdomain.xml');
+				
+					//Security.allowDomain("*.googleapis.com"); 
+					
+					
+					//var b:Bitmap = new Bitmap(s);
+					
+					map.hideControls();
+					
+					var asyncEncoder:JPEGAsyncEncoder = new JPEGAsyncEncoder(quality.value);
+					asyncEncoder.PixelsPerIteration = 500;
+					asyncEncoder.addEventListener(ProgressEvent.PROGRESS, updateProgress);
+					asyncEncoder.addEventListener(JPEGAsyncCompleteEvent.JPEGASYNC_COMPLETE, asyncComplete);
+					
+					if(CONFIG::RELEASE_VERSION.match(/true/i)){
+						var bm:Bitmap= map.map.getPrintableBitmap();
+						asyncEncoder.encode(bm.bitmapData);
+					}else{
+						var s:BitmapData = ImageSnapshot.captureBitmapData(map.map);
+						//var s:BitmapData = ImageSnapshot.captureBitmapData(FlexGlobals.topLevelApplication as DisplayObject);
+						asyncEncoder.encode(s);
+					}
+					
+					map.showControls();
+					
+					var i:int = 0;
+					for each(ogclayer in layersToHide){
+						var p:Object = parents[i];
+						p.parent.addChildAt((ogclayer.mapLayer as IOverlay).foreground,p.index);
+						i ++;
+					}
+				}
+			}
+			
+			private function updateProgress($evt:ProgressEvent):void{
+				progress.setProgress($evt.bytesLoaded, $evt.bytesTotal);
+				progress.label = ($evt.bytesLoaded / $evt.bytesTotal * 100).toFixed() + "%" + " Complete";
+			}
+			
+			private function asyncComplete($evt:JPEGAsyncCompleteEvent):void{
+				currentState = 'encoding_complete';
+				byteArray = $evt.ImageData;
+			}
+			
+			private function saveToDesktop():void{
+				var f:FileReference = new FileReference();
+				f.save(byteArray,'map.jpg');
+			}
+			
+			[Bindable]
+			public var instructions:String = 'Select image quality, then encode image and download to your computer.';
+			
+			[Bindable]
+			public var errorText:String;
+			
+			
+		]]>
+	</fx:Script>
+	<help:states>
+		<s:State name="error" />
+		<s:State name="waiting_for_input" />
+		<s:State name="encoding" />
+		<s:State name="encoding_complete" />
+	</help:states>
+	<help:content>
+		<s:VGroup width="100%" height="100%" paddingBottom="20">
+			
+			<s:VGroup width="100%" height="100%" verticalAlign="middle" horizontalAlign="center" includeIn="error">
+				<mx:Text htmlText="{errorText}" width="100%" />
+				<s:Button label="Close window" click="close();" />
+			</s:VGroup>
+			
+			<s:VGroup width="100%" height="100%" excludeFrom="error">
+				<mx:Text width="100%" htmlText="{instructions}" fontWeight="bold" />
+				<s:VGroup width="100%" horizontalAlign="left" visible="{layersToHide.length > 0}" includeInLayout="{layersToHide.length > 0}" paddingTop="8">
+					<s:Label text="Note: The following layers will not be included in your map download." color="0x330000" />
+					<s:List dataProvider="{layersToHide}" width="100%" height="100%" maxHeight="100" borderColor="0xCCCCCC" fontSize="10" fontStyle="italic">
+						<s:layout>
+							<s:VerticalLayout gap="2" clipAndEnableScrolling="true" paddingBottom="5" paddingTop="5" paddingRight="5" paddingLeft="5" />
+						</s:layout>
+					</s:List>
+				</s:VGroup>
+				<s:HGroup width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
+					<mx:ProgressBar id="progress" mode="manual" width="200" includeIn="encoding,encoding_complete" />
+				</s:HGroup>
+			</s:VGroup>
+			<s:VGroup width="100%" excludeFrom="error">
+				<s:HGroup width="100%" horizontalAlign="center" verticalAlign="middle" paddingBottom="10">
+					<s:Label text="Image quality" color.encoding="0x999999" color="0x000000" />
+					<s:Label text="{quality.value}" fontWeight="bold" color.encoding="0x999999" color="0x000000" />
+					<s:HSlider maximum="100" minimum="20" value="60" id="quality" enabled="true" enabled.encoding="false" />
+				</s:HGroup>
+				<s:HGroup width="100%" horizontalAlign="center">
+					<s:Button label="Step 1: Encode image" click="startEncoding();"  enabled.encoding="false" />
+					<s:Button label="Step 2: Download image" enabled="false" enabled.encoding_complete="true" click="saveToDesktop();" />
+				</s:HGroup>
+
+			</s:VGroup>
+			
+		</s:VGroup>
+
+	</help:content>
+	
+</help:HelpPopupDisplay>

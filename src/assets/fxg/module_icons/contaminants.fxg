@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Graphic version="1.0" viewHeight="37.1563" viewWidth="36.7031" ai:appVersion="14.0.0.367" d:id="1" xmlns="http://ns.adobe.com/fxg/2008" xmlns:ai="http://ns.adobe.com/ai/2008" xmlns:d="http://ns.adobe.com/fxg/2008/dt">
+  <Group x="-0.542969" y="0.225586" d:id="2" d:type="layer" d:userLabel="Layer 1">
+    <Group>
+      <Group d:id="3">
+        <Ellipse y="0.00146484" width="36.7021" height="36.7021" ai:knockout="0">
+          <fill>
+            <LinearGradient y="18.3511" scaleX="36.7021" rotation="-0">
+              <GradientEntry color="#ffffff" ratio="0"/>
+              <GradientEntry color="#dedfe0" ratio="0.17033"/>
+              <GradientEntry color="#b2b2b2" ratio="1"/>
+            </LinearGradient>
+          </fill>
+        </Ellipse>
+      </Group>
+      <Group x="0.422852" y="0.422852" d:id="4">
+        <Ellipse y="0.00195313" width="35.8555" height="35.8555" ai:knockout="0">
+          <fill>
+            <LinearGradient x="17.9282" y="35.8564" scaleX="35.856" rotation="-90">
+              <GradientEntry color="#ffffff" ratio="0"/>
+              <GradientEntry color="#dedfe0" ratio="0.17033"/>
+              <GradientEntry color="#b2b2b2" ratio="1"/>
+            </LinearGradient>
+          </fill>
+        </Ellipse>
+      </Group>
+      <Group x="3.89795" y="1.16699" d:id="5">
+        <Path winding="nonZero" ai:knockout="0" data="M29.1929 10.9375C30.5425 17.0771 22.688 18.918 14.6646 18.918 6.64111 18.918 -1.13916 17.3613 0.138184 10.9375 1.31982 5.0127 6.64111 0 14.6646 0 22.688 0 27.897 5.03906 29.1929 10.9375Z" >
+          <fill>
+            <LinearGradient x="14.6725" scaleX="18.9185" rotation="90">
+              <GradientEntry color="#ffffff" ratio="0.00549451"/>
+              <GradientEntry color="#e9eaeb" ratio="0.415318"/>
+              <GradientEntry color="#cfcfcf" ratio="1"/>
+            </LinearGradient>
+          </fill>
+        </Path>
+      </Group>
+    </Group>
+    <Path winding="nonZero" ai:knockout="0" data="M21.8037 27.6738C20.9082 28.3916 19.8652 28.75 18.6797 28.75 17.585 28.75 16.5811 28.3818 15.666 27.6455L14.9121 25.249 14.2646 25.8701 14.2363 26.8662C14.2178 27.71 14.0039 28.2764 13.5898 28.5645 13.3027 28.7607 12.9775 28.8604 12.6201
+ 28.8604 12.0996 28.8604 11.6963 28.6699 11.4082 28.2939 11.3018 28.168 11.2441 27.957 11.2354 27.6611 11.2256 27.3652 11.1738 27.1543 11.0869 27.0283 10.9414 26.8662 10.6602 26.7939 10.2373 26.8125 9.81543 26.832 9.53418 26.7686 9.38965 26.624
+ 9.10254 26.3203 8.95898 25.96 8.95898 25.5459 8.95898 25.2578 9.03027 24.9893 9.17285 24.7373 9.45996 24.2383 9.92969 23.9834 10.5742 23.9834 10.915 23.9834 11.2109 24.0742 11.4648 24.2529L12.8359 22.5293 12.6484 21.3721C12.1455 21.0684 11.9033
+ 20.5088 11.9199 19.7012L12.001 14.5566 10.4131 12.9141 9.14746 12.833C8.8418 12.8164 8.60449 12.6621 8.43262 12.374 8.26074 12.0889 8.19531 11.7744 8.22852 11.4326 8.26758 11.1826 8.45605 10.9736 8.79492 10.8125 9.22559 10.6162 9.50098 10.4492
+ 9.61816 10.3154 9.7334 10.1787 9.84668 9.85254 9.95313 9.33203 10.042 8.91797 10.2168 8.65039 10.4648 8.52441 10.7158 8.39844 10.9863 8.33594 11.2725 8.33594 11.5977 8.33594 11.9111 8.43359 12.2178 8.63184 12.5225 8.82715 12.6738 9.08008 12.6738
+ 9.38574 12.6738 9.47363 12.6641 9.59766 12.6484 9.74902 12.6309 9.90137 12.6201 10.0244 12.6201 10.1143 12.6201 10.2949 12.6641 10.4365 12.7559 10.5449L13.6172 11.5947C15.1436 10.8975 16.7773 10.5449 18.5195 10.5449 19.9531 10.5449 21.376 10.8408
+ 22.7734 11.4326L23.3125 11.3779 23.4756 10.9736C23.4229 10.7783 23.3945 10.5801 23.3945 10.3857 23.3945 9.87988 23.5732 9.43848 23.9336 9.0625 24.292 8.68555 24.7148 8.49902 25.1982 8.49902 25.415 8.49902 25.6309 8.54297 25.8467 8.63184 26.1514
+ 8.75879 26.3486 9.0625 26.4375 9.54883 26.5654 10.1611 26.7041 10.5576 26.8555 10.7451 27.0068 10.9365 27.3906 11.1465 28.002 11.3779 28.502 11.5762 28.7813 11.8467 28.835 12.1895 28.9248 12.8867 28.6025 13.4893 27.8672 13.9932 27.3447 14.3506
+ 26.7686 14.4775 26.1416 14.3682L25.2813 14.6904 24.5518 16.6875C24.8594 17.5107 24.9912 18.3369 24.957 19.1631 24.9209 20.1855 24.5889 21.1865 23.9609 22.1533L25.7637 24.2529C26.0703 24.0586 26.3926 23.958 26.7334 23.958 27.1289 23.958 27.4863
+ 24.0742 27.8105 24.3086 28.3506 24.6836 28.6201 25.1699 28.6201 25.7627 28.6201 25.9414 28.583 26.1123 28.5137 26.2744 28.4209 26.5088 28.2061 26.6777 27.8672 26.7832 27.415 26.9668 27.1494 27.0918 27.0596 27.165 26.8955 27.2881 26.6543 27.6377
+ 26.332 28.2148 26.0625 28.6621 25.7559 28.9043 25.415 28.9395 24.8037 29.0098 24.2607 28.8164 23.7861 28.3486 23.3086 27.8799 23.0713 27.3418 23.0713 26.7324 23.0713 26.4287 23.1406 26.1123 23.2881 25.79L22.585 25.2783 21.8037 27.6738ZM14.667
+ 17.4131C14.4531 17.4131 14.2275 17.501 13.9951 17.6816 13.6895 17.915 13.5352 18.1387 13.5352 18.3545L13.5352 19.6221C13.7529 19.9258 14.0039 20.1953 14.291 20.4297 14.4531 20.6094 14.6221 20.7852 14.8037 20.9541 14.9844 21.125 15.1797 21.209
+ 15.3955 21.209L16.2021 21.1865C16.5811 21.166 16.875 20.9951 17.0918 20.6719 17.2363 20.4766 17.3096 20.1855 17.3096 19.8086L17.3096 18.707C17.3096 18.3809 17.2051 18.0879 16.999 17.8164 16.791 17.5449 16.5273 17.4131 16.2021 17.4131L14.667 17.4131Z
+M19.958 17.8018C19.7002 18.0615 19.5723 18.2646 19.5723 18.4092L19.5723 19.3799C19.5723 19.7373 19.6865 20.0615 19.9209 20.3496 20.0098 20.4766 20.2793 20.6357 20.7275 20.834 20.873 20.9238 21.0146 21.0146 21.1592 21.1035 21.3027 21.1914 21.4463
+ 21.2275 21.5879 21.209L22.3428 21.1553C22.4512 21.1553 22.6211 21.0059 22.8535 20.6973 23 20.5557 23.1494 20.3135 23.3125 19.9746L23.3398 18.6797C23.3604 17.8359 22.9727 17.4131 22.1826 17.4131L20.8623 17.4131C20.5215 17.4131 20.2188 17.5449
+ 19.958 17.8018Z" >
+      <fill>
+        <SolidColor/>
+      </fill>
+    </Path>
+  </Group>
+  <Private>
+    <ai:PrivateElement d:ref="#1">
+      <ai:SaveOptions>
+        <ai:Dictionary>
+          <ai:DictEntry name="clipToActiveArtboard" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="rasterizeResolution" value="72" valueType="Integer"/>
+          <ai:DictEntry name="downsampleLinkedImages" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="preserveFilterPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="preserveTextPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="preserveGradientPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="aiEditCap" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="writeImages" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="versionKey" value="1" valueType="Integer"/>
+          <ai:DictEntry name="includeSymbol" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="includeXMP" value="0" valueType="Boolean"/>
+        </ai:Dictionary>
+      </ai:SaveOptions>
+      <ai:DocData base="contaminants.assets/images"/>
+      <ai:Artboards originOffsetH="1.634" originOffsetV="39" rulerCanvasDiffH="19.985" rulerCanvasDiffV="-20.422" zoom="13.15">
+        <ai:Artboard active="1" bottom="1.844" index="0" left="1.634" right="38.337" top="39"/>
+        <ai:ArtboardsParam all="0" range="" type="0"/>
+      </ai:Artboards>
+    </ai:PrivateElement>
+    <ai:PrivateElement d:ref="#2">
+      <ai:LayerOptions colorType="ThreeColor">
+        <ai:ThreeColor blue="257" green="128.502" red="79.31"/>
+      </ai:LayerOptions>
+    </ai:PrivateElement>
+    <ai:PrivateElement ai:hashcode="3932446dca3e460dab0922b47dfb6ce7" d:ref="#3">
+      <ai:Ellipse height="36.702" knockout="0" width="36.702" x="0" y="0.001">
+        <ai:Fill colorType="Gradient">
+          <ai:Gradient gradientType="linear" length="36.702" originX="0" originY="18.351">
+            <ai:GradientStops>
+              <ai:GradientStop colorType="GrayColor" midPoint="17.033" rampPoint="0">
+                <ai:GrayColor/>
+              </ai:GradientStop>
+              <ai:GradientStop colorType="GrayColor" rampPoint="100">
+                <ai:GrayColor gray="0.3"/>
+              </ai:GradientStop>
+            </ai:GradientStops>
+          </ai:Gradient>
+        </ai:Fill>
+        <ai:ArtStyle/>
+      </ai:Ellipse>
+    </ai:PrivateElement>
+    <ai:PrivateElement ai:hashcode="a35a23c9b28a6d2a4ce392bec95f69b2" d:ref="#4">
+      <ai:Ellipse height="35.855" knockout="0" width="35.855" x="0.423" y="0.425">
+        <ai:Fill colorType="Gradient">
+          <ai:Gradient angle="90" gradientType="linear" length="35.856" originX="17.928" originY="35.856">
+            <ai:GradientStops>
+              <ai:GradientStop colorType="GrayColor" midPoint="17.033" rampPoint="0">
+                <ai:GrayColor/>
+              </ai:GradientStop>
+              <ai:GradientStop colorType="GrayColor" rampPoint="100">
+                <ai:GrayColor gray="0.3"/>
+              </ai:GradientStop>
+            </ai:GradientStops>
+          </ai:Gradient>
+        </ai:Fill>
+        <ai:ArtStyle/>
+      </ai:Ellipse>
+    </ai:PrivateElement>
+    <ai:PrivateElement ai:hashcode="69c0b5f547205681754de94aa9a7346a" d:ref="#5">
+      <ai:Path data="M 33.091 12.104C 34.44 18.244 26.586 20.085 18.562 20.085C 10.539 20.085 2.759 18.528 4.036 12.104C 5.218 6.18 10.539 1.167 18.562 1.167C 26.586 1.167 31.795 6.206 33.091 12.104Z" knockout="0">
+        <ai:ArtStyle/>
+        <ai:Fill colorType="Gradient">
+          <ai:Gradient angle="-90" gradientType="linear" length="18.918" originX="14.672" originY="0">
+            <ai:GradientStops>
+              <ai:GradientStop colorType="GrayColor" midPoint="41.209" rampPoint="0.549">
+                <ai:GrayColor/>
+              </ai:GradientStop>
+              <ai:GradientStop colorType="GrayColor" rampPoint="100">
+                <ai:GrayColor gray="0.19"/>
+              </ai:GradientStop>
+            </ai:GradientStops>
+          </ai:Gradient>
+        </ai:Fill>
+      </ai:Path>
+    </ai:PrivateElement>
+  </Private>
+</Graphic>

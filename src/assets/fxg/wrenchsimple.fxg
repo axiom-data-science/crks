@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Graphic version="1.0" viewHeight="20" viewWidth="20" ai:appVersion="14.0.0.367" d:id="1" xmlns="http://ns.adobe.com/fxg/2008" xmlns:ai="http://ns.adobe.com/ai/2008" xmlns:d="http://ns.adobe.com/fxg/2008/dt">
+  <Library/>
+  <Group x="4.84473" y="4.84326" d:id="2" d:type="layer" d:userLabel="Layer 1">
+    <Group>
+      <Group x="0.3125" y="0.313965" d:id="3">
+        <Path alpha="0.8" blendMode="multiply" winding="nonZero" ai:knockout="0" data="M8.6123 6.91211L8.6123 6.91211C8.58105 6.91211 8.5498 6.91504 8.51855 6.91699L5.30518 3.70361C5.08008 3.479 4.75342 3.41748 4.46973 3.51465L4.97217 2.04443C5.0542 1.80273 4.9707 1.44531 4.79004 1.26465L3.73926 0.213867C3.55811 0.0327148
+ 3.20166 -0.0507813 2.95996 0.0317383L2.3291 0.246582C2.22656 0.281738 2.16064 0.34082 2.14355 0.413574 2.12744 0.485352 2.15967 0.567383 2.2373 0.644531L2.91357 1.31885C3.15186 1.55859 3.15088 1.94775 2.91211 2.18652L2.18701 2.91162C2.07227 3.02686
+ 1.91846 3.09033 1.75439 3.09033 1.58936 3.09033 1.43506 3.02637 1.31934 2.91016L0.644531 2.23633C0.567871 2.15918 0.48584 2.12646 0.413574 2.14355 0.341797 2.16064 0.282715 2.22607 0.247559 2.3291L0.0317383 2.95898C-0.050293 3.20166 0.0332031
+ 3.55859 0.214355 3.73926L1.26465 4.78955C1.44629 4.9707 1.80176 5.05371 2.04297 4.97168L3.51465 4.46924C3.41797 4.75342 3.479 5.08008 3.70361 5.30518L6.91699 8.51855C6.91504 8.5498 6.91211 8.58105 6.91211 8.6123 6.91211 9.55078 7.67383 10.3125
+ 8.6123 10.3125 9.55176 10.3125 10.3125 9.55078 10.3125 8.6123 10.3125 7.67383 9.55176 6.91211 8.6123 6.91211ZM8.6123 9.50391C8.12109 9.50391 7.72168 9.10352 7.72168 8.6123 7.72168 8.37402 7.81445 8.15039 7.98242 7.98242 8.15039 7.81445 8.375
+ 7.72168 8.6123 7.72168 9.10449 7.72168 9.50391 8.12109 9.50391 8.6123 9.50391 9.10352 9.10449 9.50391 8.6123 9.50391Z" >
+          <fill>
+            <LinearGradient x="5.15661" y="10.3019" scaleX="10.6156" rotation="-90">
+              <GradientEntry color="#ffffff" ratio="0"/>
+              <GradientEntry color="#b7c6ce" ratio="1"/>
+            </LinearGradient>
+          </fill>
+        </Path>
+      </Group>
+      <Path winding="nonZero" ai:knockout="0" data="M8.6123 6.9126L8.6123 6.9126C8.58008 6.9126 8.5498 6.91553 8.51855 6.91748L5.30469 3.7041C5.08008 3.47852 4.75293 3.41748 4.46924 3.51465L4.97168 2.04492C5.05371 1.80273 4.97021 1.4458 4.78955 1.26465L3.73926 0.213867C3.55811 0.0332031
+ 3.20068 -0.0507813 2.95898 0.0317383L2.3291 0.24707C2.22607 0.282227 2.16064 0.34082 2.14355 0.413574 2.12646 0.48584 2.15918 0.567871 2.23633 0.644531L2.91357 1.31885C3.15137 1.55859 3.15088 1.94824 2.91211 2.18701L2.18701 2.91211C2.07178 3.02686
+ 1.91797 3.09033 1.75439 3.09033 1.58887 3.09033 1.43457 3.02686 1.31836 2.91064L0.644531 2.23633C0.567383 2.15967 0.485352 2.12646 0.413574 2.14355 0.341309 2.16064 0.282715 2.22607 0.247559 2.3291L0.0317383 2.95898C-0.050293 3.20215 0.0332031
+ 3.55908 0.213867 3.73926L1.26465 4.78955C1.44531 4.9707 1.80176 5.0542 2.04297 4.97217L3.51465 4.46973C3.41748 4.75293 3.47852 5.08008 3.70361 5.30518L6.91699 8.51807C6.91504 8.54932 6.91211 8.58057 6.91211 8.61279 6.91211 9.55127 7.67383 10.313
+ 8.6123 10.313 9.55078 10.313 10.3125 9.55127 10.3125 8.61279 10.3125 7.67334 9.55176 6.9126 8.6123 6.9126ZM8.6123 9.50342C8.12109 9.50342 7.72168 9.104 7.72168 8.61279 7.72168 8.37451 7.81348 8.15088 7.98242 7.98291 8.15039 7.81396 8.37402 7.72217
+ 8.6123 7.72217 9.10352 7.72217 9.50293 8.12158 9.50293 8.61279 9.50293 9.104 9.10352 9.50342 8.6123 9.50342Z" >
+        <fill>
+          <SolidColor color="#666666"/>
+        </fill>
+      </Path>
+    </Group>
+  </Group>
+  <Private>
+    <ai:PrivateElement d:ref="#1">
+      <ai:SaveOptions>
+        <ai:Dictionary>
+          <ai:DictEntry name="clipToActiveArtboard" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="downsampleLinkedImages" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="rasterizeResolution" value="72" valueType="Integer"/>
+          <ai:DictEntry name="preserveGradientPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="preserveFilterPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="preserveTextPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="includeSymbol" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="writeImages" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="aiEditCap" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="versionKey" value="1" valueType="Integer"/>
+          <ai:DictEntry name="includeXMP" value="0" valueType="Boolean"/>
+        </ai:Dictionary>
+      </ai:SaveOptions>
+      <ai:DocData base="wrenchsimple.assets/images"/>
+      <ai:Artboards originOffsetH="0" originOffsetV="20" rulerCanvasDiffH="10.5" rulerCanvasDiffV="-9.5" zoom="8">
+        <ai:Artboard active="1" index="0" right="20" top="20"/>
+        <ai:ArtboardsParam all="0" range="" type="0"/>
+      </ai:Artboards>
+    </ai:PrivateElement>
+    <ai:PrivateElement d:ref="#2">
+      <ai:LayerOptions colorType="ThreeColor">
+        <ai:ThreeColor blue="257" green="128.502" red="79.31"/>
+      </ai:LayerOptions>
+    </ai:PrivateElement>
+    <ai:PrivateElement ai:hashcode="6200a9d635baba96ff42eb3ee61f8ede" d:ref="#3">
+      <ai:Path alpha="0.8" blendMode="1" data="M 8.925 7.226L 8.925 7.226C 8.894 7.226 8.862 7.229 8.831 7.231L 5.618 4.018C 5.393 3.793 5.066 3.731 4.782 3.829L 5.285 2.358C 5.367 2.117 5.283 1.759 5.103 1.579L 4.052 0.528C 3.871 0.347 3.514 0.263 3.272 0.346L 2.642 0.561C 2.539 0.596 2.473 0.655 2.456 0.728C 2.44 0.799 2.472 0.881 2.55 0.958L 3.226 1.633C 3.464 1.873 3.463 2.262 3.225 2.5L 2.5 3.226C 2.385 3.341 2.231 3.404 2.067 3.404C 1.902 3.404 1.748 3.34 1.632 3.224L 0.957 2.55C 0.88 2.473 0.798 2.44 0.726 2.458C 0.654 2.475 0.595 2.54 0.56 2.643L 0.344 3.273C 0.262 3.516 0.346 3.873 0.527 4.053L 1.577 5.104C 1.759 5.285 2.114 5.368 2.355 5.286L 3.827 4.783C 3.73 5.067 3.792 5.394 4.016 5.619L 7.229 8.833C 7.228 8.864 7.225 8.895 7.225 8.926C 7.225 9.865 7.986 10.626 8.925 10.626C 9.864 10.626 10.625 9.865 10.625 8.926C 10.625 7.988 9.864 7.226 8.925 7.226ZM 8.925 9.818C 8.434 9.818 8.034 9.417 8.034 8.926C 8.034 8.688 8.127 8.464 8.295 8.296C 8.463 8.128 8.688 8.036 8.925 8.036C 9.417 8.036 9.816 8.435 9.816 8.926C 9.816 9.417 9.417 9.818 8.925 9.818Z" knockout="0">
+        <ai:ArtStyle/>
+        <ai:Fill colorType="Gradient">
+          <ai:Gradient angle="90" gradientType="linear" length="10.616" originX="5.157" originY="10.302">
+            <ai:GradientStops>
+              <ai:GradientStop colorType="ThreeColor" rampPoint="0">
+                <ai:ThreeColor blue="1" green="1" red="1"/>
+              </ai:GradientStop>
+              <ai:GradientStop colorType="ThreeColor" rampPoint="100">
+                <ai:ThreeColor blue="0.808" green="0.776" red="0.718"/>
+              </ai:GradientStop>
+            </ai:GradientStops>
+          </ai:Gradient>
+        </ai:Fill>
+      </ai:Path>
+    </ai:PrivateElement>
+  </Private>
+</Graphic>

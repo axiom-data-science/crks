@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Graphic xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		   xmlns:s="library://ns.adobe.com/flex/spark" 
+		   xmlns:mx="library://ns.adobe.com/flex/mx" creationComplete="colorTransform()">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.crks.helpers.LayerTypes;
+			
+			
+			private var _layer_type:String;
+			
+			[Bindable]
+			public function set layer_type($layer_type:String):void{
+				_layer_type = $layer_type;
+				
+				if(_layer_type == LayerTypes.DATA_LAYER_TYPE){
+					color = 0x000066;
+				}else if(_layer_type == LayerTypes.VECTOR_LAYER_TYPE){
+					color = 0x660000;
+				}else if(_layer_type == LayerTypes.RASTER_LAYER_TYPE){
+					color = 0x006699;
+				}
+			}
+			public function get layer_type():String{
+				return _layer_type;
+			}
+			
+			private var _color:uint;
+			
+			[Bindable]
+			public function set color($color:uint):void{
+				_color = $color;
+				colorTransform();
+			}
+			public function get color():uint{
+				return _color;
+			}
+			
+			private function colorTransform():void{
+				if(_color){
+					var trans:ColorTransform = new ColorTransform();
+					trans.color = _color;
+					this.transform.colorTransform = trans;
+				}
+			}
+			
+			[Bindable]
+			public var icon:DisplayObject;
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+</s:Graphic>

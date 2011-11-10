@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   xmlns:mx="library://ns.adobe.com/flex/mx" width="350" height="700" mouseDownOutside="close();" xmlns:ns="com.axiomalaska.integratedlayers.views.panels.data.layer_data.filter.*" xmlns:ns1="com.axiomalaska.integratedlayers.views.panels.data.layer_data.sensors_data.*" xmlns:ns2="com.axiomalaska.integratedlayers.views.panels.data.layer_data.sensors_data.legend.*"
+				    cornerRadius="5" dropShadowVisible="true" borderColor="0x666666">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.Filterable;
+			import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.StationsDataLayer;
+			
+			import mx.collections.ArrayCollection;
+			import mx.collections.Sort;
+			import mx.core.FlexGlobals;
+			import mx.managers.PopUpManager;
+			
+			import spark.events.TextOperationEvent;
+			
+			[Dispatcher]
+			public var dispatcher:IEventDispatcher;
+			
+			[Bindable]
+			public var stations_layer:StationsDataLayer;
+				
+			
+			public function open():void{
+				PopUpManager.addPopUp(this,FlexGlobals.topLevelApplication as DisplayObject,true);
+				PopUpManager.centerPopUp(this);
+				
+			}
+			
+			private function close():void{
+				PopUpManager.removePopUp(this);
+			}
+			
+			
+
+
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:VerticalLayout paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="10" />
+	</s:layout>
+	
+	<s:HGroup width="100%" verticalAlign="middle" paddingBottom="20">
+		<s:HGroup width="100%">
+			<s:Label fontSize="16" fontWeight="bold" text="Data feed: Sensor Stations" width="100%" color="0x666666" />
+			<s:Label fontSize="14" fontWeight="bold" text="X" click="close();" buttonMode="true" />
+		</s:HGroup>
+		
+	</s:HGroup>
+	<s:Label text="Sensor stations" fontSize="14" fontWeight="bold" />
+	<ns2:LegendIcons paddingBottom="20" />
+	<s:Label fontSize="14" fontWeight="bold" text="Sensor settings" />
+	<ns1:SensorStreamingSettings stations_layer="{stations_layer}" />
+	<s:Label fontSize="14" fontWeight="bold" text="Data filters" />
+	<s:HGroup width="100%">
+		<mx:TabBar dataProvider="{vs}" />
+	</s:HGroup>
+	<ns2:DataFilters stations_layer="{stations_layer}" id="vs" />
+	
+	<!--
+	
+	<mx:ViewStack width="100%" height="100%" id="vs">
+		<s:NavigatorContent label="Sensors" width="100%" height="100%">
+			<s:layout>
+				<s:VerticalLayout />
+			</s:layout>
+			<s:TextInput change="stations_layer.sensors.refresh();stations_layer.stations.refresh();stations_layer.filterMarkers();" text="@{stations_layer.sensor_search}" />
+			<s:List width="100%" height="100%" dataProvider="{stations_layer.sensors}"></s:List>
+		</s:NavigatorContent>
+		<s:NavigatorContent label="Sources" width="100%" height="100%">
+			<s:layout>
+				<s:VerticalLayout />
+			</s:layout>
+			<s:TextInput change="stations_layer.sources.refresh();stations_layer.stations.refresh();stations_layer.filterMarkers();" text="@{stations_layer.source_search}" />
+			<s:List width="100%" height="100%" dataProvider="{stations_layer.sources}"></s:List>
+		</s:NavigatorContent>
+		<s:NavigatorContent label="Stations" width="100%" height="100%">
+			<s:layout>
+				<s:VerticalLayout />
+			</s:layout>
+			<s:TextInput change="stations_layer.stations.refresh();stations_layer.filterMarkers()" text="@{stations_layer.station_search}" />
+			<s:List width="100%" height="100%" dataProvider="{stations_layer.stations}"></s:List>
+		</s:NavigatorContent>
+	</mx:ViewStack>
+	
+	-->
+	
+	
+	
+</s:BorderContainer>

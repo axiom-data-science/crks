@@ -1,0 +1,14 @@
+<swiz:BeanProvider 
+	xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:swiz="http://swiz.swizframework.org"
+	xmlns:services="com.axiomalaska.integratedlayers.services.*" >
+	
+	<services:ApplicationService id="applicationService" />
+	<services:DataLayerService id="dataLayerService" />
+	<services:OgcLayersService id="rasterLayersService" />
+	<services:WFSService id="wfsService" />
+	<services:WMSService id="wmsService" />
+	<services:VirtualSensorService id="virtualSensorService" />
+	
+	
+</swiz:BeanProvider>

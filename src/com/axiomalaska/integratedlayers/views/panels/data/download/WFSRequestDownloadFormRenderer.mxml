@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="false" currentState="{wfs_request.state}" height="100%" width="100%">
+	<fx:Script>
+		<![CDATA[
+			
+			
+			import com.axiomalaska.integratedlayers.events.WFSDataEvent;
+			import com.axiomalaska.integratedlayers.models.WFSRequest;
+			
+			import mx.collections.ArrayCollection;
+			
+			private var requested:Boolean;
+			
+			[Dispatcher]
+			public var dispatcher:IEventDispatcher;
+			
+			
+			override public function set data($data:Object):void{
+				super.data = $data;
+				if($data){
+					if(!wfs_request){
+						wfs_request = $data as WFSRequest;
+						triggerFeatureCountCall();
+					}
+					
+				}
+			}
+			
+			[PostConstruct]
+			private function triggerFeatureCountCall():void{
+				trace('tried');
+				if(!requested && dispatcher){		
+					trace('called');
+					requested = true;
+					dispatcher.dispatchEvent(new WFSDataEvent(WFSDataEvent.WFS_REQUEST_FEATURE_COUNT,wfs_request));	
+				}
+			}
+			
+			[Bindable]
+			public var wfs_request:WFSRequest;
+			
+			/*
+			[Bindable]
+			public var types_collection:ArrayCollection = new ArrayCollection(
+				[
+					{label:'Excel',value:'excel'},	
+					{label:'CSV',value:'csv'},
+					{label:'Shape files (zip)',value:'SHAPE-ZIP'},
+					{label:'GML2',value:'GML2'},
+					{label:'GML2 (gzip)',value:'GML2-GZIP'},
+					{label:'GML3',value:'gml3'},
+					{label:'JSON',value:'json'}
+				]
+			);
+			*/
+			
+			[Bindable]
+			public var types_collection:ArrayCollection = new ArrayCollection(
+				[
+					{label:'Excel',value:'excel'},	
+					//{label:'Excel 2007',value:'excel2007'},	
+					{label:'CSV',value:'csv'},
+					{label:'Shape files (zip)',value:'shape-zip'}
+				]
+			);
+			
+			
+			
+			private function getDownload():void{
+				wfs_request.output_format = download_type.selectedItem.value;
+				var url:String = wfs_request.getFeatureCall();
+				navigateToURL(new URLRequest(url),'_blank');
+			}
+			
+			override protected function getCurrentRendererState():String{
+				return wfs_request.state;
+			}
+			
+			
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:states>
+		<s:State name="loading" />
+		<s:State name="valid" />
+		<s:State name="error" />
+	</s:states>
+	<s:layout>
+		<s:VerticalLayout />
+	</s:layout>
+	<s:VGroup width="100%" includeIn="valid" paddingTop="15">
+		<s:Label text="{'Download ' + wfs_request.feature_count + ' features'}" fontSize="14" fontWeight="bold" />
+		<s:Label text="{'from ' + wfs_request.geoserver_domain}" />
+		<s:HGroup width="100%" verticalAlign="middle" paddingTop="20">
+			<s:Label text="Output format:" fontSize="14" fontWeight="bold" />
+			<s:DropDownList width="200" 
+				id="download_type"
+				dataProvider="{types_collection}"
+				selectedIndex="0"
+				/>
+		</s:HGroup>
+		<s:Button label="Download" buttonMode="true" fontSize="13" click="getDownload()" />
+	</s:VGroup>
+	<s:VGroup width="100%" height="100%" verticalAlign="middle" horizontalAlign="center" includeIn="loading">
+		<mx:ProgressBar label="Requesting number of features in bounding box" width="300" indeterminate="true" />
+	</s:VGroup>
+	<s:VGroup width="100%" height="100%" includeIn="error">
+		<s:Label text="{'Your request returned too many features (' + wfs_request.feature_count  + ').'}" />
+		<s:Label text="Try adjusting your bounding box, or removing some layers from the map" />
+	</s:VGroup>
+
+
+	
+</s:ItemRenderer>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:fxg="assets.fxg.*">
+	<fx:Script>
+		<![CDATA[
+			[Bindable]
+			public var backgroundColor:uint = 0x000000;
+		]]>
+	</fx:Script>
+	<s:states>
+		<s:State name="open" />
+		<s:State name="closed" />
+	</s:states>
+	<s:Rect width.closed="14" width.open="8" height.open="20" height.closed="70" topLeftRadiusX="5" topLeftRadiusY="5" bottomLeftRadiusX="5" bottomLeftRadiusY="5">
+		<s:fill>
+			<s:SolidColor color="{backgroundColor}" />
+		</s:fill>
+		<!--<s:filters>
+			<s:DropShadowFilter />
+		</s:filters>-->
+	</s:Rect>
+	<s:VGroup paddingLeft="3" paddingTop="4" horizontalAlign="center">
+		<fxg:rightarrow includeIn="open" width="4" height="10" />
+		<fxg:leftarrow includeIn="closed" width="4" height="10" />
+		<s:Label text="Legend" rotation="270" verticalCenter="0" horizontalCenter="2" fontSize="10" color="#FFFFFF" includeIn="closed"  fontFamily="arial" />
+	</s:VGroup>
+</s:Group>

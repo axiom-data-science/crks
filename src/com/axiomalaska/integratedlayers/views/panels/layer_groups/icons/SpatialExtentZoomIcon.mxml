@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" buttonMode="true" xmlns:fxg="assets.fxg.*" click="onClick();" visible="{spatial_extent_item.hasBounds}" includeInLayout="{spatial_extent_item.hasBounds}">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.crks.dto.Layer;
+			import com.axiomalaska.crks.interfaces.ISpatialExtentItem;
+			import com.google.maps.Map;
+			
+			import com.axiomalaska.integratedlayers.events.MapZoomEvent;
+			[Bindable]
+			public var spatial_extent_item:ISpatialExtentItem;
+			
+			protected function onHover():void{
+				if(spatial_extent_item && spatial_extent_item.hasBounds){
+					dispatchEvent(new MapZoomEvent(MapZoomEvent.HIGHLIGHT_EXTENT,spatial_extent_item.spatialBounds));
+				}
+			}
+			
+			protected function onOut():void{
+				if(spatial_extent_item && spatial_extent_item.hasBounds){
+					dispatchEvent(new MapZoomEvent(MapZoomEvent.REMOVE_EXTENT,spatial_extent_item.spatialBounds));
+				}
+			}
+			
+			protected function onClick():void{
+				if(spatial_extent_item && spatial_extent_item.hasBounds){
+					dispatchEvent(new MapZoomEvent(MapZoomEvent.HIGHLIGHT_AND_ZOOM_TO_EXTENT,spatial_extent_item.spatialBounds));
+				}
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fxg:zoomsimple />
+</s:Group>

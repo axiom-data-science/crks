@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Graphic version="1.0" viewHeight="58.1396" viewWidth="68.2168" ai:appVersion="14.0.0.367" d:id="1" xmlns="http://ns.adobe.com/fxg/2008" xmlns:ai="http://ns.adobe.com/ai/2008" xmlns:d="http://ns.adobe.com/fxg/2008/dt">
+  <Library/>
+  <Group x="-8.54297" y="0.651367" d:id="2" d:type="layer" d:userLabel="Layer 1">
+    <Group>
+      <Group x="20.8301" y="9.93848">
+        <filters>
+          <DropShadowFilter alpha="0.5" angle="135" blurX="10" blurY="10" color="#3e4a5c" distance="8.0176" quality="3"/>
+        </filters>
+        <Group d:userLabel="rainy +">
+          <Group>
+            <Path winding="nonZero" ai:knockout="0" data="M3.15039 19.4229C-1.49316 14.7783 -0.30957 8.03516 8.8877 11.7744L9.16113 11.2285C4.94629 3.15039 20.0068 -6.0498 21.7256 7.13086 23.7998 3.85059 32.1943 5.49023 32.1064 10.4092 33.8291 11.0615 38.3408 11.0615 38.6631 16.417 41.3916 14.2334
+ 48.4971 17.2373 46.8584 20.2432L3.15039 19.4229Z" >
+              <fill>
+                <SolidColor color="#ffffff"/>
+              </fill>
+              <stroke>
+                <SolidColorStroke color="#231f20" caps="none" weight="1" joints="miter" miterLimit="4"/>
+              </stroke>
+            </Path>
+          </Group>
+          <Group x="14.6953" y="29.2344" ai:knockout="0">
+            <Path winding="nonZero" ai:knockout="0" data="M1.00098 0.649414C1.5459 2.01465 2.36426 3.38184 3.18457 4.74707" >
+              <fill>
+                <SolidColor color="#2174bb"/>
+              </fill>
+            </Path>
+            <Group ai:knockout="0">
+              <Path winding="nonZero" ai:knockout="0" data="M0.0341797 0.90918C0.647461 2.39746 1.46973 3.77832 2.2959 5.15527 2.70215 5.83301 4.56152 5.14941 4.07324 4.33691 3.30371 3.05566 2.53613 1.77637 1.96582 0.391602 1.63574 -0.411133 -0.27832 0.151367 0.0341797 0.90918L0.0341797 0.90918Z" >
+                <fill>
+                  <SolidColor color="#231f20"/>
+                </fill>
+              </Path>
+            </Group>
+          </Group>
+          <Group x="22.0732" y="29.2598" ai:knockout="0">
+            <Path winding="nonZero" ai:knockout="0" data="M0.998047 0.624023C1.54297 1.98926 2.36133 3.35645 3.18164 4.72168" >
+              <fill>
+                <SolidColor color="#2174bb"/>
+              </fill>
+            </Path>
+            <Group ai:knockout="0">
+              <Path winding="nonZero" ai:knockout="0" data="M0.03125 0.883789C0.644531 2.36816 1.4668 3.74707 2.29102 5.12207 2.67578 5.76074 4.54102 5.10059 4.07227 4.32129 3.30273 3.03613 2.53516 1.75293 1.96289 0.366211 1.64648 -0.401367 -0.263672 0.166992 0.03125 0.883789L0.03125 0.883789Z" >
+                <fill>
+                  <SolidColor color="#231f20"/>
+                </fill>
+              </Path>
+            </Group>
+          </Group>
+          <Group x="29.1709" y="29.2266" ai:knockout="0">
+            <Path winding="nonZero" ai:knockout="0" data="M1 0.657227C1.54688 2.02246 2.36719 3.38965 3.18555 4.75488" >
+              <fill>
+                <SolidColor color="#2174bb"/>
+              </fill>
+            </Path>
+            <Group ai:knockout="0">
+              <Path winding="nonZero" ai:knockout="0" data="M0.0351563 0.916992C0.650391 2.40527 1.47266 3.78809 2.29883 5.16699 2.71094 5.85645 4.56641 5.16504 4.07422 4.34277 3.30664 3.06152 2.53906 1.78223 1.9668 0.399414 1.63086 -0.415039 -0.283203 0.147461 0.0351563 0.916992L0.0351563 0.916992Z" >
+                <fill>
+                  <SolidColor color="#231f20"/>
+                </fill>
+              </Path>
+            </Group>
+          </Group>
+          <Group x="36.5752" y="29.4902" ai:knockout="0">
+            <Path winding="nonZero" ai:knockout="0" data="M0.972656 0.393555C1.51758 1.75879 2.33789 3.12598 3.1582 4.49121" >
+              <fill>
+                <SolidColor color="#2174bb"/>
+              </fill>
+            </Path>
+            <Group ai:knockout="0">
+              <Path winding="nonZero" ai:knockout="0" data="M0.00585938 0.65332C0.599609 2.08887 1.39453 3.4209 2.19141 4.74902 2.45313 5.18652 4.24219 4.43066 4.12305 4.23145 3.32617 2.90332 2.53125 1.57129 1.9375 0.135742 1.76758 -0.27832 -0.115234 0.360352 0.00585938 0.65332L0.00585938 0.65332Z" >
+                <fill>
+                  <SolidColor color="#231f20"/>
+                </fill>
+              </Path>
+            </Group>
+          </Group>
+          <Group x="22.0771" y="37.4795" ai:knockout="0">
+            <Path winding="nonZero" ai:knockout="0" data="M0.994141 0.599609C1.53906 1.9668 2.35742 3.33203 3.17773 4.69727" >
+              <fill>
+                <SolidColor color="#2174bb"/>
+              </fill>
+            </Path>
+            <Group ai:knockout="0">
+              <Path winding="nonZero" ai:knockout="0" data="M0.0273438 0.857422C0.638672 2.33984 1.46094 3.7168 2.28516 5.08789 2.64648 5.68945 4.51953 5.05078 4.07227 4.30469 3.29883 3.01953 2.5332 1.73047 1.95898 0.339844 1.6582 -0.390625 -0.248047 0.185547 0.0273438 0.857422L0.0273438 0.857422Z" >
+                <fill>
+                  <SolidColor color="#231f20"/>
+                </fill>
+              </Path>
+            </Group>
+          </Group>
+          <Group x="29.4531" y="37.4863" ai:knockout="0">
+            <Path winding="nonZero" ai:knockout="0" data="M0.991211 0.592773C1.53809 1.95996 2.3584 3.3252 3.17676 4.69043" >
+              <fill>
+                <SolidColor color="#2174bb"/>
+              </fill>
+            </Path>
+            <Group ai:knockout="0">
+              <Path winding="nonZero" ai:knockout="0" data="M0.0263672 0.850586C0.637695 2.33301 1.45996 3.70801 2.28223 5.0791 2.6377 5.66895 4.5127 5.03613 4.07129 4.30176 3.29785 3.0127 2.53223 1.72363 1.95801 0.333008 1.65918 -0.387695 -0.24707 0.19043 0.0263672 0.850586L0.0263672 0.850586Z" >
+                <fill>
+                  <SolidColor color="#231f20"/>
+                </fill>
+              </Path>
+            </Group>
+          </Group>
+          <Group x="36.5732" y="37.6592" ai:knockout="0">
+            <Path winding="nonZero" ai:knockout="0" data="M0.974609 0.419922C1.51953 1.78711 2.33984 3.15234 3.16016 4.51758" >
+              <fill>
+                <SolidColor color="#2174bb"/>
+              </fill>
+            </Path>
+            <Group ai:knockout="0">
+              <Path winding="nonZero" ai:knockout="0" data="M0.0078125 0.677734C0.601563 2.11523 1.39648 3.44531 2.19336 4.77539 2.47656 5.24805 4.27539 4.50781 4.125 4.25781 3.32813 2.92773 2.5332 1.59766 1.93945 0.160156 1.75195 -0.296875 -0.134766 0.333984 0.0078125 0.677734L0.0078125 0.677734Z" >
+                <fill>
+                  <SolidColor color="#231f20"/>
+                </fill>
+              </Path>
+            </Group>
+          </Group>
+          <Group x="11.1895" y="8.02539">
+            <Group y="-0.140625" ai:knockout="0">
+              <Path winding="nonZero" ai:knockout="0" data="M23.8662 17.4971C16.2178 17.4971 8.84277 17.4971 1.19434 17.4971 0.648438 14.7646 0.648438 10.667 3.10645 8.48145 5.56543 6.02246 10.208 6.2959 11.0283 10.1201 11.0283 -6.81543 33.7002 1.65332 26.5986 12.3057 28.7842 12.3057 34.2451 13.6729
+ 32.6064 16.6768 31.7881 18.042 26.5986 17.2236 25.2314 17.2236" >
+                <fill>
+                  <SolidColor color="#ffffff"/>
+                </fill>
+              </Path>
+              <Group y="0.140625">
+                <Path winding="nonZero" ai:knockout="0" data="M24.4893 16.9502C18.2002 16.9502 11.9111 16.9502 5.62207 16.9502 1.4541 16.9502 1.48535 14.8291 2.23145 11.2666 3.09082 7.16113 8.61621 5.99316 10.0615 10.2393 10.2197 10.7041 11.9775 10.2021 11.9932 9.72168 12.2021 3.10742 16.9404 -1.51855
+ 23.3916 2.32227 27.1494 4.56152 27.8135 8.75098 25.6436 12.3311 25.5303 12.5205 25.8838 12.5654 25.9736 12.5713 28.1064 12.6885 30.7041 13.165 31.8545 15.1865 33.0537 17.29 26.5029 16.708 25.8564 16.6787 25.4326 16.6592 23.6377 17.4443 24.6084
+ 17.4893 26.4092 17.5693 36.1162 18.7607 33.4111 14.0088 32.21 11.9014 27.1768 12.9521 28.3545 10.5283 29.4053 8.36816 28.9502 5.94238 27.6924 4.00293 25.5127 0.637695 20.9795 -0.467773 17.2529 0.172852 12.1904 1.04395 10.21 5.53613 10.0615 10.2393
+ 10.7061 10.0654 11.3486 9.89355 11.9932 9.72168 10.7783 6.14941 7.61035 5.93262 4.45801 6.96777 0.0302734 8.4209 -0.395508 13.7627 0.228516 17.6143 0.249023 17.7373 0.490234 17.7607 0.571289 17.7607 8.12793 17.7607 15.6846 17.7607 23.2412 17.7607
+ 23.6592 17.7607 25.4482 16.9502 24.4893 16.9502L24.4893 16.9502Z" >
+                  <fill>
+                    <SolidColor color="#231f20"/>
+                  </fill>
+                </Path>
+              </Group>
+            </Group>
+          </Group>
+        </Group>
+      </Group>
+    </Group>
+  </Group>
+  <Private>
+    <ai:PrivateElement d:ref="#1">
+      <ai:SaveOptions>
+        <ai:Dictionary>
+          <ai:DictEntry name="versionKey" value="1" valueType="Integer"/>
+          <ai:DictEntry name="writeImages" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="aiEditCap" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="includeXMP" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="includeSymbol" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="clipToActiveArtboard" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="downsampleLinkedImages" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="rasterizeResolution" value="72" valueType="Integer"/>
+          <ai:DictEntry name="preserveGradientPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="preserveFilterPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="preserveTextPolicy" value="3" valueType="Integer"/>
+        </ai:Dictionary>
+      </ai:SaveOptions>
+      <ai:DocData base="weathericon.assets/images"/>
+      <ai:Artboards originOffsetH="417.807" originOffsetV="396.093" rulerCanvasDiffH="400.5" rulerCanvasDiffV="-399.5" zoom="1.29">
+        <ai:Artboard active="1" bottom="337.953" index="0" left="417.807" right="486.023" top="396.093"/>
+        <ai:ArtboardsParam all="0" range="" type="0"/>
+      </ai:Artboards>
+    </ai:PrivateElement>
+    <ai:PrivateElement d:ref="#2">
+      <ai:LayerOptions colorType="ThreeColor">
+        <ai:ThreeColor blue="257" green="128.502" red="79.31"/>
+      </ai:LayerOptions>
+    </ai:PrivateElement>
+  </Private>
+</Graphic>

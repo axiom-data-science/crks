@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%"
+				autoDrawBackground="false" buttonMode="true" xmlns:modules="views.panels.modules.*" xmlns:ns="views.panels.layer_groups.*" xmlns:fxg="assets.fxg.*" xmlns:help="views.panels.help.*" xmlns:layers="com.axiomalaska.integratedlayers.views.panels.layers.*" xmlns:ns1="views.panels.layer_groups.icons.*" xmlns:legend="com.axiomalaska.integratedlayers.views.panels.legend.*" xmlns:icons="com.axiomalaska.integratedlayers.views.panels.layers.icons.*" xmlns:ns2="com.axiomalaska.integratedlayers.views.panels.layer_groups.*" xmlns:ns3="com.axiomalaska.integratedlayers.views.panels.layer_groups.icons.*"
+				>
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.crks.dto.Layer;
+			import com.axiomalaska.crks.dto.LayerGroup;
+			
+			import com.axiomalaska.integratedlayers.events.LayerGroupEvent;
+			import com.axiomalaska.integratedlayers.events.LegendEvent;
+			
+			import com.axiomalaska.integratedlayers.map.IntegratedWMSGoogleLayer;
+			
+			import com.axiomalaska.integratedlayers.views.panels.help.ModuleHelp;
+			override public function set data($data:Object):void{
+				super.data = $data;
+				if($data){
+					layer_group = $data as LayerGroup;
+					if(layer_group.layers.length < 2){
+						single_layer = layer_group.layers[0];
+					}
+				}
+			}
+			
+			[Bindable]
+			private var layer_group:LayerGroup;
+			
+			[Bindable]
+			private var single_layer:Layer;
+			
+			private function removeLegendItem():void{
+				dispatchEvent(new LayerGroupEvent(LayerGroupEvent.UNLOAD_LAYER_GROUP,layer_group));
+				//dispatchEvent(new LegendEvent(LegendEvent.LOAD_LEGEND_ITEM,layer));
+			}
+			
+
+		]]>
+	</fx:Script>
+	
+	
+	<s:states>
+		<s:State name="normal" />
+		<s:State name="hovered" />
+	</s:states>
+	<s:Group width="100%" height="100%">
+		<s:BorderContainer width="100%" height="{contentHolder.height}" backgroundColor="0xE0E0E0" backgroundColor.hovered="0xEDEDED" cornerRadius="5" borderAlpha="0" borderVisible="false">
+			<s:filters>
+				<mx:BevelFilter blurX="4" blurY="4" highlightColor="0xFFFFFF" shadowColor="0xCCCCCC" includeIn="hovered" />
+			</s:filters>
+		</s:BorderContainer>
+	</s:Group>
+	
+	<s:VGroup  id="contentHolder"  paddingLeft="10" paddingBottom="10" paddingRight="10" paddingTop="10" width="100%">
+		<s:VGroup width="100%">
+			
+			<ns2:ModuleLabel module="{layer_group.module}" />
+			<s:HGroup width="100%" verticalAlign="middle" gap="5">
+				<s:Graphic toolTip="Remove from map" buttonMode="true" click="removeLegendItem();">
+					<fxg:deletebutton />
+				</s:Graphic>
+				<legend:LayerGroupVisibilityToggle layer_group="{layer_group}" />
+				<s:Label text="{layer_group.label}" maxDisplayedLines="1" fontSize="11" fontFamily="Arial" fontWeight="bold" width="100%" />
+				<ns3:LayerGroupTimeIcon layer_group="{layer_group}" />
+				<ns3:MetaDataItemHelpIcon meta_data_item="{layer_group}" />
+				<s:Graphic toolTip="{layer_group.layers.length  + ' layers'}" fontSize="10" buttonMode="true"
+							click="{layer_group.expanded ? layer_group.expanded = false : layer_group.expanded = true}">
+					<fxg:expandarrow />
+				</s:Graphic>
+			</s:HGroup>
+			<ns2:ActiveLayerGroupLayerList id="layerGroupLayerList" layer_group="{layer_group}" />
+		</s:VGroup>
+		<!--<ns:LayerOutput layer="{single_layer}" width="100%" visible="{Boolean(single_layer)}" includeInLayout="{Boolean(single_layer)}" />-->
+	</s:VGroup>	
+	
+</s:ItemRenderer>

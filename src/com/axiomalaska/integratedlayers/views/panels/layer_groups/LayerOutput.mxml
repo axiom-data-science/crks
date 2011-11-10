@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:HGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%"
+		  paddingLeft="3" paddingRight="3" paddingTop="2" paddingBottom="2" verticalAlign="middle" xmlns:fxg="assets.fxg.*" xmlns:layers="com.axiomalaska.integratedlayers.views.panels.layers.*" xmlns:ns="views.panels.layer_groups.icons.*" xmlns:icons="com.axiomalaska.integratedlayers.views.panels.layers.icons.*">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.crks.dto.Layer;
+			
+			import mx.core.FlexGlobals;
+			import mx.managers.PopUpManager;
+			
+			import com.axiomalaska.integratedlayers.views.panels.legend.ComplexSymbologyLegend;
+			
+			[Bindable]
+			public var layer:Layer;
+			
+			
+			private function loadLegendItem():void{
+				//dispatchEvent(new LegendEvent(LegendEvent.LOAD_LEGEND_ITEM,module_layer));
+			}
+			
+
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<layers:LayerLegendInline layer="{layer}" />
+	<s:Label fontSize="11" text="{layer.label}" width="100%" maxDisplayedLines="1" click="loadLegendItem();"/>
+	<icons:LayerTimeIcon layer="{layer}" />
+</s:HGroup>

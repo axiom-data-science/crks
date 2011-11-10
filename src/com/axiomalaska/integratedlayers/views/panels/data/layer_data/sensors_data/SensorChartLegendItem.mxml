@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:HGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx" visible="{Boolean(label)}" includeInLayout="{Boolean(label)}">
+	<fx:Script>
+		<![CDATA[
+			
+			[Bindable]
+			public var color:uint;
+			
+			[Bindable]
+			public var label:String;
+			
+		]]>
+	</fx:Script>
+	
+	<s:Ellipse width="6" height="6">
+		<s:fill>
+			<s:SolidColor color="{color}" />
+		</s:fill>
+		<s:filters>
+			<s:DropShadowFilter alpha=".3" blurX="1" blurY="1" />
+		</s:filters>
+	</s:Ellipse>
+	<s:Label text="{label}" fontSize="10" fontWeight="bold" fontFamily="Arial" />
+	
+</s:HGroup>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:CheckBox xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			xmlns:s="library://ns.adobe.com/flex/spark" 
+			xmlns:mx="library://ns.adobe.com/flex/mx" change="onShowScreenSelect();" selected="@{applicationData.hide_intro}"
+			fontWeight="bold" label="Do not show this screen again at startup">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.integratedlayers.events.HelpEvent;
+			
+			import com.axiomalaska.integratedlayers.models.presentation_data.ApplicationData;
+			[Dispatcher]
+			public var dispatcher:IEventDispatcher;
+			
+			[Bindable]
+			[Inject("applicationData")]
+			public var applicationData:ApplicationData;
+			
+			
+			private function onShowScreenSelect():void{
+				if(selected){
+					dispatcher.dispatchEvent(new HelpEvent(HelpEvent.HIDE_APPLICATION_HELP_ON_LOAD));
+				}else{
+					dispatcher.dispatchEvent(new HelpEvent(HelpEvent.SHOW_APPLICATION_HELP_ON_LOAD));
+				}
+			}
+		]]>
+	</fx:Script>
+</s:CheckBox>

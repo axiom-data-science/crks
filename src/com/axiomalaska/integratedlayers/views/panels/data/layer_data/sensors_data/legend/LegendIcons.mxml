@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" gap="15">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.RealTimeDataMarker;
+			import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.Sensor;
+			import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.Station;
+			import com.axiomalaska.integratedlayers.models.presentation_data.sensors.SensorLegendPM;
+			//import com.greensock.TweenMax;
+			
+			[Dispatcher]
+			public var dispatcher:IEventDispatcher;
+			
+			[Bindable]
+			[Inject]
+			public var sensorLayerData:SensorLegendPM;
+			
+			[PostConstruct]
+			public function init():void{
+				addIcon(sensorLayerData.getMarker(),marker);
+				addIcon(sensorLayerData.getTideMarker(),tideMarker);
+				addIcon(sensorLayerData.getWebCamMarker(),webCamMarker);
+				
+				var val:String = '10';
+				var vectorMarker:RealTimeDataMarker = sensorLayerData.getMarker();
+				vectorMarker.setDataDisplayText(val,'#FFFFFF');
+				vectorMarker.setDataDisplayColor(0x006699);
+				var sp:Sprite = vectorMarker.makeVectorWedge(30,0,40,20);
+				vectorMarker.vectorDataDisplay = sp;
+				vectorMarker.addChildAt(sp,0);
+				
+				var lines:Sprite = new Sprite();
+				lines.graphics.lineStyle(1,0x333333);
+				lines.graphics.moveTo(23,-15);
+				lines.graphics.lineTo(31,-18);
+				lines.graphics.moveTo(5,5);
+				lines.graphics.lineTo(15,7);
+				vectorMarker.addChild(lines);
+				
+				var dir:Number = 60;
+				//TweenMax.to(vectorMarker.vectorDataDisplay,0,{rotation:String(dir)});
+				addIcon(vectorMarker,iconDisplay);
+			}
+			
+			private function addIcon($m:RealTimeDataMarker,$target:UIComponent):void{
+				$m.draw();
+				$m.x = $m.width/2;
+				//$m.y = $m.height/2;
+				$target.addChild($m);
+				$target.width = $m.width;
+				//$target.height = $m.height;
+			}
+			
+			[Bindable]
+			private var tide_dt:BitmapData;
+			
+		]]>
+	</fx:Script>
+	<s:HGroup width="100%">
+		<s:HGroup verticalAlign="middle" height="100%">
+			<mx:UIComponent id="marker" />
+			<s:Label text="Sensors" fontSize="11" fontFamily="Arial"  />
+		</s:HGroup>
+		<s:HGroup verticalAlign="middle" height="100%">
+			<mx:UIComponent id="tideMarker" />
+			<s:Label text="Tide predictions" fontSize="11" fontFamily="Arial" />
+		</s:HGroup>
+		<s:HGroup verticalAlign="middle" height="100%">
+			<mx:UIComponent id="webCamMarker" />
+			<s:Label text="Web cams" fontSize="11" fontFamily="Arial"  />
+		</s:HGroup>
+	</s:HGroup>
+	<s:Group width="100%" height="35">
+		<mx:UIComponent id="iconDisplay" x="0" y="21" />
+		<s:Label x="55" y="0" text="{'Latest magnitude and direction of flow for ' + sensorLayerData.selected_vector_preview_sensor.label}" width="100%" fontSize="10" fontFamily="Arial" />
+		<s:Label x="40" y="24" text="{'Latest ' + sensorLayerData.selected_scalar_preview_sensor.label + ' value'}" width="100%" fontSize="10" fontFamily="Arial" />
+	</s:Group>
+	<s:Label text="Hover over map markers to preview data. Click for more data or to share data view." fontSize="10" color="0x333333" width="100%" />
+	
+</s:VGroup>

@@ -1,0 +1,27 @@
+<swiz:BeanProvider 
+	xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:swiz="http://swiz.swizframework.org"
+	xmlns:controllers="com.axiomalaska.integratedlayers.controllers.*" xmlns:controller="controller.*" >
+	
+	<controllers:ApplicationController id="applicationController" />
+	<controllers:LayerGroupController id="layerGroupsController" />
+	
+	<controllers:LayersController id="layersController" />
+	<controllers:DataLayersController id="dataLayersController" />
+	<controllers:RasterLayersController id="rasterLayersController" />
+	<controllers:VirtualSensorController id="virtualSensorController" />
+	<controllers:VectorLayersController id="vectorLayersController" />
+	<controllers:WfsDataController id="wfsDataController" />
+	<controllers:WmsDataController id="wmsDataController" />
+	
+	
+	<controllers:LegendController id="legendController" />
+	<controllers:ModulesController id="modulesController" />
+	<controllers:MapController id="mapController" />
+	<controllers:TimeController id="timeController" />
+	
+	<controllers:HelpController id="helpController" />
+	<controllers:ApplicationStateController id="applicationStateController" />
+	
+	
+</swiz:BeanProvider>

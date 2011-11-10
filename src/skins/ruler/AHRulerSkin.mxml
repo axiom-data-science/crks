@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx" 
+		width="100%"
+		height="100%"
+		xmlns:local="*" 
+		xmlns:timeline="com.axiomalaska.integratedlayers.views.test.timeline.*">
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("com.axiomalaska.integratedlayers.views.test.timeline.AHRuler")]
+	</fx:Metadata>
+	
+	<!-- Declaration for the dynamic SkinPart for tickline Labels --> 
+	<fx:Declarations>
+		<fx:Component id="tickLineLabel">
+			<timeline:AHLabelInstance text="Label" fontSize="11" fontWeight="normal"  />
+		</fx:Component>
+	</fx:Declarations>
+	
+	
+	<s:Group id="rulerGroup" width="100%" height="100%" clipAndEnableScrolling="true">
+		<timeline:DateBarGraphicElement
+			id="ruler"
+			width="100%"
+			height="100%"
+			divisions="24" 
+			subdivisions="4" 
+		>
+			<timeline:fill>
+				<s:LinearGradient rotation="90">
+					<s:GradientEntry color="0x2DF0FF" ratio="0" />
+					<s:GradientEntry color="0x1DE0EF" ratio="1" />
+				</s:LinearGradient>
+			</timeline:fill>
+			<timeline:stroke>
+				<s:SolidColorStroke color="0x2Da0aF" />
+			</timeline:stroke>
+		</timeline:DateBarGraphicElement>
+		<!--<timeline:AHRulerGraphicElement 
+			id="ruler" 
+			width="100%"
+			height="100%"
+			divisions="24" 
+			subdivisions="4" >
+			<timeline:fill>
+				<s:LinearGradient rotation="90">
+					<s:GradientEntry color="0x2DF0FF" ratio="0" />
+					<s:GradientEntry color="0x1DE0EF" ratio="1" />
+				</s:LinearGradient>
+			</timeline:fill>
+			<timeline:stroke>
+				<s:SolidColorStroke color="0x2Da0aF" />
+			</timeline:stroke>
+		</timeline:AHRulerGraphicElement>-->
+	</s:Group>
+	
+	
+</s:Skin>
+

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:List xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%"
+		minHeight="0" 
+		dragEnabled="true" dragMoveEnabled="true" dropEnabled="true" dragComplete="onDragComplete();"
+		>
+	
+	
+	
+	<fx:Script>
+		<![CDATA[
+			
+			import com.axiomalaska.crks.dto.LayerGroup;
+			protected function onDragComplete():void{
+				
+			}
+			
+			
+		]]>
+	</fx:Script>
+	<!--s:layout>
+	<s:VerticalLayout clipAndEnableScrolling="true" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" gap="0" variableRowHeight="true" horizontalAlign="justify"  />
+	</s:layout -->
+	<s:layout>
+		<s:VerticalLayout requestedMinRowCount="1" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" gap="2" />
+	</s:layout>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:itemRenderer>
+		<fx:Component>
+			<s:ItemRenderer>
+				<fx:Script>
+					<![CDATA[
+						import com.axiomalaska.crks.dto.LayerGroup;
+						import com.axiomalaska.crks.dto.Module;
+						
+						[Bindable]
+						public var module:Module;
+						
+						import com.axiomalaska.integratedlayers.views.panels.layer_groups.renderers.ActiveLayerGroupRenderer;
+						import com.axiomalaska.integratedlayers.views.panels.layer_groups.renderers.ActiveLayerGroupSingleLayerRenderer;
+						
+						protected function legendItemRendererFunction($layer_group:LayerGroup):ClassFactory{
+							var cl:Class = com.axiomalaska.integratedlayers.views.panels.layer_groups.renderers.ActiveLayerGroupRenderer;
+							if($layer_group.layers.length == 1){
+								cl = com.axiomalaska.integratedlayers.views.panels.layer_groups.renderers.ActiveLayerGroupSingleLayerRenderer;
+							}
+							return new ClassFactory(cl);
+						}
+						
+						override public function set data($data:Object):void{
+							super.data = $data;
+							if($data){
+								module = ($data as LayerGroup).module;
+							}
+						}
+						
+					]]>
+				</fx:Script>
+				
+				<!-- itemRendererFunction="legendItemRendererFunction" -->
+				<s:Label text="{module.label}" />
+				
+			</s:ItemRenderer>
+		</fx:Component>
+	</s:itemRenderer>
+</s:List>

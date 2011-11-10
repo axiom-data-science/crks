@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" width="100%"
+				autoDrawBackground="false" xmlns:fxg="assets.fxg.*" xmlns:ns="views.panels.layer_groups.*" xmlns:ns1="views.panels.layer_groups.icons.*" xmlns:legend="com.axiomalaska.integratedlayers.views.panels.legend.*" xmlns:icons="com.axiomalaska.integratedlayers.views.panels.layers.icons.*" xmlns:ns2="com.axiomalaska.integratedlayers.views.panels.layer_groups.*" xmlns:ns3="com.axiomalaska.integratedlayers.views.panels.layer_groups.icons.*">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.crks.dto.Layer;
+			
+			import com.axiomalaska.integratedlayers.events.LegendEvent;
+			
+			import com.axiomalaska.integratedlayers.map.IntegratedWMSGoogleLayer;
+			override public function set data($data:Object):void{
+				super.data = $data;
+				if($data){
+					layer = $data as Layer;
+				}
+			}
+			
+			[Bindable]
+			private var layer:Layer;
+
+		]]>
+	</fx:Script>
+
+	<!--s:states>
+		<s:State name="normal" />
+		<s:State name="hovered" />
+	</s:states-->
+	<!-- backgroundColor.hovered="0xEDEDED" -->
+	<s:BorderContainer width="100%" height="{contentHolder.height}" backgroundColor="0xE0E0E0" borderAlpha="0" borderVisible="false">
+		<!--<s:filters>
+			<mx:BevelFilter blurX="2" blurY="2" highlightColor="0xFFFFFF" shadowColor="0xCCCCCC" />
+		</s:filters>-->
+	</s:BorderContainer>
+	<s:HGroup width="100%" id="contentHolder" paddingLeft="5" paddingRight="3" paddingTop="2" paddingBottom="2" minHeight="23" verticalAlign="middle">
+		<icons:LayerLoadingIcon visible="{(layer.mapLayer as IntegratedWMSGoogleLayer).loading}" />
+		<legend:LayerVisibilityToggle layer="{layer}" />
+		<ns2:LayerOutput layer="{layer}" />
+		<ns3:SpatialExtentZoomIcon spatial_extent_item="{layer}" />
+		<icons:LayerWrenchIcon layer="{layer}" />
+		<ns3:MetaDataItemHelpIcon meta_data_item="{layer}" />
+	</s:HGroup>
+</s:ItemRenderer>

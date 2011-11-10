@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		   xmlns:s="library://ns.adobe.com/flex/spark" 
+		   xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:fxg="assets.fxg.*" xmlns:ns="views.panels.layer_groups.icons.*" xmlns:ns1="com.axiomalaska.integratedlayers.views.panels.layer_groups.icons.*">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.crks.dto.LayerGroup;
+			import com.axiomalaska.crks.helpers.LayerTypes;
+			/*
+			private var _layer_group:LayerGroup;
+			
+			
+			[Bindable]
+			public function set layer_group($layer_group:LayerGroup):void{
+				_layer_group = $layer_group;
+				var clr:uint;
+				
+				
+				if(layer_group.layerType.type == LayerTypes.DATA_LAYER_TYPE){
+					
+					
+					
+				}else if(layer_group.layerType.type == LayerTypes.VECTOR_LAYER_TYPE){
+					
+					clr = 0x660000;
+					//var v:VectorIcon = new VectorIcon();
+					//icon.addElement(v);
+					
+				}else if(layer_group.layerType.type == LayerTypes.RASTER_LAYER_TYPE){
+					clr = 0x006699;
+					//var r:RasterIcon = new RasterIcon();
+					//icon.addElement(r);
+				}
+				
+				if(clr){
+					var trans:ColorTransform = new ColorTransform();
+					trans.color = clr;
+					icon.transform.colorTransform = trans;
+				}
+				
+				
+				
+				
+				_layer_type = $layer_type;
+				trace(_layer_type);
+				if(_layer_type){
+					
+					trace('color was ' + color);
+					
+					if(_layer_type == LayerTypes.DATA_LAYER_TYPE){
+						color = 0x33FF00;
+					}else if(_layer_type == LayerTypes.VECTOR_LAYER_TYPE){
+						color = 0x990000;
+					}else if(_layer_type == LayerTypes.RASTER_LAYER_TYPE){
+						color = 0x006699;
+					}
+					
+					
+					//ct.color = color;
+					
+					trace('color is ' + color);
+					
+					this.invalidateDisplayList();
+				}
+				
+			}
+			public function get layer_group():LayerGroup{
+				return _layer_group;
+			}*/
+			
+			[Bindable]
+			public var layer_group:LayerGroup;
+		
+
+		
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<ns1:LayerTypeIcon layer_type="{layer_group.layerType.type}"/>
+</s:Group>

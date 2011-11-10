@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%"
+		 minHeight="60" xmlns:components="com.patrickmowrer.components.*">	
+	<fx:Script>
+		<![CDATA[
+			import mx.events.CollectionEvent;
+			import mx.events.FlexEvent;
+			
+			[Bindable]
+			public var mindate:Date = new Date();
+			
+			[Bindable]
+			public var maxdate:Date = new Date(2020,1,1);
+			
+			[Bindable]
+			public var selecteddate:Date = new Date();
+			
+			protected function onValueCommit(event:FlexEvent):void
+			{
+				//trace('commit');
+			}
+			
+			protected function valuesUpdate(event:CollectionEvent):void
+			{
+				
+				//trace(mindate.getTime());
+				
+				if(sliderValues && sliderValues.source){
+					//trace('updated ' + sliderValues.source);
+				}
+				
+			}
+		]]>
+	</fx:Script>	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<s:ArrayCollection id="sliderValues" source="{slider.values}" collectionChange="valuesUpdate(event)" />
+	</fx:Declarations>
+	<s:layout>
+		<s:VerticalLayout paddingLeft="10" paddingRight="10" verticalAlign="middle" />
+	</s:layout>
+	<components:HSlider id="slider" styleName="dateSlider" minimum="{mindate.getTime()}" maximum="{maxdate.getTime()}" values="{[selecteddate.getTime()]}" width="100%" valueCommit="onValueCommit(event)" />
+</s:Panel>

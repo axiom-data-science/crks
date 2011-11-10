@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx">
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("spark.components.ToggleButton")]
+	</fx:Metadata>
+	
+	<!-- states !! -->
+	<s:states>  
+		<s:State name="disabled" />
+		<s:State name="down" />
+		<s:State name="over" />
+		<s:State name="up" />
+		<s:State name="disabledAndSelected" />
+		<s:State name="downAndSelected" /> 
+		<s:State name="overAndSelected" />
+		<s:State name="upAndSelected" />
+	</s:states>
+	
+	<!-- SkinParts
+	name=labelDisplay, type=spark.components.supportClasses.TextBase, required=false
+	-->
+	<s:Rect left="0" right="5" top="0" bottom="0" radiusX="5" radiusY="5">
+		<s:fill>
+			<s:LinearGradient rotation="90">
+				<s:GradientEntry 
+								
+					color="0xFFFFFF" 
+					color.downAndSelected="0xFFFFcc"
+					color.overAndSelected="0xFFFFcc"
+					color.upAndSelected="0xFFFFcc"
+					alpha="0" 
+					alpha.over="1" 
+					alpha.down="1"
+					alpha.downAndSelected="1"
+					alpha.overAndSelected="1"
+					alpha.upAndSelected="1"	 							 
+				/>
+				<s:GradientEntry 
+								color="0xffff99" 
+								color.downAndSelected="0xFFFF66"
+								color.overAndSelected="0xFFFF66"
+								color.upAndSelected="0xFFFF66"
+								alpha=".1"  
+								alpha.over="1" 
+								alpha.down="1" 
+								alpha.downAndSelected="1"
+								alpha.overAndSelected="1"
+								alpha.upAndSelected="1"
+				/>
+			</s:LinearGradient>
+		</s:fill>
+		<s:stroke>
+			<s:SolidColorStroke color="0x660000" color.up="0xFFFFFF" weight="2" />
+		</s:stroke>
+		<s:filters>
+			<s:DropShadowFilter blurX="0" blurY="3" angle="90"
+								alpha="0.5" distance="3" includeIn="over,down,downAndSelected,overAndSelected,upAndSelected" color="0x651717" />   
+		</s:filters>
+		
+	</s:Rect>
+	<s:Rect left="0" right="-5" top="0" bottom="-5">
+		<s:fill>
+			<s:LinearGradient>
+				<s:GradientEntry color="0xFFFFFF" alpha="1" />
+				<s:GradientEntry color="0xFFFFFF" alpha=".3" />
+			</s:LinearGradient>
+		</s:fill>
+	</s:Rect>
+	<s:Label id="labelDisplay" left="10" top="5" right="10" bottom="5" />
+</s:Skin>

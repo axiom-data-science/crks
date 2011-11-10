@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:fxg="assets.fxg.*" click="onClick(event)" xmlns:legend="com.axiomalaska.integratedlayers.views.panels.legend.*" buttonMode="true">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.crks.dto.Layer;
+			
+			import com.axiomalaska.integratedlayers.events.LayerEvent;
+			
+			import spark.components.PopUpAnchor;
+			
+			[Dispatcher]
+			public var dispatcher:IEventDispatcher;
+			
+			[Bindable]
+			public var layer:Layer;
+
+			protected function onClick(event:MouseEvent):void
+			{
+				if(!tools.displayPopUp){
+					tools.displayPopUp = true;
+					dispatcher.dispatchEvent(new LayerEvent(LayerEvent.HIDE_LAYER_TOOLS,layer));
+				}else{
+					tools.displayPopUp = false;
+				}
+			}
+			
+			[EventHandler("LayerEvent.HIDE_LAYER_TOOLS", properties="layer")]
+			public function otherToolsOpened($layer:Layer):void{
+				if($layer != layer){
+					tools.displayPopUp = false;
+				}
+			}
+
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fxg:wrenchsimple />
+	<legend:LayerTools id="tools" layer="{layer}" bottom="0" right="20"/>
+	<!--<s:PopUpAnchor id="tools" bottom="0" right="0">
+		<s:BorderContainer width="200" height="80" cornerRadius="5" borderAlpha=".5" dropShadowVisible="true">
+			<s:layout>
+				<s:VerticalLayout paddingLeft="10" paddingBottom="5" paddingRight="10" paddingTop="5" verticalAlign="middle" />
+			</s:layout>
+			<s:HGroup width="100%">
+				<s:Label text="Layer tools" fontSize="11" fontWeight="bold" width="100%" />
+				<s:Label text="x" fontSize="10" click="tools.displayPopUp = false;" buttonMode="true" />
+			</s:HGroup>
+			<s:HGroup width="100%" verticalAlign="middle">
+				<s:Label text="Alpha" />
+				<s:HSlider width="100%" maximum="100" minimum="0" value="@{layer.alpha}" />	
+			</s:HGroup>
+			<s:HGroup width="100%" verticalAlign="middle">
+				<s:Label text="Fill color" />
+				<mx:ColorPicker />
+			</s:HGroup>
+			
+		</s:BorderContainer>
+	</s:PopUpAnchor>-->
+</s:Group>

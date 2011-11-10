@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx">
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("com.axiomalaska.integratedlayers.views.panels.time_slider.SkinnableCompoundTimeLayer")]
+	</fx:Metadata>
+	<fx:Script>
+		<![CDATA[
+			override public function invalidateDisplayList():void{
+				//if(width > 0){
+					//trace('WIDTH = ' + width + ' CONTENTWIDTH = ' + contentWidth + ' GRAPHIC = ' + graphic.width + ' // ' + graphic.contentWidth);
+					if(hostComponent && hostComponent.layer && hostComponent.layer.hasTimeComponent && hostComponent.minTime && hostComponent.maxTime){
+						var pw:Number = timeLineContentDisplay.width;
+						var st:Number = pw * (hostComponent.layer.startTimeUtc.getTime() - hostComponent.minTime.getTime()) / (hostComponent.maxTime.getTime() - hostComponent.minTime.getTime());
+						var nd:Number = pw * (hostComponent.layer.endTimeUtc.getTime() - hostComponent.minTime.getTime()) / (hostComponent.maxTime.getTime() - hostComponent.minTime.getTime());
+						var sp:Sprite = new Sprite();
+						sp.graphics.clear();
+						sp.graphics.lineStyle(2,0xFFFFCC);
+						sp.graphics.moveTo(st,0);
+						sp.graphics.lineTo(nd,0);
+						while(path.numChildren > 0){
+							path.removeChildAt(0);
+						}
+						path.addChild(sp);
+						
+					}
+					/*
+					if(layer && layer.hasTimeComponent && timeData && timeData.minimum_date && timeData.maximum_date){
+						var pw:Number = lc.width;//(parentDocument as CompoundTimeSlider).sliceSlider.width;
+						var st:Number =  pw * (layer.startTimeUtc.getTime() - timeData.minimum_date.getTime()) / (timeData.maximum_date.getTime() - timeData.minimum_date.getTime());
+						var nd:Number = pw * (layer.endTimeUtc.getTime() - timeData.minimum_date.getTime()) / (timeData.maximum_date.getTime() - timeData.minimum_date.getTime())
+						pathData = 'M ' + st + ' 0 H ' + st + ' ' + nd;
+						path.invalidateDisplayList();
+						
+						var sp:Sprite = new Sprite();
+						sp.graphics.clear();
+						sp.graphics.lineStyle(2,0xFFFFCC);
+						sp.graphics.moveTo(st,0);
+						sp.graphics.lineTo(nd,0);
+						while(path.numChildren > 0){
+							path.removeChildAt(0);
+						}
+						path.addChild(sp);
+						
+					}
+					*/
+				//}
+			}
+		]]>
+	</fx:Script>
+	<s:Rect left="0" right="0" top="0" bottom="0">
+		<s:fill>
+			<s:SolidColor color="0xCCCCCC" alpha=".8"></s:SolidColor>
+		</s:fill>
+	</s:Rect>	
+	<s:HGroup paddingTop="5" paddingBottom="5" verticalAlign="middle">
+		<s:Group id="labelContentDisplay" width="150" />
+		<s:Graphic id="timeLineContentDisplay" width="100%">
+			<mx:UIComponent id="path" />
+		</s:Graphic>
+	</s:HGroup>
+</s:Skin>

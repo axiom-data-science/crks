@@ -1,0 +1,20 @@
+<swiz:BeanProvider 
+	xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:swiz="http://swiz.swizframework.org" >
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.integratedlayers.models.presentation_data.ApplicationData;
+			import com.axiomalaska.integratedlayers.models.presentation_data.LegendData;
+			import com.axiomalaska.integratedlayers.models.presentation_data.MapData;
+			import com.axiomalaska.integratedlayers.models.presentation_data.sensors.SensorLegendPM;
+			import com.axiomalaska.integratedlayers.models.presentation_data.TimeData;
+		]]>
+	</fx:Script>
+	
+	<swiz:Prototype type="{ApplicationData}" id="applicationData" singleton="true" />
+	<swiz:Prototype type="{MapData}" id="mapData" singleton="true" />
+	<swiz:Prototype type="{LegendData}" id="legendData" singleton="true" />
+	<swiz:Prototype type="{TimeData}" id="timeData" singleton="true" />
+	<swiz:Prototype type="{SensorLegendPM}" id="sensorLayerData" singleton="true" />
+	
+</swiz:BeanProvider>

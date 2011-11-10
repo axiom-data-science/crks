@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:ns="com.axiomalaska.charts.skins.graphical_elements.*">
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("com.axiomalaska.charts.axes.SkinnableChartBackground")]
+	</fx:Metadata>
+	
+	<!-- SkinParts
+	name=graphicalElement, type=com.axiomalaska.charts.skins.graphical_elements.AxiomChartGraphicalElement, required=false
+	name=graphicalElement, type=com.axiomalaska.charts.skins.graphical_elements.AxiomChartGraphicalElement, required=false
+	-->
+	<s:Group width="100%" height="100%" clipAndEnableScrolling="true">
+		<ns:HorizontalGridLines id="graphicalElement" width="100%" height="100%">
+			<ns:stroke>
+				<s:SolidColorStroke color="0x666666" weight="1" alpha=".3" />
+			</ns:stroke>
+		</ns:HorizontalGridLines>
+	</s:Group>
+</s:Skin>

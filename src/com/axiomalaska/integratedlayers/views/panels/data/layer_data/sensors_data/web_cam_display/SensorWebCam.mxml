@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" 
+		>
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.Station;
+			import com.axiomalaska.integratedlayers.utilities.ResultSetHelper;
+			import com.axiomalaska.models.ResultSet;
+			import com.axiomalaska.models.VariableDataDescriptor;
+			import com.axiomalaska.models.VariableDataDescriptorIndexType;
+			import com.axiomalaska.models.VariableDescriptorType;
+			
+			private var _result_set:ResultSet;
+			
+			public function set result_set($result_set:ResultSet):void{
+				if(_result_set != $result_set){
+					_result_set = $result_set;
+					
+					for(var index:String in result_set.collection){
+						var img:WebCam = new WebCam();
+						holder.addElement(img);
+						img.link_to_popup = true;
+						img.image_index = int(index);
+						img.result_set = _result_set;
+					}
+					
+					
+					
+					var source_keys:Array = ResultSetHelper.getVariableDescriptorTypeIndex(
+						result_set,
+						[VariableDescriptorType.SOURCE_DATA_URL],
+						[VariableDataDescriptorIndexType.SINGLE]
+					);
+					
+					
+					if(source_keys){
+						source_url = result_set.collection.getItemAt(0)[source_keys[0]];
+					}
+					
+					
+
+				}
+			}
+			public function get result_set():ResultSet{
+				return _result_set;
+			}
+			
+			[Bindable]
+			private var source_url:String;
+			
+			[Inject("applicationData.active_station")]
+			public var station:Station;
+			
+			private function goToSource():void{
+				navigateToURL(new URLRequest(source_url), '_blank');
+			}
+		]]>
+	</fx:Script>
+	<s:Scroller width="100%" height="100%" verticalScrollPolicy="off" horizontalScrollPolicy="auto">
+		<s:HGroup id="holder" width="100%" height="100%" paddingBottom="5" />
+	</s:Scroller>
+	<s:HGroup>
+		
+		<s:Label text="Click on images for large version" fontSize="10"/>
+		
+		<!--<s:Label text="{'Original images available at ' + source_url}" 
+				 buttonMode="true" fontSize="10" color="0x006699" click="goToSource();"
+				 visible="{Boolean(source_url)}" includeInLayout="{Boolean(source_url)}" />-->
+		
+	</s:HGroup>
+	
+</s:VGroup>

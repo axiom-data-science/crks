@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx" height="100%" width="250" creationComplete="onCreated()" updateComplete="loadImage()">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.Station;
+			import com.axiomalaska.integratedlayers.utilities.ResultSetHelper;
+			import com.axiomalaska.models.ResultSet;
+			import com.axiomalaska.models.VariableDataDescriptor;
+			import com.axiomalaska.models.VariableDataDescriptorIndexType;
+			import com.axiomalaska.models.VariableDescriptorType;
+			
+			import mx.core.FlexGlobals;
+			private var _image_url:String;
+			
+			
+			[Bindable]
+			public var station:Station;
+
+			[Bindable]
+			public var data_age_string:String;
+			
+			[Bindable]
+			public var label:String;
+			
+			[Bindable]
+			public var loading:Boolean = true;
+			
+			
+			[Bindable]
+			public var image_index:int = 0;
+			
+			private var _result_set:ResultSet;
+			
+			[Bindable]
+			public function set result_set($result_set:ResultSet):void{
+				if(_result_set != $result_set){
+					_result_set = $result_set;
+					//trace('setting result set..');
+					getImageInfoFromResultSet()
+				}
+			}
+			public function get result_set():ResultSet{
+				return _result_set;
+			}
+			
+			private function getImageInfoFromResultSet():void{
+				if(result_set){
+					if(result_set.descriptors && result_set.descriptors[0] && result_set.descriptors[0].dataFields){
+						var image_key:String;
+						var label_key:String;
+						var time_key:String = result_set.descriptors[0].primaryKey;
+						
+						var image_keys:Array = ResultSetHelper.getVariableDescriptorTypeIndex(result_set,[VariableDescriptorType.WEB_CAM_URL],[VariableDataDescriptorIndexType.SINGLE]);
+						var label_keys:Array = ResultSetHelper.getVariableDescriptorTypeIndex(result_set,[VariableDescriptorType.LABEL],[VariableDataDescriptorIndexType.SINGLE]);
+						
+						if(image_keys){
+							image_key = image_keys[0];
+						}
+						if(label_keys){
+							label_key = label_keys[0];
+						}
+						
+						if(result_set.collection.getItemAt(image_index)){
+							var obj:Object = result_set.collection.getItemAt(image_index);
+							image_url = obj[image_key];
+							data_age_string = ResultSetHelper.getTimeSinceResult(result_set,int(image_key),image_index);
+							if(label_key){
+								label = obj[label_key];
+							}
+						}
+						
+					}
+				}
+			}
+			
+			[Bindable]
+			public var link_to_popup:Boolean = false;
+			
+			[Bindable]
+			public function set image_url($image_url:String):void{
+				if(_image_url != $image_url){
+					_image_url = $image_url;
+					//MAKE SURE NOT NULL
+					if(image_url){
+						_imageUpdate = true;
+						trace('image url set to ' + $image_url);
+						loadImage();
+					}
+					//loadImage(_image_url);
+				}
+			}
+			
+			public function get image_url():String{
+				return _image_url;
+			}
+			
+			private var loader:Loader = new Loader();
+			
+			private var _imageUpdate:Boolean = false;
+			
+			private function onCreated():void{
+				loadImage();
+			}
+			
+			private var orig_width:Number;
+			private var orig_height:Number;
+			private var ready:Boolean = false;
+			
+			public function loadImage():void{
+				
+				if(_imageUpdate === true && ready){
+					trace('loading ' + label);
+					loading = true;
+					loader.load(new URLRequest(image_url));
+					_imageUpdate = false;
+					
+					loader.contentLoaderInfo.addEventListener(Event.COMPLETE,function($evt:Event):void{
+						
+						if(loading){
+							loading = false;
+							loader.alpha = 0;
+							//trace('loaded ' + image_url);
+							
+							var _w:Number = loader.width;
+							var _h:Number = loader.height;
+							
+							orig_width = _w;
+							orig_height = _h;
+							
+							var _maxW:Number = img.width;
+							var _maxH:Number = img.height;
+							
+							var _nw:Number = _maxW;
+							var _nh:Number = (_h *_nw) / _w;
+							
+							if(_nh > (_maxH)){
+								_nh = _maxH;
+								_nw = (_w * _nh) / _h;
+							}
+							
+							loader.width = _nw;
+							loader.height = _nh;
+							
+							trace('SETTING WIDTH/HEIGHT TO ' + _nw + ' / ' + _nh + ' FOR ' + label);
+							
+							while(img.numChildren > 0){
+								img.removeChildAt(0);
+							}
+							
+							img.addChild(loader);
+							
+							loader.addEventListener(Event.ENTER_FRAME,fadeIn);
+							
+							function fadeIn($evt:Event):void{
+								if(loader.alpha <  1){
+									loader.alpha += .3;
+									//trace(image_url + ' ===> alpha = ' + loader.alpha);
+								}else{
+									loader.removeEventListener(Event.ENTER_FRAME,fadeIn);
+									//trace(image_url + ' DONE FADE');
+								}
+							}
+							
+							
+							if(link_to_popup){
+								img.toolTip = 'Click to enlarge image';
+								img.buttonMode = true;
+								loader.addEventListener(MouseEvent.CLICK,imageClick);
+							}
+							
+						}
+					}); 
+				}
+				
+				
+				function imageClick():void{
+					var window_width:Number = (FlexGlobals.topLevelApplication as DisplayObject).width;
+					var window_height:Number = (FlexGlobals.topLevelApplication as DisplayObject).height;
+					
+					var new_width:Number = orig_width + 50;
+					var new_height:Number = orig_height + 150;
+					
+					
+					if(new_width > (window_width - 50)){
+						new_width = window_width - 50;
+						new_height = new_width * (orig_height/orig_width);
+					}
+					
+					if(new_height > (window_height - 50)){
+						new_height = window_height - 50;
+						new_width = new_height * (orig_width/orig_height);
+					}
+					
+					var pop:WebCamPopup = new WebCamPopup();
+					pop.width = new_width;
+					pop.height = new_height;
+					pop.open();
+					if(station && station.label){
+						pop.title = station.label;
+					}
+					pop.image_index = image_index;
+					pop.result_set = result_set;
+					
+				}
+
+			}
+
+			
+			private var percent_image_loaded:Number;
+			
+			
+			
+		]]>
+	</fx:Script>
+
+	<s:VGroup width="100%" height="100%" visible="{!loading}">
+		<mx:UIComponent id="img" height="100%" width="100%" creationComplete="{ready = true;loadImage();}" />
+		<s:Label text="{data_age_string}" fontSize="10" color="0x999999" width="100%" />
+		<s:Label fontSize="11" text="{label}" width="100%" />
+	</s:VGroup>
+	
+	<s:VGroup verticalAlign="middle" horizontalAlign="center" width="100%" height="100%" visible="{loading}">
+		<mx:ProgressBar id="prog" width="50%" alpha=".7" label="Loading image" indeterminate="true" />
+	</s:VGroup>
+</s:Group>

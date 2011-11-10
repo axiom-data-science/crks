@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:HGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.RealTimeDataMarker;
+			import com.axiomalaska.integratedlayers.models.presentation_data.sensors.SensorLegendPM;
+			import com.greensock.TweenMax;
+			
+			[Dispatcher]
+			public var dispatcher:IEventDispatcher;
+			
+			[Bindable]
+			[Inject]
+			public var sensorLayerData:SensorLegendPM;
+			
+			[PostConstruct]
+			public function init():void{
+				var vectorMarker:RealTimeDataMarker = sensorLayerData.getMarker();
+				vectorMarker.setDataDisplayText('');
+				var sp:Sprite = vectorMarker.makeVectorWedge(30,0,40,20);
+				vectorMarker.vectorDataDisplay = sp;
+				vectorMarker.addChildAt(sp,0);
+				var dir:Number = 60;
+				
+				TweenMax.to(vectorMarker.vectorDataDisplay,2,{rotation:String(dir)});
+				addIcon(vectorMarker,vectorIcon);
+				
+			}
+			
+			private function addIcon($m:RealTimeDataMarker,$target:UIComponent):void{
+				$m.draw();
+				$m.x = $m.width/2;
+				//$m.y = $m.height/2;
+				$target.addChild($m);
+				$target.width = $m.width;
+				$target.height = $m.height;
+			}
+			
+			[Bindable]
+			private var tide_dt:BitmapData;
+			
+			
+		]]>
+	</fx:Script>
+	<s:HGroup width="100%">
+		<mx:UIComponent id="vectorIcon" />
+	</s:HGroup>
+</s:HGroup>

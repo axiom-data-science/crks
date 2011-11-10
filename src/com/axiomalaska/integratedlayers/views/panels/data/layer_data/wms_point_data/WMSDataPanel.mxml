@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:NavigatorContent xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					  xmlns:s="library://ns.adobe.com/flex/spark" 
+					  xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="com.axiomalaska.components.*" width="100%" height="100%"
+					  label="WMS Point Data">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.integratedlayers.events.WMSDataEvent;
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.integratedlayers.models.WMSInfoLayerResult;
+			import com.axiomalaska.integratedlayers.models.WMSRequest;
+			import com.axiomalaska.map.overlay.WMS;
+			import com.axiomalaska.crks.dto.Layer;
+			import com.axiomalaska.crks.dto.OgcLayer;
+			
+			import com.axiomalaska.integratedlayers.models.WMSGetInfoData;
+			
+			import mx.collections.ArrayCollection;
+			import mx.events.CollectionEvent;
+			
+			import spark.components.Label;
+			import spark.components.NavigatorContent;
+			
+			
+			private var _wms_info:WMSGetInfoData;
+			
+			[Bindable]
+			public function set wms_info($wms_info:WMSGetInfoData):void{
+				_wms_info = $wms_info;
+				if(vs){
+					vs.removeAllElements();
+				}
+				_wms_info.layer_results.addEventListener(CollectionEvent.COLLECTION_CHANGE,function($evt:CollectionEvent):void{
+					if($evt.kind == 'add'){
+						var content:WMSLayerData = new WMSLayerData();
+						var wms_info_result:WMSInfoLayerResult = $evt.currentTarget.getItemAt($evt.location) as WMSInfoLayerResult; 
+						content.data_collection =wms_info_result.data_collection;
+						content.layer = wms_info_result.layer;
+						content_to_add = content;
+						addContent();
+					}
+					
+					
+
+				});
+			}
+			public function get wms_info():WMSGetInfoData{
+				return _wms_info;
+			}
+			
+			
+			private var content_to_add:WMSLayerData;
+			
+			private function addContent():void{
+				if(vs && content_to_add){
+					vs.addElement(content_to_add);
+					if(vs.numElements == 1){
+						vs.selectedChild = content_to_add;
+						lb.selectedIndex = 0;
+					}
+					
+					content_to_add = null;
+					
+				}
+			}
+
+			
+		]]>
+	</fx:Script>
+	<components:IconPanel width="100%" height="100%">
+		<components:layout>
+			<s:VerticalLayout paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="10" />
+		</components:layout>
+		<components:titleBarIcons>
+			<s:HGroup width="100%" verticalAlign="middle">
+				<s:Label fontSize="13" fontWeight="bold" color="0xFFFFFF" text="{'Point feature data (' + wms_info.latlon.latitude + ',' + wms_info.latlon.longitude + ')'}" width="100%" />
+				<s:Label fontSize="14" fontWeight="bold" color="0xFFFFFF" text="X" buttonMode="true" click="dispatchEvent(new WMSDataEvent(WMSDataEvent.WMS_POINT_FEATURE_REMOVE_POINT))" />
+			</s:HGroup>
+		</components:titleBarIcons>
+		<s:VGroup width="100%" height="100%" verticalAlign="middle" horizontalAlign="center"
+				  visible="{wms_info.loading}" includeInLayout="{wms_info.loading}">
+			<mx:ProgressBar width="100" label="" indeterminate="true" />
+		</s:VGroup>
+		
+		<s:HGroup width="100%" visible="{Boolean(wms_info.message)}" includeInLayout="{Boolean(wms_info.message)}">
+			<s:Label text="{wms_info.message}" />
+		</s:HGroup>
+		
+		<s:VGroup width="100%" height="100%" visible="{Boolean(!wms_info.loading &amp;&amp; !wms_info.message)}" includeInLayout="{Boolean(!wms_info.loading &amp;&amp; !wms_info.message)}">
+			
+			<s:Scroller width="100%">
+				<s:HGroup width="100%">
+					<mx:LinkBar id="lb" dataProvider="{vs}" fontSize="10" />		
+				</s:HGroup>
+			</s:Scroller>
+			
+			<mx:ViewStack id="vs" height="100%" width="100%" creationComplete="addContent();"  />
+		</s:VGroup>
+	</components:IconPanel>
+	
+</s:NavigatorContent>

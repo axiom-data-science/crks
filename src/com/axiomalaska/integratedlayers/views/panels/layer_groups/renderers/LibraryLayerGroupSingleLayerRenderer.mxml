@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%"
+				autoDrawBackground="false" buttonMode="true" xmlns:modules="views.panels.modules.*" xmlns:ns="views.panels.layer_groups.*" xmlns:fxg="assets.fxg.*" xmlns:help="views.panels.help.*" xmlns:layers="com.axiomalaska.integratedlayers.views.panels.layers.*" xmlns:ns1="views.panels.layer_groups.icons.*" xmlns:ns2="com.axiomalaska.integratedlayers.views.panels.layer_groups.*" xmlns:ns3="com.axiomalaska.integratedlayers.views.panels.layer_groups.icons.*"
+				>
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.crks.dto.Layer;
+			import com.axiomalaska.crks.dto.LayerGroup;
+			import com.axiomalaska.crks.dto.VectorLayer;
+			import com.axiomalaska.crks.helpers.LayerTypes;
+			
+			import com.axiomalaska.integratedlayers.events.LayerGroupEvent;
+			import com.axiomalaska.integratedlayers.events.LegendEvent;
+			override public function set data($data:Object):void{
+				super.data = $data;
+				if($data){
+					layer_group = $data as LayerGroup;
+					if(layer_group.layers.length < 2){
+						if(layer_group.layers.length > 0){
+							single_layer = layer_group.layers[0];
+						}else{
+							trace(layer_group.label + ' DOSNT HAVE LAYERS!');
+						}
+					}
+				}
+			}
+			
+			[Bindable]
+			private var layer_group:LayerGroup;
+			
+			private var tempState:String = 'normal';
+			
+			[Bindable]
+			private var single_layer:Layer;
+			
+			private function loadLegendItem():void{
+				dispatchEvent(new LayerGroupEvent(LayerGroupEvent.LOAD_LAYER_GROUP,layer_group));
+				//dispatchEvent(new LegendEvent(LegendEvent.LOAD_LEGEND_ITEM,layer));
+			}
+			
+			override protected function getCurrentRendererState():String{
+				//trace('returning.. ' + tempState);
+				//trace(currentState);
+				return tempState;
+			}
+		]]>
+	</fx:Script>
+	
+	<!--s:Label left="5" right="5" top="3" bottom="3" text="{layer_group.label}" width="100%" click="loadLegendItem();"/-->
+	
+	<s:states>
+		<s:State name="normal" />
+		<s:State name="hovered" />
+	</s:states>
+	<s:BorderContainer width="100%" height="{contentHolder.height}" backgroundColor="0xE0E0E0" backgroundColor.hovered="0xEDEDED" cornerRadius="5" borderAlpha="0" borderVisible="false">
+		<s:filters>
+			<mx:BevelFilter blurX="4" blurY="4" highlightColor="0xFFFFFF" shadowColor="0xCCCCCC" />
+		</s:filters>
+	</s:BorderContainer>
+	<s:VGroup  id="contentHolder"  paddingLeft="10" paddingBottom="10" paddingRight="10" paddingTop="10" width="100%" verticalAlign="top">
+		<s:VGroup width="100%">
+			<ns2:ModuleLabel module="{layer_group.module}" />
+			<s:HGroup width="100%" verticalAlign="middle">
+				<ns3:LayerGroupIcon layer_group="{layer_group}" click="loadLegendItem();layerGroupLayerList.invalidateDisplayList();" buttonMode="true" />
+				<s:Label text="{layer_group.label}" left="5" maxDisplayedLines="2" fontSize="11" fontWeight="bold" width="100%"/>
+				<ns3:LayerGroupTimeIcon layer_group="{layer_group}" />
+				<ns3:LayerGroupHelpIcon layer_group="{layer_group}" />
+			</s:HGroup>
+			<!--s:Label text="{layer_group.layers.length  + ' layers'}" fontSize="10" buttonMode="true"
+			click="{layer_group.expanded ? layer_group.expanded = false : layer_group.expanded = true}"  /-->
+			<ns2:ActiveLayerGroupLayerList id="layerGroupLayerList" layer_group="{layer_group}" />
+		</s:VGroup>
+		<!--<ns:LayerOutput layer="{single_layer}" width="100%" visible="{Boolean(single_layer)}" includeInLayout="{Boolean(single_layer)}" />-->
+	</s:VGroup>	
+	
+</s:ItemRenderer>

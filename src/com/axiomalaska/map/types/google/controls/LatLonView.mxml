@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   xmlns:mx="library://ns.adobe.com/flex/mx" width="90" height="20" backgroundAlpha=".7" cornerRadius="4"
+				   mouseEnabled="false" mouseChildren="false">
+	<fx:Declarations>
+		<mx:NumberFormatter precision="2" id="formatter" />
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.google.maps.LatLng;
+			
+			
+			public function updateLatLng($latlng:LatLng):void{
+				var lat:Number = $latlng.lat();
+				var lon:Number = $latlng.lng();
+				
+				lat_lon = formatter.format(lat) + ',' + formatter.format(lon);
+			}
+			
+			[Bindable]
+			public var lat_lon:String;
+		]]>
+	</fx:Script>
+	<s:filters>
+		<s:DropShadowFilter blurX="2" blurY="2" strength=".4" />
+	</s:filters>
+	<s:layout>
+		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center" />
+	</s:layout>
+	<s:Label fontSize="11" text="{lat_lon}" />
+</s:BorderContainer>

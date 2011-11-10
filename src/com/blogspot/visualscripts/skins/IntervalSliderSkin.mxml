@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+Default skin for IntervalSlider
+middleTrack,thumb1,thumb2 components have their includeinLayout
+property set to false,
+thumb1,thumb2 have their x coordinate set to false by IntervalSlider.as
+Due to a bug in flex you must specify the width and height of these
+components.
+-->
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Metadata>
+		[HostComponent("com.blogspot.visualscripts.IntervalSlider")]
+	</fx:Metadata>
+	
+	<s:Rect width="100%" height="2" >
+		<s:fill>
+			<s:SolidColor color="0xCCCCCC" alpha=".3" />
+		</s:fill>
+	</s:Rect>
+	
+	<s:Group x="{thumb1.x}" width="{thumb2.x-thumb1.x}"
+			 height="7" id="middleTrack" buttonMode="true">
+		<s:Rect width="100%" height="100%">
+			<s:fill><s:SolidColor color="0xFF0000" /></s:fill>
+			<s:filters>
+				<s:DropShadowFilter />
+				<s:BevelFilter strength=".7" highlightAlpha=".3" />
+			</s:filters>
+		</s:Rect>
+	</s:Group>
+	
+	<!--
+	<mx:Image source="@Embed(source='E:/flex/SwizIntegratedMap/src/assets/images/carrot_up_red.png')"
+		id="thumb1" toolTip="{new Date(hostComponent.thumb1Value).toDateString()}" buttonMode="true"  alpha="0.8" />
+	<mx:Image source="@Embed(source='E:/flex/SwizIntegratedMap/src/assets/images/carrot_up_red.png')"
+		id="thumb2" toolTip="{new Date(hostComponent.thumb2Value).toDateString()}" buttonMode="true" alpha="0.8" />
+	-->
+	
+	
+	<s:Button id="thumb1" width="10" height="10" toolTip="{new Date(hostComponent.thumb1Value).toDateString()}" buttonMode="true"  skinClass="com.blogspot.visualscripts.skins.IntervalButtonArrowSkin"/>	
+	<s:Button id="thumb2" width="10" height="10" toolTip="{new Date(hostComponent.thumb2Value).toDateString()}" buttonMode="true" skinClass="com.blogspot.visualscripts.skins.IntervalButtonArrowSkin"/>
+	
+
+</s:Skin>

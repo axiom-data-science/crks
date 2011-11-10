@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<control:Control xmlns:mx="http://www.adobe.com/2006/mxml"
+				 xmlns:control="org.openscales.component.control.*">
+	
+	<mx:Script>
+		<![CDATA[
+			import org.openscales.core.events.MapEvent;
+			import org.openscales.core.events.LayerEvent;
+			import org.openscales.core.basetypes.Pixel;
+			import org.openscales.core.Map;
+			import mx.events.SliderEvent;
+			
+			[Bindable] private var _toolTipZoomIn:String = "Zoom In";
+			[Bindable] private var _toolTipZoomOut:String = "Zoom Out";
+			[Bindable] private var _toolTipZoomSlider:String = "Set the scale of the map";
+			[Bindable] private var _showDataTip:Boolean = true;
+			
+			public function set showDataTip(value:String):void
+			{
+				if(value == true)
+				{
+					this._showDataTip = true;
+				}
+				else
+				{
+					this._showDataTip = false;
+				}
+			}
+			
+			
+			private function onZoomOutClick(event:MouseEvent):void{
+				this.map.zoom--;
+			}
+			
+			private function onZoomInClick(event:MouseEvent):void{
+				this.map.zoom++;
+			}
+			
+			public function onZoomSliderThumbPress(event:SliderEvent):void {
+				zoomSlider.removeEventListener(SliderEvent.CHANGE,this.zoomSliderChange);
+				zoomSlider.addEventListener(SliderEvent.THUMB_RELEASE,this.onZoomSliderThumbRelease);
+			}
+			
+			public function onZoomSliderThumbRelease(event:SliderEvent):void {
+				map.zoom = zoomSlider.value;
+				
+				if(map.zoom!=zoomSlider.value)  zoomSlider.value=map.zoom;
+				
+				zoomSlider.addEventListener(SliderEvent.CHANGE,this.zoomSliderChange);
+			}
+			
+			public function zoomSliderChange(event:Event):void {
+				map.zoom = zoomSlider.value;
+			}
+			
+			private function initializeZoomLevels(event:Event = null):void {
+				zoomSlider.maximum = map.baseLayer.maxZoomLevel;
+				zoomSlider.minimum = map.baseLayer.minZoomLevel;
+				zoomSlider.value = map.zoom;
+				zoomSlider.addEventListener(SliderEvent.CHANGE,this.zoomSliderChange);
+			}
+			
+			override public function set active(value:Boolean):void {
+				if(value) {					
+					map.addEventListener(LayerEvent.BASE_LAYER_CHANGED, this.initializeZoomLevels);
+					map.addEventListener(MapEvent.ZOOM_END, this.updateZoomLevels);
+					initializeZoomLevels();								
+				} else {
+					map.removeEventListener(LayerEvent.BASE_LAYER_CHANGED, this.initializeZoomLevels);
+					map.removeEventListener(MapEvent.ZOOM_END, this.updateZoomLevels);
+				}
+				super.active = value;
+			}
+			
+			private function updateZoomLevels(event:Event = null):void {
+				zoomSlider.value = map.zoom;
+			}
+			
+			public function set toolTipZoomIn(value:String):void{ 
+				this._toolTipZoomIn = value;
+			}
+			
+			public function set toolTipZoomOut(value:String):void{ 
+				this._toolTipZoomOut = value;
+			}
+			
+			public function set toolTipZoomSlider(value:String):void{ 
+				this._toolTipZoomSlider = value;
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:Style>
+		.zoomSliderStyle {
+		}
+	</mx:Style>
+	
+	<mx:HBox verticalAlign="middle">
+		
+		<mx:VBox height="100%" verticalAlign="top" horizontalAlign="center" verticalGap="0">
+			
+			<mx:Button id="zoomIn" styleName="zoomIn"
+					  toolTip="{this._toolTipZoomIn}"
+					  useHandCursor="true" buttonMode="true"
+					  click="this.onZoomInClick(event);" />
+			
+			
+			<mx:Button id="zoomOut" styleName="zoomOut"
+					   toolTip="{this._toolTipZoomOut}"
+					   useHandCursor="true" buttonMode="true"
+					   click="this.onZoomOutClick(event);" />
+			
+		</mx:VBox>
+		
+		<mx:VSlider id="zoomSlider"
+					toolTip="{this._toolTipZoomSlider}" styleName="zoom"
+					height="100"
+					liveDragging="true" allowTrackClick="true"
+					tickInterval="1" snapInterval="1" 
+					thumbPress="this.onZoomSliderThumbPress(event)"
+					useHandCursor="true" buttonMode="true" showDataTip="{this._showDataTip}"
+					/>
+		
+	</mx:HBox>
+	
+	<mx:Style>
+		@namespace mx "http://www.adobe.com/2006/mxml";
+		/*
+		.zoomOut
+		{
+			upSkin: Embed('E:/flex/AxiomMaps/src/assets/images/mapZoomOut-upskin.png');
+			overSkin: Embed('E:/flex/AxiomMaps/src/assets/images/mapZoomOut-upskin.png');
+			downSkin: Embed('E:/flex/AxiomMaps/src/assets/images/mapZoomOut-upskin.png');
+			disabledSkin: Embed('E:/flex/AxiomMaps/src/assets/images/mapZoomOut-upskin.png');
+		}
+		
+		.zoomIn
+		{
+			upSkin: Embed('E:/flex/AxiomMaps/src/assets/images/mapZoomIn-upskin.png');
+			overSkin: Embed('E:/flex/AxiomMaps/src/assets/images/mapZoomIn-upskin.png');
+			downSkin: Embed('E:/flex/AxiomMaps/src/assets/images/mapZoomIn-upskin.png');
+			disabledSkin: Embed('E:/flex/AxiomMaps/src/assets/images/mapZoomIn-upskin.png');
+		}
+		*/
+	</mx:Style>
+	
+</control:Control>

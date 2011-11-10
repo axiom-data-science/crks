@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base:SkinnableAxiomChartContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+								   xmlns:s="library://ns.adobe.com/flex/spark" 
+								   xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:base="com.axiomalaska.charts.base.*"
+								   skinClass="com.axiomalaska.charts.skins.DefaultAxiomChartContainerSkin">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<base:layout>
+		<s:VerticalLayout />
+	</base:layout> 
+</base:SkinnableAxiomChartContainer>

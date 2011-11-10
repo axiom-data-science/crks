@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base:AxiomChartContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						  xmlns:s="library://ns.adobe.com/flex/spark"
+						  xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:base="com.axiomalaska.charts.base.*" width="100%" height="100%"
+						 xmlns:scale="com.axiomalaska.charts.scale.*" xmlns:axes="com.axiomalaska.charts.axes.*" xmlns:implementations="com.axiomalaska.charts.implementations.*"
+						 styleName="sparkLine">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.charts.base.AxiomChartPlottableItem;
+			import com.axiomalaska.models.ResultSet;
+			
+			[Bindable]
+			public var result_set:ResultSet;
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<scale:LinearScale id="hs" dataProvider="{result_set.collection}" dataField="0" minLayout="0" maxLayout="{alc.width}" />
+		<scale:AxiomLinearScale id="vs" dataProvider="{result_set.collection}" dataField="1" minLayout="0" maxLayout="{alc.height}" />
+	</fx:Declarations>
+	
+	<base:horizontalAxes>
+		<axes:HorizontalTimeAxis id="horizontalAxis" minSegmentSize="75" scale="{hs}" visible="false" includeInLayout="false" />
+	</base:horizontalAxes>
+	<base:verticalAxes>
+		<axes:VerticalAxis id="verticalAxis" scale="{vs}" visible="false" includeInLayout="false" />
+	</base:verticalAxes>
+
+	<base:chartImplementations>
+		<implementations:AxiomLineChartImplementation lineColor="0x999999" lineWeight="3" id="alc" horizontalScale="{hs}" verticalScale="{vs}" dataProvider="{result_set.collection}"
+													  xField="{hs.dataField}" yField="{vs.dataField}" />
+		
+		
+	</base:chartImplementations>
+</base:AxiomChartContainer>

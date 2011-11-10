@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<components:IconPanel xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" title="{single_layer.label}"
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" xmlns:ns="com.axiomalaska.integratedlayers.views.panels.data.layer_data.filter.*" xmlns:ns1="com.axiomalaska.integratedlayers.views.panels.layer_groups.icons.*" xmlns:components="com.axiomalaska.components.*" xmlns:ns2="com.axiomalaska.integratedlayers.views.panels.data.layer_data.sensors_data.*" xmlns:ns3="com.axiomalaska.integratedlayers.views.panels.data.layer_data.sensors_data.legend.*">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.integratedlayers.events.DataLayerEvent;
+			import com.axiomalaska.integratedlayers.events.LayerGroupEvent;
+			import com.axiomalaska.integratedlayers.events.LegendEvent;
+			import com.axiomalaska.integratedlayers.map.IntegratedWMSGoogleLayer;
+			import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.SensorTypes;
+			import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.StationsDataLayer;
+			import com.axiomalaska.integratedlayers.models.presentation_data.sensors.SensorLegendPM;
+			import com.axiomalaska.integratedlayers.views.panels.help.ModuleHelp;
+			import com.axiomalaska.crks.dto.DataLayer;
+			import com.axiomalaska.crks.dto.Layer;
+			import com.axiomalaska.crks.dto.LayerGroup;
+			
+			import mx.collections.Sort;
+			
+			import spark.events.IndexChangeEvent;
+
+			
+			[Dispatcher]
+			public var dispatcher:IEventDispatcher;
+			
+			[Bindable]
+			public var single_layer:Layer;
+
+
+
+		]]>
+	</fx:Script>
+
+	<s:VGroup  id="contentHolder"  paddingLeft="10" paddingBottom="10" paddingRight="10" paddingTop="10" width="100%" height="100%">
+		<s:VGroup width="100%" height="100%">
+			<s:Label text="Sensor stations" fontSize="13" fontWeight="bold" />
+			<ns3:LegendIcons paddingBottom="20" />
+			<s:Label text="Sensor streaming" fontSize="13" fontWeight="bold" />
+			<ns2:SensorStreamingSettings stations_layer="{(single_layer as DataLayer).mapLayer as StationsDataLayer}" />
+			<s:Label text="Data filters" fontSize="13" fontWeight="bold" />
+			<s:TabBar fontSize="10" dataProvider="{vs}" />
+			<ns3:DataFilters id="vs" stations_layer="{(single_layer as DataLayer).mapLayer as StationsDataLayer}" height="100%" />
+		</s:VGroup>
+		<!--<ns:LayerOutput layer="{single_layer}" width="100%" visible="{Boolean(single_layer)}" includeInLayout="{Boolean(single_layer)}" />-->
+	</s:VGroup>	
+</components:IconPanel>

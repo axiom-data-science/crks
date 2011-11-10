@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" currentState="{layer_group.expanded ? 'expanded' : 'collapsed'}">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.crks.dto.LayerGroup;
+			
+			import com.axiomalaska.integratedlayers.events.LegendEvent;
+
+			[Bindable]
+			public var layer_group:LayerGroup;
+			
+			private function onReorderDone():void{
+				dispatchEvent(new LegendEvent(LegendEvent.LEGEND_REORDER_COMPLETE,null));
+				layersList.dropEnabled = false;
+			}
+
+			private function onReorderStart():void{
+				layersList.dropEnabled = true;
+			}
+			
+		]]>
+	</fx:Script>
+	<s:states>
+		<s:State name="collapsed" />
+		<s:State name="expanded" />
+	</s:states>
+	
+	<s:List width="100%" id="layersList" includeIn="expanded" borderAlpha="0" borderVisible="false"
+			dataProvider="{layer_group.layers}" itemRenderer="com.axiomalaska.integratedlayers.views.panels.layer_groups.renderers.LayerGroupLayerRenderer"
+			contentBackgroundAlpha="0" dragEnabled="true" dragMoveEnabled="true" dragStart="onReorderStart()" dragComplete="onReorderDone();">
+		<s:layout>
+			<s:VerticalLayout horizontalAlign="justify" variableRowHeight="true" clipAndEnableScrolling="true" paddingTop="5" paddingBottom="5" gap="1" />
+		</s:layout>
+	</s:List>
+	
+</s:VGroup>

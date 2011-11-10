@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						  xmlns:s="library://ns.adobe.com/flex/spark" 
+						  xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:base="com.axiomalaska.charts.base.*" width="100%" height="100%"
+						 xmlns:scale="com.axiomalaska.charts.scale.*" xmlns:axes="com.axiomalaska.charts.axes.*" xmlns:implementations="com.axiomalaska.charts.implementations.*" xmlns:ns="com.axiomalaska.integratedlayers.views.panels.data.layer_data.sensors_data.*">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.charts.base.AxiomChartPlottableItem;
+			import com.axiomalaska.integratedlayers.utilities.ResultSetHelper;
+			import com.axiomalaska.models.ResultSet;
+			import com.axiomalaska.models.VariableData;
+			import com.axiomalaska.models.VariableDataDescriptor;
+			import com.axiomalaska.models.VariableDataDescriptorIndexType;
+			import com.axiomalaska.models.VariableDescriptor;
+			import com.axiomalaska.models.VariableDescriptorType;
+			
+			import mx.collections.ArrayCollection;
+			
+			
+			private var _result_set:ResultSet;
+			
+			[Bindable]
+			public function set result_set($result_set:ResultSet):void{
+				if(_result_set != $result_set){
+					_result_set = $result_set;
+					
+					//null out the indexes..
+					valueYField = null;
+					value2YField = null;
+					maxYField = null;
+					minYField = null;
+					
+					var vdd:VariableDescriptor = result_set.descriptors[0] as VariableDescriptor;
+					
+					hsDataField = String(vdd.primaryKey);
+					
+					var vsDPSource:Array = [];
+					
+					for each(var dataField:VariableDataDescriptor in vdd.dataFields){
+
+						var vsInd:String;
+						var dirInd:String
+						for(var ind:String in dataField.indexes){
+							if(
+								dataField.indexes[ind] == VariableDataDescriptorIndexType.SINGLE || 
+								dataField.indexes[ind] == VariableDataDescriptorIndexType.MAGNITUDE
+							){
+								vsInd = ind;
+							}else if(dataField.indexes[ind] == VariableDataDescriptorIndexType.DIRECTION){
+								dirInd = ind;
+							}
+						}
+						
+						
+						
+						var lbl:String = (result_set.data[vsInd] as VariableData).metadata.label;
+						if((result_set.data[vsInd] as VariableData).metadata.unit){
+							lbl = lbl + ' (' + (result_set.data[vsInd] as VariableData).metadata.unit + ')';
+						}
+						
+						if(dataField.descriptorType == VariableDescriptorType.VALUE){
+							if(!valueYField){
+								valueYField = vsInd;
+								valueLabel = lbl;
+								valueDirField = dirInd;
+							}else{
+								value2YField = vsInd;
+								
+								value2Label = lbl;
+							}
+						}else if(dataField.descriptorType == VariableDescriptorType.AVG){
+							averageYField = vsInd;
+							averageLabel = lbl;
+						}else if(dataField.descriptorType == VariableDescriptorType.MIN){
+							minYField = vsInd;
+							minLabel = lbl;
+						}else if(dataField.descriptorType == VariableDescriptorType.MAX){
+							maxYField = vsInd;
+							maxLabel = lbl;
+						}
+						var arr:Array = result_set.data[vsInd].values;
+						vsDPSource = vsDPSource.concat(arr);
+							
+
+					}
+					
+					vsDataProvider = new ArrayCollection(vsDPSource);
+					
+					
+				}
+			}
+			public function get result_set():ResultSet{
+				return _result_set;
+			}
+			
+			private function onMouseMove($evt:MouseEvent):void{
+				var mousePoint:Point = new Point($evt.localX,$evt.localY);
+				var item:AxiomChartPlottableItem;
+				
+
+				
+				if(valueYField){
+					item = alc.getNearestPlottableItem(mousePoint);
+					selectedDate = item.value[hsDataField];
+					valueValue = item.value[valueYField];
+					
+
+					if(valueDirField){
+						valueDirection = item.value[valueDirField];
+					}
+				}
+				
+				if(value2YField){
+					if(!item){
+						item = alc2.getNearestPlottableItem(mousePoint);
+					}
+					value2Value = item.value[value2YField];
+				}
+				
+				if(minYField){
+					if(!item){
+						item = alcMin.getNearestPlottableItem(mousePoint);
+					}
+					minValue = item.value[minYField]
+				}
+				
+				if(maxYField){
+					if(!item){
+						item = alcMax.getNearestPlottableItem(mousePoint);
+					}
+					maxValue = item.value[maxYField];
+				}
+				
+				if(averageYField){
+					if(!item){
+						item = alcAv.getNearestPlottableItem(mousePoint);
+					}
+					averageValue = item.value[averageYField]
+				}
+				
+				if(item && item.point){
+					var pt:Point = item.point;
+					
+					verticalMouseIndicator.x = pt.x;
+					horizontalMouseIndicator.y = pt.y;
+					
+					graphMouseIndicator.x = pt.x - graphMouseIndicator.width/2;
+					graphMouseIndicator.y = pt.y - graphMouseIndicator.height/2;
+					
+					selectedDate = item.value[hsDataField];
+
+					
+					
+					var _x:Number = pt.x - graphLabel.width - 15;
+					if(_x < 0){
+						_x = pt.x + 15;
+					}
+					graphLabel.x = _x;
+					graphLabel.y = 5;
+					
+				}
+			}
+			
+			private function showMouseIndicators():void{
+				verticalMouseIndicator.visible = true;
+				horizontalMouseIndicator.visible = true;
+				graphMouseIndicator.visible = true;
+				graphLabel.visible = true;
+			}
+			
+			private function hideMouseIndicators():void{
+				verticalMouseIndicator.visible = false;
+				horizontalMouseIndicator.visible = false;
+				graphMouseIndicator.visible = false;
+				graphLabel.visible = false;
+			}
+			
+			
+			
+			[Bindable]
+			private var hsDataField:String;
+			
+			
+			[Bindable]
+			private var vsDataProvider:ArrayCollection = new ArrayCollection();
+			
+			[Bindable]
+			private var valueYField:String;
+			
+			[Bindable]
+			private var valueLabel:String;
+			
+			[Bindable]
+			private var valueValue:String;
+			
+			private var valueDirField:String;
+			
+			[Bindable]
+			private var valueDirection:Number;
+			
+			
+			[Bindable]
+			private var valueColor:uint = 0x333333;
+			
+			[Bindable]
+			private var value2YField:String;
+			
+			[Bindable]
+			private var value2Label:String;
+			
+			[Bindable]
+			private var value2Value:String;
+			
+			
+			[Bindable]
+			private var value2Color:uint = 0x003333;
+			
+			[Bindable]
+			private var averageYField:String;
+			
+			[Bindable]
+			private var averageLabel:String;
+			
+			[Bindable]
+			private var averageColor:uint = 0x999999;
+			
+			[Bindable]
+			private var averageValue:String;
+			
+			[Bindable]
+			private var minYField:String;
+			
+			[Bindable]
+			private var minLabel:String;
+			
+			[Bindable]
+			private var minColor:uint = 0x006699;
+			
+			[Bindable]
+			private var minValue:String;
+			
+			[Bindable]
+			private var maxYField:String;
+			
+			[Bindable]
+			private var maxLabel:String;
+			
+			[Bindable]
+			private var maxColor:uint = 0x990000;
+			
+			[Bindable]
+			private var maxValue:String;
+			
+			[Bindable]
+			private var selectedDate:Date;
+			
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<scale:LinearScale id="hs" dataProvider="{result_set.collection}" dataField="{hsDataField}" minLayout="0" maxLayout="{alc.width}" />
+		<scale:AxiomLinearScale id="vs" dataProvider="{vsDataProvider}" minLayout="0" maxLayout="{alc.height}" />
+	</fx:Declarations>
+	<s:HGroup width="100%" verticalAlign="middle" paddingLeft="8" paddingBottom="4" gap="8">
+		<ns:SensorChartLegendItem label="{valueLabel}" color="{valueColor}" />
+		<ns:SensorChartLegendItem label="{value2Label}" color="{value2Color}" />
+		<ns:SensorChartLegendItem label="{averageLabel}" color="{averageColor}" />
+		<ns:SensorChartLegendItem label="{minLabel}" color="{minColor}" />
+		<ns:SensorChartLegendItem label="{maxLabel}" color="{maxColor}" />
+	</s:HGroup>
+	<base:AxiomChartContainer width="100%" height="100%" id="chartContainer"						  
+		mouseOver="showMouseIndicators();" mouseOut="hideMouseIndicators();" mouseMove="onMouseMove(event)">
+
+		<base:horizontalAxes>
+			<axes:HorizontalTimeAxis id="horizontalAxis" minSegmentSize="200" scale="{hs}" />
+		</base:horizontalAxes>
+		<base:verticalAxes>
+			<axes:VerticalAxis id="verticalAxis" scale="{vs}" />
+		</base:verticalAxes>
+		<base:chartImplementations>
+			
+			<implementations:AxiomLineChartImplementation lineColor="{averageColor}" lineWeight="2" displayPoints="false" displayFill="true" dataProvider="{result_set.collection}" id="alcAv" horizontalScale="{hs}" verticalScale="{vs}"
+														  xField="{hs.dataField}" yField="{averageYField}" />
+
+			<implementations:AxiomLineChartImplementation lineColor="{minColor}" displayPoints="true" dataProvider="{result_set.collection}" id="alcMin" horizontalScale="{hs}" verticalScale="{vs}"
+														  xField="{hs.dataField}" yField="{minYField}" 
+														  skinClass="com.axiomalaska.charts.skins.AxiomPointChartImplementationSkin" />
+			
+			<implementations:AxiomLineChartImplementation lineColor="{maxColor}" displayPoints="true" dataProvider="{result_set.collection}" id="alcMax" horizontalScale="{hs}" verticalScale="{vs}"
+														  xField="{hs.dataField}" yField="{maxYField}" 
+														  skinClass="com.axiomalaska.charts.skins.AxiomPointChartImplementationSkin" />
+			
+			<implementations:AxiomLineChartImplementation lineColor="{valueColor}" displayPoints="true" dataProvider="{result_set.collection}" id="alc" horizontalScale="{hs}" verticalScale="{vs}"
+														  xField="{hs.dataField}" yField="{valueYField}" />
+			
+			<implementations:AxiomLineChartImplementation lineColor="{value2Color}" displayPoints="true" dataProvider="{result_set.collection}" id="alc2" horizontalScale="{hs}" verticalScale="{vs}"
+														  xField="{hs.dataField}" yField="{value2YField}" />
+			
+			
+			
+			
+		</base:chartImplementations>
+		<base:backgroundElements>
+			<s:Rect width="100%" height="100%">
+				<s:fill>
+					<s:LinearGradient rotation="270">
+						<s:GradientEntry color="0x999999" />
+						<s:GradientEntry color="0xEDEDED" />
+					</s:LinearGradient>
+				</s:fill>
+			</s:Rect>
+			<axes:SkinnableChartBackground width="100%" height="100%" axis="{horizontalAxis}" skinClass="com.axiomalaska.charts.skins.DefaultAxiomHorizontalBackgroundSkin" />
+			<axes:SkinnableChartBackground width="100%" height="100%" axis="{verticalAxis}" skinClass="com.axiomalaska.charts.skins.DefaultAxiomVerticalBackgroundSkin" />
+		</base:backgroundElements>
+		
+		<base:foregroundElements>
+			
+			
+			
+			<s:Rect width="1" height="100%" id="verticalMouseIndicator" visible="false">
+				<s:fill>
+					<s:SolidColor color="{valueColor}" alpha=".5" />
+				</s:fill>
+			</s:Rect>
+			
+			<s:Rect width="100%" height="1" id="horizontalMouseIndicator" visible="false">
+				<s:fill>
+					<s:SolidColor color="{valueColor}" alpha=".5" />
+				</s:fill>
+			</s:Rect>
+			
+			
+			<s:Ellipse visible="false" width="5" height="5" id="graphMouseIndicator">
+				<s:fill>
+					<s:SolidColor color="0xFF0000" />
+				</s:fill>
+				<s:filters>
+					<s:DropShadowFilter />
+				</s:filters>
+			</s:Ellipse>
+			
+			<s:BorderContainer width="230" minHeight="0" backgroundAlpha=".7"  id="graphLabel" visible="false" cornerRadius="4" dropShadowVisible="true">
+				<s:layout>
+					<s:VerticalLayout paddingLeft="5" paddingRight="5" paddingTop="5" paddingBottom="5" />
+				</s:layout>
+				<ns:SensorChartToolTip label="{valueLabel}" value="{valueValue}" vectorValue="{valueDirection}" color="{valueColor}" />
+				<ns:SensorChartToolTip label="{value2Label}" value="{value2Value}" color="{value2Color}" />
+				<ns:SensorChartToolTip label="{maxLabel}" value="{maxValue}" color="{maxColor}" />
+				<ns:SensorChartToolTip label="{minLabel}" value="{minValue}" color="{minColor}" />
+				<ns:SensorChartToolTip label="{averageLabel}" value="{averageValue}" color="{averageColor}" />
+				<s:Label text="{selectedDate.toLocaleString()}" fontSize="10" color="0x333333" />
+			</s:BorderContainer>
+
+
+			
+		</base:foregroundElements>
+		
+	</base:AxiomChartContainer>
+</s:VGroup>

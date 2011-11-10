@@ -1,0 +1,8 @@
+build.test.flex.host = 192.168.1.199
+build.test.flex.path = /var/www/crks-test
+build.test.flex.user = root
+build.test.flex.pass = PASSWORD
+build.live.flex.host = 192.168.1.199
+build.live.flex.path = /var/www/crks
+build.live.flex.user = root
+build.live.flex.pass = PASSWORD

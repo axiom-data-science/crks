@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="false" width="100%">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.integratedlayers.events.DataFilterEvent;
+			import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.Filterable;
+			import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.Source;
+			import com.axiomalaska.utilities.logos.SourceLogos;
+			
+			[Dispatcher]
+			public var dispatcher:IEventDispatcher;
+			
+			[Bindable]
+			private var filterable:Filterable;
+			
+			[Bindable]
+			private var icon:Class;
+			
+			override public function set data($data:Object):void{
+				super.data = $data;
+				if($data){
+					filterable = $data as Filterable;
+					if($data is Source){
+						icon = SourceLogos.findLogoClass(($data as Source).label);
+					}
+				}
+			}
+			
+			private function onHover():void{
+				hover_on  = true;
+				dispatcher.dispatchEvent(new DataFilterEvent(DataFilterEvent.HIGHLIGHT_FILTERABLE,filterable));
+			}
+			
+			private function onOut():void{
+				hover_on = false;
+				dispatcher.dispatchEvent(new DataFilterEvent(DataFilterEvent.UNHIGHLIGHT_FILTERABLE,filterable));
+			}
+			
+			private function checkboxClick():void{
+				dispatcher.dispatchEvent(new DataFilterEvent(DataFilterEvent.RUN_FILTER));
+			}
+			
+			[Bindable]
+			private var hover_on:Boolean = false;
+			
+
+			protected function uncheckAllButThis():void
+			{
+				dispatcher.dispatchEvent(new DataFilterEvent(DataFilterEvent.UNCHECKALL_BUT_SELECTED,filterable));
+			}
+
+		]]>
+	</fx:Script>
+	<s:Rect width="100%" height="100%" alpha="1">
+		<s:fill>
+			<s:SolidColor color="{hover_on ? 0xEDEDED : 0xE0E0E0}" />
+		</s:fill>
+		<s:filters>
+			<s:BevelFilter blurX="1" blurY="1" strength="{hover_on ? .2 : .1}" />
+		</s:filters>
+	</s:Rect>
+	<s:HGroup width="100%" height="100%" paddingBottom="5" paddingLeft="8" paddingRight="5" paddingTop="5" verticalAlign="middle"
+			  mouseOut="onOut();" mouseOver="onHover();" buttonMode="true">
+		<s:CheckBox selected="@{filterable.selected}" click="checkboxClick();" />
+		<s:HGroup height="100%" width="100%" verticalAlign="middle">
+			<mx:Image source="{icon}" visible="{Boolean(icon)}" includeInLayout="{Boolean(icon)}" />
+			<s:Label text="{filterable.label}" fontSize="12" width="100%" color="{filterable.selected ? 0x333333 : 0x999999} " />
+			<s:HGroup buttonMode="true" visible="{hover_on}" click="uncheckAllButThis()" verticalAlign="middle">
+				<s:Label text="Select only" fontSize="10" />
+				<s:CheckBox fontSize="10" enabled="false" selected="true" />
+			</s:HGroup>
+			
+		</s:HGroup>
+	</s:HGroup>
+	
+</s:ItemRenderer>

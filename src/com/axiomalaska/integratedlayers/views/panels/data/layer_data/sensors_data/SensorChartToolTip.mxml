@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:HGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   xmlns:mx="library://ns.adobe.com/flex/mx" width="100%"
+				   visible="{Boolean(label)}" includeInLayout="{Boolean(label)}" verticalAlign="middle" xmlns:fxg="assets.fxg.*" xmlns:ns="com.axiomalaska.integratedlayers.views.panels.data.layer_data.sensors_data.*">
+	
+	<fx:Script>
+		<![CDATA[
+			[Bindable]
+			public var color:uint;
+			
+			[Bindable]
+			public var label:String;
+			
+			[Bindable]
+			public var value:String;
+			
+			[Bindable]
+			public var vectorValue:Number;
+			
+		]]>
+	</fx:Script>
+	
+<!--  visible="{Boolean(vectorValue)}" includeInLayout="{Boolean(vectorValue)}" -->
+	
+	<s:HGroup width="100%" height="100%" verticalAlign="middle">
+		<s:Label fontSize="11" fontFamily="Arial" fontWeight="bold" color="{color}" text="{label}" width="100%" />
+		<s:Label fontSize="11" fontFamily="Arial" text="{value}" />
+	</s:HGroup>
+	<s:VGroup horizontalAlign="center" verticalAlign="middle" visible="{Boolean(vectorValue)}" includeInLayout="{Boolean(vectorValue)}">
+		<ns:WindDirectionIcon direction="{vectorValue}" arrowColor="{color}">
+			<ns:layout>
+				<s:HorizontalLayout verticalAlign="middle" /> 
+			</ns:layout>
+		</ns:WindDirectionIcon>
+	</s:VGroup>
+
+			  
+</s:HGroup>

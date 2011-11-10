@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:HGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="40"
+		  verticalAlign="middle" horizontalAlign="right" currentState="{Boolean(active_portal_modules.length > 0) ? currentState = 'loaded' : currentState = 'loading'}">
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			
+			[Bindable]
+			[Inject("applicationData.active_portal_modules")]
+			public var active_portal_modules:ArrayCollection;
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:states>
+		<s:State name="loading" />
+		<s:State name="loaded" />
+		<s:State name="active" />
+	</s:states>
+	
+	
+	<s:Scroller width="100%" height="100%" verticalScrollPolicy="off">
+		<s:HGroup width="100%" height="100%" verticalAlign="middle" horizontalAlign="right">
+			<!--<s:Label text="Modules" fontWeight="bold" fontSize="12" color="0xFFFFFF" visible.loading="false" />-->
+			<s:List height="100%" contentBackgroundAlpha="0" borderVisible="false" borderAlpha="0" dataProvider="{active_portal_modules}" itemRenderer="com.axiomalaska.integratedlayers.views.panels.modules.ModuleToolBarRenderer">
+				<s:layout>
+					<s:HorizontalLayout horizontalAlign="right" gap="0" />
+				</s:layout>
+			</s:List>	
+		</s:HGroup>
+	</s:Scroller>
+</s:HGroup>

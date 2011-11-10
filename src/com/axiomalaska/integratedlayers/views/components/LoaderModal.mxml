@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		   xmlns:s="library://ns.adobe.com/flex/spark" 
+		   xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%"
+		   backgroundColor="0xFFFFFF" backgroundAlpha=".7">
+	<fx:Script>
+		<![CDATA[
+			[Bindable]
+			public var loading_message:String = 'Loading data';
+			
+			[Bindable]
+			public var background_color1:uint = 0x000000;
+			
+			[Bindable]
+			public var background_color2:uint = 0x333333;
+			
+			[Bindable]
+			public var text_color:uint = 0xFFFFFF;
+		]]>
+	</fx:Script>
+	
+	<s:VGroup width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
+		<s:BorderContainer width="250" height="100" backgroundColor="0x7c694d" borderAlpha="0" cornerRadius="15" dropShadowVisible="true">
+			<s:backgroundFill>
+				<s:LinearGradient rotation="90">
+					<s:GradientEntry color="{background_color1}" />
+					<s:GradientEntry color="{background_color2}" />
+				</s:LinearGradient>
+			</s:backgroundFill>
+		</s:BorderContainer>
+	</s:VGroup>
+	<s:VGroup width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
+		<mx:ProgressBar id="loadBar" width="150" indeterminate="true" label="{loading_message}" color="{text_color}" labelPlacement="bottom" />
+	</s:VGroup>
+</mx:Canvas>

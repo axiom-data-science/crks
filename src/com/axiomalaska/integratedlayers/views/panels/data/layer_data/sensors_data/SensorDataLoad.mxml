@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:NavigatorContent
+		xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" 
+		 currentState="{request_event.data_request.loading === true ? 'loading' : 'loaded'}" 
+		 xmlns:ns="com.axiomalaska.integratedlayers.views.panels.data.layer_data.result_set_chart.*" 
+		 xmlns:ns1="com.axiomalaska.integratedlayers.views.panels.data.layer_data.sensors_data.*"
+		  label="{sensor.label}">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.integratedlayers.events.SensorEvent;
+			import com.axiomalaska.integratedlayers.models.DataRequest;
+			import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.Sensor;
+			import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.Station;
+			
+			[Bindable]
+			public var station:Station;
+			
+			[Bindable]
+			public var sensor:Sensor;
+			
+			
+			public var requested:Boolean = false;
+			
+			[Bindable]
+			public var request_event:SensorEvent;
+			
+			public function getSensorData():void{
+				if(station && sensor && !requested){
+					requested = true;
+					request_event = new SensorEvent(SensorEvent.REQUEST_SENSOR_DATA,station,sensor,true,{pastHours:168});
+					dispatchEvent(request_event);
+				}
+				
+			}
+			
+			[Bindable]
+			private var source_url:String;
+			
+			
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:VerticalLayout paddingLeft="5" paddingTop="5" paddingRight="5" paddingBottom="5" />
+	</s:layout>
+	<s:states>
+		<s:State name="loading" />
+		<s:State name="loaded" />
+	</s:states>
+	<s:VGroup includeIn="loading" width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
+		<mx:ProgressBar width="200" label="" indeterminate="true" />
+	</s:VGroup>
+	<s:VGroup width="100%" height="100%" includeIn="loaded">
+		
+		<mx:ViewStack width="100%" height="100%" id="vs">
+			<ns1:SensorDataGraphicalDisplay result_set="{request_event.data_request.result_set}" />
+			<s:NavigatorContent label="Data" width="100%" height="100%">
+				<mx:DataGrid dataProvider="{request_event.data_request.results}" width="100%" height="100%" />
+			</s:NavigatorContent>
+		</mx:ViewStack>
+		
+		
+		<s:HGroup width="100%" verticalAlign="bottom">
+			<mx:LinkBar dataProvider="{vs}" fontSize="10" verticalAlign="bottom" />
+			<ns1:SensorStationSourceLink result_set="{request_event.data_request.result_set}" />
+		</s:HGroup>
+		
+		
+	</s:VGroup>
+</s:NavigatorContent>

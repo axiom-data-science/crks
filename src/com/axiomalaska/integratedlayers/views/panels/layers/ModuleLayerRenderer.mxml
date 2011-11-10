@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="true">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.crks.dto.Layer;
+			
+			import com.axiomalaska.integratedlayers.events.LegendEvent;
+			override public function set data($data:Object):void{
+				super.data = $data;
+				if($data){
+					//module_layer = $data as ModuleLayer;
+				}
+			}
+			
+			//[Bindable]
+			//private var module_layer:ModuleLayer;
+			
+			private function loadLegendItem():void{
+				//dispatchEvent(new LegendEvent(LegendEvent.LOAD_LEGEND_ITEM,module_layer));
+			}
+		]]>
+	</fx:Script>
+	<!--
+	<s:Label left="5" right="5" top="3" bottom="3" text="{module_layer.layer.label}" width="100%" click="loadLegendItem();"/>
+	-->
+</s:ItemRenderer>

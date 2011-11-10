@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Graphic xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		   xmlns:s="library://ns.adobe.com/flex/spark" 
+		   xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:fxg="assets.fxg.*"
+		   visible="{layer_group.hasTimeComponent}" includeInLayout="{layer_group.hasTimeComponent}" xmlns:ns="views.panels.layer_groups.icons.*" xmlns:ns1="com.axiomalaska.integratedlayers.views.panels.layer_groups.icons.*">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.crks.dto.Layer;
+			import com.axiomalaska.crks.dto.LayerGroup;
+			[Bindable]
+			public var layer_group:LayerGroup;
+		]]>
+	</fx:Script>
+	<ns1:LayerTypeTimeIcon layer_type="{layer_group.layerType.type}" toolTip="{layer_group.startTimeUtc.toDateString() + ' - ' + layer_group.endTimeUtc.toDateString()}" />
+</s:Graphic>

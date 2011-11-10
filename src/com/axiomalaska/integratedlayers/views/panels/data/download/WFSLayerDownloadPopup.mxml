@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   xmlns:mx="library://ns.adobe.com/flex/mx" width="600" height="200" cornerRadius="10" dropShadowVisible="true" 
+				   mouseDownOutside="close();">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.map.interfaces.IOGCLayer;
+			import com.axiomalaska.models.SpatialBounds;
+			import com.axiomalaska.models.Temporal;
+			import com.axiomalaska.crks.dto.Layer;
+			import com.axiomalaska.crks.dto.LayerGroup;
+			import com.axiomalaska.crks.dto.OgcLayer;
+			import com.axiomalaska.crks.dto.VectorLayer;
+			
+			import com.axiomalaska.integratedlayers.models.WFSRequest;
+			import com.axiomalaska.integratedlayers.models.presentation_data.LegendData;
+			
+			import mx.collections.ArrayCollection;
+			import mx.core.FlexGlobals;
+			import mx.managers.PopUpManager;
+			
+			[Bindable]
+			public var layer:VectorLayer;
+			
+			public function open():void{
+				PopUpManager.addPopUp(this,FlexGlobals.topLevelApplication as DisplayObject,true);
+				PopUpManager.centerPopUp(this);
+				
+			}
+			
+			private function close():void{
+				PopUpManager.removePopUp(this);
+			}
+			
+			[Bindable]
+			public var wfs_types_collection:ArrayCollection = new ArrayCollection(
+				[
+					{label:'Excel',value:'excel'},	
+					{label:'CSV',value:'csv'},
+					{label:'Shape files (zip)',value:'SHAPE-ZIP'},
+					{label:'GML2',value:'GML2'},
+					{label:'GML2 (gzip)',value:'GML2-GZIP'},
+					{label:'GML3',value:'gml3'},
+					{label:'JSON',value:'json'}
+				]
+			);
+			
+			private function getDownload():void{
+				
+				
+				var _url:String = layer.wmsUrl.replace(/\/wms/,'/wfs') + '?service=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=' +  layer.ogcName + '&' + 
+					'OUTPUTFORMAT=' + download_type.selectedItem.value;
+				
+				navigateToURL(new URLRequest(_url),"_blank");
+				trace(_url);
+				//dispatcher.dispatchEvent(new TrackingEvent(TrackingEvent.TRACK_ACTION,'BIOTICS','Geoserver Download', layername + ' (' + download_type.selectedItem.value + '): ' + species.common_name));
+			}
+			
+			
+
+			
+			
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:layout>
+		<s:VerticalLayout gap="10" paddingLeft="20" paddingBottom="20" paddingTop="20" paddingRight="20" />
+	</s:layout>
+	<s:HGroup width="100%">
+		<s:Label text="{'Download: ' + layer.label}" fontWeight="bold" fontSize="16" width="100%" />
+		<mx:Image source="@Embed('E:/flex/AxiomMaps/src/assets/images/close.png')" buttonMode="true" click="close();" />
+	</s:HGroup>
+	
+	<s:HGroup width="100%" verticalAlign="middle">
+		<s:Label text="Output format:" fontSize="14" fontWeight="bold" />
+		<s:ComboBox 
+			id="download_type"
+			dataProvider="{wfs_types_collection}"
+			selectedIndex="0"
+			/>
+	</s:HGroup>
+	
+	<s:Button id="download_button" label="Download" buttonMode="true" fontSize="13" click="getDownload()" />
+
+	
+	
+</s:BorderContainer>

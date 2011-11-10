@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Graphic version="1.0" viewHeight="41.8789" viewWidth="37.498" ai:appVersion="14.0.0.367" d:id="1" xmlns="http://ns.adobe.com/fxg/2008" xmlns:ai="http://ns.adobe.com/ai/2008" xmlns:d="http://ns.adobe.com/fxg/2008/dt">
+  <Library/>
+  <Group d:id="2" d:type="layer" d:userLabel="Layer 1">
+    <Group>
+      <Group ai:knockout="0">
+        <Path winding="nonZero" ai:knockout="0" data="M3.84961 41.3789C1.7832 41.3789 0.5 39.6768 0.5 36.9385L0.5 4.93848C0.5 2.20117 1.7832 0.5 3.84961 0.5 4.71191 0.5 5.68945 0.801758 6.67773 1.37109L34.3906 17.3711C36.0723 18.3428 36.999 19.6104 36.999 20.9395 36.998 22.2686 36.0723 23.5352
+ 34.3906 24.5059L6.67773 40.5059C5.68945 41.0762 4.71094 41.3789 3.84961 41.3789L3.84961 41.3789Z" >
+          <fill>
+            <SolidColor color="#ffffff"/>
+          </fill>
+        </Path>
+        <Group ai:knockout="0">
+          <Path winding="nonZero" ai:knockout="0" data="M3.85059 1L3.85059 1C4.62402 1 5.51563 1.27832 6.42773 1.80469L34.1406 17.8047C35.6611 18.6826 36.499 19.7959 36.498 20.9395 36.498 22.082 35.6611 23.1953 34.1406 24.0723L6.42773 40.0723C5.51563 40.5996 4.62402 40.8789 3.84961 40.8789 2.06543
+ 40.8789 1 39.4053 1 36.9385L1 4.93848C1 2.47266 2.06543 1 3.85059 1M3.84961 0C1.57324 0.000976563 0 1.81348 0 4.93848L0 36.9385C0 40.0645 1.57227 41.8789 3.84961 41.8789 4.77734 41.8789 5.82422 41.5762 6.92773 40.9385L34.6406 24.9385C38.4512
+ 22.7393 38.4512 19.1396 34.6406 16.9385L6.92773 0.938477C5.82324 0.301758 4.77832 0 3.84961 0L3.84961 0Z" >
+            <fill>
+              <SolidColor color="#8c98a0"/>
+            </fill>
+          </Path>
+        </Group>
+      </Group>
+      <Group x="2.3457" y="18.1934" blendMode="screen" ai:knockout="0">
+        <Path winding="nonZero" ai:knockout="0" data="M31.293 0.477539L30.4629 0C31.0586 0.523438 31.3906 1.08203 31.3906 1.6084 31.3906 2.37598 30.709 3.20801 29.5156 3.89453L1.60742 20.0068C1.03711 20.3369 0.492188 20.5498 0 20.6387 0.261719 21.2188 0.710938 21.6855 1.50391 21.6855 2.10547
+ 21.6855 2.82227 21.4521 3.58203 21.0137L31.293 5.01465C32.4766 4.33301 33.1543 3.50488 33.1543 2.74609 33.1543 1.9873 32.4766 1.15918 31.293 0.477539Z" >
+          <fill>
+            <SolidColor color="#cccccc"/>
+          </fill>
+        </Path>
+      </Group>
+    </Group>
+  </Group>
+  <Private>
+    <ai:PrivateElement d:ref="#1">
+      <ai:SaveOptions>
+        <ai:Dictionary>
+          <ai:DictEntry name="includeXMP" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="writeImages" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="includeSymbol" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="versionKey" value="1" valueType="Integer"/>
+          <ai:DictEntry name="aiEditCap" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="preserveGradientPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="clipToActiveArtboard" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="downsampleLinkedImages" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="preserveTextPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="preserveFilterPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="rasterizeResolution" value="72" valueType="Integer"/>
+        </ai:Dictionary>
+      </ai:SaveOptions>
+      <ai:DocData base="goarrow.assets/images"/>
+      <ai:Artboards originOffsetH="467.219" originOffsetV="383.649" rulerCanvasDiffH="400.5" rulerCanvasDiffV="-399.5" zoom="1.24">
+        <ai:Artboard active="1" bottom="341.771" index="0" left="467.219" right="504.717" top="383.649"/>
+        <ai:ArtboardsParam all="0" range="" type="0"/>
+      </ai:Artboards>
+    </ai:PrivateElement>
+    <ai:PrivateElement d:ref="#2">
+      <ai:LayerOptions colorType="ThreeColor">
+        <ai:ThreeColor blue="257" green="128.502" red="79.31"/>
+      </ai:LayerOptions>
+    </ai:PrivateElement>
+  </Private>
+</Graphic>

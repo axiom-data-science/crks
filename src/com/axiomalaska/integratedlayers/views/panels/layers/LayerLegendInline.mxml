@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:fxg="assets.fxg.*">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.crks.dto.Layer;
+			
+			import com.axiomalaska.integratedlayers.views.panels.legend.ComplexSymbologyLegend;
+			[Bindable]
+			public var layer:Layer;
+			
+			
+			private var _complexSymbology:ComplexSymbologyLegend;
+			private function showComplexSymbology($evt:MouseEvent = null):void{
+				if(!_complexSymbology){
+					_complexSymbology = new ComplexSymbologyLegend();
+					_complexSymbology.loadLegend(layer);
+				}
+				
+				_complexSymbology.open($evt);
+				
+			}
+			
+			private function removeComplexSymbologyOnRollout():void{
+				if(_complexSymbology && !_complexSymbology.freezeOpen){
+					removeComplexSymbology();
+				}
+			}
+			
+			private function removeComplexSymbology():void{
+				if(_complexSymbology){
+					_complexSymbology.close();
+				}
+			}
+			
+			private function freezeComplexSymbology():void{
+				
+				if(!_complexSymbology){
+					showComplexSymbology();
+				}
+				_complexSymbology.freezeOpen = true;
+			}
+		]]>
+	</fx:Script>
+	<mx:Image source="{layer.getLegendImageUrl()}" 
+			  visible="{!layer.complexSymbology}" includeInLayout="{!layer.complexSymbology}"
+			  width="20" height="20">
+		<mx:filters>
+			<s:DropShadowFilter blurX="1" blurY="1" alpha=".2" />
+		</mx:filters>
+	</mx:Image>
+	<s:Group includeInLayout="{layer.complexSymbology}" visible="{layer.complexSymbology}" 
+			 mouseOver="showComplexSymbology(event)" mouseOut="removeComplexSymbologyOnRollout()" click="freezeComplexSymbology();" buttonMode="true">
+		<fxg:legendicon width="15" height="15" />	
+	</s:Group>
+</s:Group>

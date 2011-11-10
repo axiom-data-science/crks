@@ -1,0 +1,20 @@
+<swiz:BeanProvider 
+	xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:swiz="http://swiz.swizframework.org"
+	xmlns:service="service.*" 
+	xmlns:controller="controller.*" xmlns:services="com.axiomalaska.integratedlayers.services.*" xmlns:controllers="com.axiomalaska.integratedlayers.controllers.*" xmlns:dto="com.axiomalaska.crks.dto.*">
+	<fx:Script>
+		<![CDATA[
+			import com.axiomalaska.integratedlayers.models.AMFResultObject;
+			import com.axiomalaska.crks.dto.AmfDataService;
+		]]>
+	</fx:Script>
+	
+	<controllers:ServiceTestController id="serviceTestController" />
+	<services:DataLayerService id="dataLayerService" />
+	<swiz:ServiceHelper id="serviceHelper" />
+	
+	<dto:AmfDataService id="amfDataService" />
+	<swiz:Prototype type="{AMFResultObject}" id="resultObject" singleton="true" />
+	
+</swiz:BeanProvider>

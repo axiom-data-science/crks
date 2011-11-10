@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:maps="com.google.maps.*"  width="100%" height="100%" visible="{spacial_extent_item.hasBounds}" includeInLayout="{spacial_extent_item.hasBounds}">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+
+			import com.axiomalaska.crks.interfaces.ISpatialExtentItem;
+			import com.google.maps.LatLng;
+			import com.google.maps.LatLngBounds;
+			import com.google.maps.MapEvent;
+			import com.google.maps.overlays.Polygon;
+			
+			public var polygon:Polygon;
+			
+			private var _spacial_extent_item:ISpatialExtentItem;
+			
+			[Bindable]
+			public function set spacial_extent_item($spacial_extent_item:ISpatialExtentItem):void{
+				_spacial_extent_item = $spacial_extent_item;
+				buildMap();
+			}
+			public function get spacial_extent_item():ISpatialExtentItem{
+				return _spacial_extent_item;
+			}
+			
+			private var _mapInitialized:Boolean = false;
+			protected function mapInit():void{
+				_mapInitialized = true;
+				buildMap();
+			}
+			
+			protected function buildMap():void
+			{
+				if(spacial_extent_item && _mapInitialized){
+					if(spacial_extent_item.hasBounds){
+						
+						addPolygon(
+							spacial_extent_item.spatialBounds.noWrap().north_east.latitude,
+							spacial_extent_item.spatialBounds.noWrap().north_east.longitude,
+							spacial_extent_item.spatialBounds.noWrap().south_west.latitude,
+							spacial_extent_item.spatialBounds.noWrap().south_west.longitude
+						);
+					}
+					
+					
+					function addPolygon($maxLat:Number,$maxLng:Number,$minLat:Number,$minLng:Number):void{
+
+						
+						var bnds:LatLngBounds = new LatLngBounds();
+						bnds.extend(new LatLng($minLat,$minLng,true));
+						bnds.extend(new LatLng($maxLat,$maxLng,true));
+						
+						if(polygon){
+							map.removeOverlay(polygon);
+						}
+						
+						polygon = new Polygon([
+							new LatLng(bnds.getSouth(),$minLng,true),
+							new LatLng(bnds.getNorth(),$minLng,true),
+							new LatLng(bnds.getNorth(),$maxLng,true),
+							new LatLng(bnds.getSouth(),$maxLng,true),
+						]);
+						
+						
+					
+						map.addOverlay(polygon);
+						map.setCenter(polygon.getLatLngBounds().getCenter(),map.getBoundsZoomLevel(polygon.getLatLngBounds()) - 1);
+						
+						includeInLayout = true;
+						visible = true;
+						
+					}
+				}
+			}
+
+		]]>
+	</fx:Script>
+	<maps:Map id="map" mapevent_mapready="mapInit()" width="100%" height="100%">
+		<maps:filters>
+			<s:DropShadowFilter blurX="2" blurY="2" inner="true" alpha=".4" />
+		</maps:filters>
+	</maps:Map>
+</s:VGroup>

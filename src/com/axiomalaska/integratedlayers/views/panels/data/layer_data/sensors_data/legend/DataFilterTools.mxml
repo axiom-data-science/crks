@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx" width="100%">	
+		<fx:Script>
+			<![CDATA[
+				import com.axiomalaska.integratedlayers.events.DataFilterEvent;
+				import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.Filterable;
+				import com.axiomalaska.integratedlayers.models.layers.data.stations_layer.StationsDataLayer;
+				
+				import mx.collections.ArrayCollection;
+				
+				[Dispatcher]
+				public var dispatcher:IEventDispatcher;
+				
+				[Bindable]
+				public var stations_layer:StationsDataLayer;
+				
+				[Bindable]
+				public var collection:ArrayCollection;
+				
+				[Bindable]
+				public var search_string:String;
+				
+				private function runFilter():void{
+					dispatcher.dispatchEvent(new DataFilterEvent(DataFilterEvent.RUN_FILTER));
+				}
+				
+				private function uncheckAll():void{
+					for each(var filterable:Filterable in collection){
+						filterable.selected = false;
+					}
+					runFilter();
+					//dispatchEvent(new DataFilterEvent(DataFilterEvent.RUN_FILTER));
+				}
+				
+				private function checkAll():void{
+					for each(var filterable:Filterable in collection){
+						filterable.selected = true;
+					}
+					runFilter();
+					//dispatchEvent(new DataFilterEvent(DataFilterEvent.RUN_FILTER));
+				}
+				
+			]]>
+		</fx:Script>
+		<s:TextInput change="collection.refresh();runFilter()" text="@{search_string}" width="100%" fontSize="10" />
+		<s:HGroup width="100%">
+			<s:Label fontSize="10" text="Check all" buttonMode="true" click="checkAll()" /> 
+			<s:Label fontSize="11" text="|" color="0x999999" />
+			<s:Label fontSize="10" text="Uncheck all"  buttonMode="true" click="uncheckAll()"  />			
+		</s:HGroup>
+
+		
+</s:VGroup>
