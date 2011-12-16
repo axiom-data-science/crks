@@ -93,7 +93,7 @@
     </s:states>
     
 	
-	<mx:Image source="@Embed(source='E:/flex/SwizIntegratedMap/src/assets/images/carrot_down_red.png')" left="-10" />
+	<mx:Image source="@Embed(source='/assets/images/carrot_down_red.png')" left="-10" />
  
     
 </s:SparkSkin>

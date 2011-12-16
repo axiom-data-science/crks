@@ -586,7 +586,7 @@ package com.axiomalaska.integratedlayers.models.presentation_data
 		private function _makeStationsLayer($module:Module,$label:String = 'Sensors'):void{
 			var a:AmfDataService = new AmfDataService();
 			a.destination = 'StationSensorService';
-			//a.url = AppSettings.domain + '/sensorobservations/messagebroker/amf2';
+			
 			a.url = AppSettings.domain + '/stationsensorservice/messagebroker/amf2';
 			a.method = 'getStations';
 			

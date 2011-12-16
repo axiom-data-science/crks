@@ -37,5 +37,5 @@
 	</fx:Script>
 	<s:Label text="Source data available at:" color="0x333333" verticalAlign="top" fontSize="10" fontStyle="italic" />
 	<s:Label text="{source_url}" fontSize="10" color="0x006699" verticalAlign="top" />
-	<mx:Image source="@Embed('E:/flex/SwizIntegratedMap/src/assets/images/external.png')" />
+	<mx:Image source="@Embed('/assets/images/external.png')" />
 </s:HGroup>

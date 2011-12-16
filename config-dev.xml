@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--  see http://www.adobe.com/devnet/flex/articles/flex_streamline_project_environment.html -->
+<flex-config>
+    <compiler>
+    	<keep-as3-metadata name="URLMapping"/>
+        <define>
+            <name>CONFIG::RELEASE_VERSION</name>
+			<value>"false"</value>
+        </define>        
+        <define>
+            <name>CONFIG::SERVICES_DOMAIN</name>
+            <value>"http://192.168.1.199"</value>
+        </define>
+        <define>
+        	<name>CONFIG::SERVICES_PATH</name>
+        	<value>"/crks-service"</value>
+        </define>
+    </compiler>
+</flex-config>

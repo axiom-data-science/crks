@@ -4,15 +4,33 @@ can be loaded and manipulated simultaneously.
 
 ## Dependencies
 - Download swc files for following projects and place in libs directory
-- SWIZ Framework version 1.1 (swiz-framework-v1.0.0.swc) http://swizframework.org/
+- SWIZ Framework version 1.1 (swiz-framework-v1.3.1.swc) http://swizframework.org/
 - Google maps version 1.20 (map_flex_1_20.swc) http://code.google.com/apis/maps/documentation/flash/
 
+## Compiling with Flex SDK
+- Download the Flex 4.1 SDK (http://opensource.adobe.com/wiki/display/flexsdk/Download+Flex+4)
+- Unzip the sdk folder to a stable directory
+
+## Compiling with Flash Builder IDE
+- Install Flash Builder
+- Install Flex 4.1 SDK if it's not included with Flash Builder
+- In Flash Builder, create a new Flex project and choose the crks project directory
+- Choose Flex 4.1 SDK and no server technology, then press Next
+- Accept bin-debug as debug output, press Next
+- In the Library window, add the Swiz and Google Maps swcs
+- In the Main application file setting, choose CRKS.mxml
+- Choose finish
+- Open project properties, choose Flex Compiler pane, and set Additional compiler arguments to -load-config+=config-dev.xml
+- Adjust config-dev.xml settings as needed 
+
+## Apache Ant
+- Install Apache Ant if needed (note: Ant comes bundled with Eclipse, but the following jars still have to be added to the lib folder and Eclipse Ant classpath)
+- Copy flexTasks.jar from the Flex SDK's ant/lib folder or Flash Builder's sdks/4.1.0/ant/lib folder to Ant's lib folder
+- To enable remote deployment, download jsch.jar and place in Ant's lib folder
 
 ## Building 
-- Copy build.properties.example to build.properties and replace host environment variables.
-- Get new google api map key for host at http://code.google.com/apis/maps/signup.html
-- Be sure crossdomain.xml (html-template/crossdomain.xml) file is present at root (domain/crossdomain.xml).
+- Copy build.properties.example to build.properties and set variables to match deployment config
+- Get new google api map key for host at http://code.google.com/apis/maps/signup.html and set in build.properties
+- Be sure crossdomain.xml (html-template/crossdomain.xml) file is present at deployment webroot (www.yourdomain.com/crossdomain.xml).
   If deploying to root, file will be included automatically with build.
-- In build.xml, find compileCRKSToTarget task and replace mapKey (from above), servicesDomain and
-  servicesPath variables.
-- Run ant task deploy-flex-live to deploy project to server
+- Run Ant task deploy to deploy project to server

@@ -87,10 +87,13 @@ package com.axiomalaska.integratedlayers.controllers
 		}
 		
 		public function getApplicationData():void{
-			var portal_id:int = 10;//10
-			//var portal_id:int = 6;
+			var portal_id:int = 10;
+
 			if(FlexGlobals.topLevelApplication.parameters.hasOwnProperty('portal_id')){
-				portal_id = int(FlexGlobals.topLevelApplication.parameters.portal_id);
+				var flashvar_portal_id:int = int(FlexGlobals.topLevelApplication.parameters.portal_id);
+				if( flashvar_portal_id > 0 ){
+					portal_id = flashvar_portal_id;
+				}
 			}
 			serviceHelper.executeServiceCall(applicationService.getPortalMeta(portal_id),handlePortalMetaResult,handleError);
 			

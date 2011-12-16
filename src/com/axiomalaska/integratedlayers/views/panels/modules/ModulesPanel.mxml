@@ -49,7 +49,7 @@
 				<modules1:ModuleIcon module="{applicationData.active_module}" />
 				<s:Label text="{applicationData.active_module.label}" fontWeight="bold" color="0xFFFFFF" fontSize="13" width="100%" top="3" />
 				<ns1:MetaDataItemHelpIcon meta_data_item="{applicationData.active_module}" />
-				<mx:Image source="@Embed('E:/flex/AxiomMaps/src/assets/images/close.white.png')"  buttonMode="true" click="close()"/>
+				<mx:Image source="@Embed('/assets/images/close.white.png')"  buttonMode="true" click="close()"/>
 			</s:HGroup>
 			<components1:SpacialExtentOverviewMap spacial_extent_item="{applicationData.active_module}" height="120" />
 		</s:VGroup>

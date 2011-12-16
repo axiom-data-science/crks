@@ -216,7 +216,7 @@
 			<ns2:TimeSlider 
 				id="boundsSlider"
 				width="100%" buttonMode="true"
-				thumbSkin="@Embed(source='E:/flex/SwizIntegratedMap/src/assets/images/carrot_down_red.png')"
+				thumbSkin="@Embed(source='/assets/images/carrot_down_red.png')"
 				thumbCount="2"
 				values="{[
 				(boundedDates.startdate ? boundedDates.startdate.getTime() : 0),
@@ -269,7 +269,7 @@
 			<ns2:TimeSlider 
 				id="sliceSlider"
 				width="100%" buttonMode="true"
-				thumbSkin="@Embed(source='E:/flex/SwizIntegratedMap/src/assets/images/carrot_up_red.png')"
+				thumbSkin="@Embed(source='/assets/images/carrot_up_red.png')"
 				minimum="{minDate ? minDate.getTime() : 0}" maximum="{maxDate ? maxDate.getTime() : 0}" value="{sliceDate.getTime()}"
 				thumbPress="onStartSlide()" thumbRelease="onEndSliceSlide()" change="onSliceSliderChange();" updateComplete="_updateSkinValues();"
 				/>

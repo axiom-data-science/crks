@@ -29,13 +29,13 @@ package com.axiomalaska.map.types.google.controls
 		
 		public var tooltip:String = 'Test';
 		
-		[Embed(source='E:/flex/AxiomMaps/src/assets/images/google-maps-marquee-zoom-off.png')]
+		[Embed(source='/assets/images/google-maps-marquee-zoom-off.png')]
 		private var iconOff:Class;
 
-		[Embed(source='E:/flex/AxiomMaps/src/assets/images/google-maps-marquee-zoom-on.png')]
+		[Embed(source='/assets/images/google-maps-marquee-zoom-on.png')]
 		private var iconOn:Class;
 		
-		[Embed(source="E:/flex/AxiomMaps/src/assets/cursors/crosshair.png")]
+		[Embed(source="/assets/cursors/crosshair.png")]
 		private var crosshairCursor:Class;
 		
 		private var iconOnButton:Sprite = new Sprite();

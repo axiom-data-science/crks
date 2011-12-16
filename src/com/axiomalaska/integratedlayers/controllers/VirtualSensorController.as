@@ -50,11 +50,11 @@ package com.axiomalaska.integratedlayers.controllers
 		public var map:IMap;
 		public var marker:Marker;
 		
-		[Embed(source="E:/flex/AxiomMaps/src/assets/images/virtual-sensor-marker-icon.png")]
+		[Embed(source="/assets/images/virtual-sensor-marker-icon.png")]
 		[Bindable]
 		public var virtualSensorIcon:Class;
 		
-		[Embed(source="E:/flex/AxiomMaps/src/assets/images/virtual-sensor-cursor.png")]
+		[Embed(source="/assets/images/virtual-sensor-cursor.png")]
 		[Bindable]
 		private var cursor:Class;
 		

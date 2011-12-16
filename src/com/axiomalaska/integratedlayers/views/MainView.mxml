@@ -106,32 +106,32 @@
 			}
 			
 			
-			[Embed(source="E:/flex/AxiomMaps/src/assets/images/google-maps-marquee-download-off.png")]
+			[Embed(source="/assets/images/google-maps-marquee-download-off.png")]
 			[Bindable]
 			public var downloadOff:Class;
 
-			[Embed(source="E:/flex/AxiomMaps/src/assets/images/google-maps-marquee-download-on.png")]
+			[Embed(source="/assets/images/google-maps-marquee-download-on.png")]
 			[Bindable]
 			public var downloadOn:Class;
 			
-			[Embed(source="E:/flex/AxiomMaps/src/assets/images/google-maps-point-download-off.png")]
+			[Embed(source="/assets/images/google-maps-point-download-off.png")]
 			[Bindable]
 			public var pointDownloadOff:Class;
 			
-			[Embed(source="E:/flex/AxiomMaps/src/assets/images/google-maps-point-download-on.png")]
+			[Embed(source="/assets/images/google-maps-point-download-on.png")]
 			[Bindable]
 			public var pointDownloadOn:Class;
 			
 			[Bindable]
-			[Embed(source="E:/flex/AxiomMaps/src/assets/images/google-maps-virtual-sensor-tool-on.png")]
+			[Embed(source="/assets/images/google-maps-virtual-sensor-tool-on.png")]
 			public var virtualSensorOn:Class;
 			
 			[Bindable]
-			[Embed(source="E:/flex/AxiomMaps/src/assets/images/google-maps-virtual-sensor-tool-off.png")]
+			[Embed(source="/assets/images/google-maps-virtual-sensor-tool-off.png")]
 			public var virtualSensorOff:Class;
 			
 			[Bindable]
-			[Embed(source="E:/flex/AxiomMaps/src/assets/images/google-maps-screenshot-tool-off.png")]
+			[Embed(source="/assets/images/google-maps-screenshot-tool-off.png")]
 			public var screenShotOff:Class;
 			
 			private var mapPrint:MapPrint = new MapPrint();
@@ -145,7 +145,7 @@
 		<s:HGroup width="100%" height="100%" verticalAlign="middle" visible="{!applicationData.loading}">
 			<s:HGroup width="100%" height="100%" verticalAlign="middle">
 				<s:Label text="{applicationData.portal.label}" fontWeight="bold" fontSize="18" color="0xFFFFFF" />
-				<mx:Image source="@Embed('E:/flex/AxiomMaps/src/assets/images/help-small.png')" buttonMode="true" click="dispatchEvent(new HelpEvent(HelpEvent.SHOW_APPLICATION_HELP));"/>
+				<mx:Image source="@Embed('/assets/images/help-small.png')" buttonMode="true" click="dispatchEvent(new HelpEvent(HelpEvent.SHOW_APPLICATION_HELP));"/>
 			</s:HGroup>
 			
 			<!-- HACK! NEEDS TO MOVE IN TO DB -->

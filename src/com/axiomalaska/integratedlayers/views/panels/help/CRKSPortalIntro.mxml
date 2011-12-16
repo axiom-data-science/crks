@@ -12,7 +12,7 @@
 				'understand the Copper River Watershed. The purpose of CRKS is to facilitate the ' +
 				'exchange of information about the natural and human resources of the region.';
 			
-			[Embed(source="E:/flex/SwizIntegratedMap/src/assets/images/ecotrust.png")]
+			[Embed(source="/assets/images/ecotrust.png")]
 			[Bindable]
 			public var ecotrust_logo:Class;
 			
