@@ -1,7 +1,7 @@
 <project name="CRKS Build">
 	<property file="build.properties" />
-	<taskdef resource="flexTasks.tasks" />
 	<property name="FLEX_HOME" value="${flex.home}" />
+	<taskdef resource="flexTasks.tasks" />
 
 	<tstamp>
 		<format property="NOW" pattern="yyyy.MM.dd.hhmmss" />
