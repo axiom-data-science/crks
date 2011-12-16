@@ -21,9 +21,9 @@ can be loaded and manipulated simultaneously.
 - In the Library window, add the Swiz and Google Maps swcs
 - In the Main application file setting, choose CRKS.mxml
 - Choose finish
+- Copy config-dev.xml.example to config.dev.xml, adjust properties as needed for development environment
 - Open project properties, choose Flex Compiler pane, and set Additional compiler arguments to -load-config+=config-dev.xml
 - Copy the backup of index.template.html back into html-template/index.template.html (overwrite the generic version)
-- Adjust config-dev.xml settings as needed 
 
 ## Apache Ant
 - Install Apache Ant if needed (note: Ant comes bundled with Eclipse, but the following jars still have to be added to the lib folder and Eclipse Ant classpath)

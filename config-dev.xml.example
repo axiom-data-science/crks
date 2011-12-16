@@ -5,15 +5,15 @@
     	<keep-as3-metadata name="URLMapping"/>
         <define>
             <name>CONFIG::RELEASE_VERSION</name>
-			<value>"false"</value>
+            <value>"false"</value>
         </define>        
         <define>
             <name>CONFIG::SERVICES_DOMAIN</name>
-            <value>"http://192.168.1.199"</value>
+            <value>"http://data.crks.org/"</value>
         </define>
         <define>
-        	<name>CONFIG::SERVICES_PATH</name>
-        	<value>"/crks-service"</value>
+            <name>CONFIG::SERVICES_PATH</name>
+            <value>"/crks-service"</value>
         </define>
     </compiler>
 </flex-config>

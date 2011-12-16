@@ -7,3 +7,4 @@ build.properties
 .settings
 .actionScriptProperties
 .flexProperties
+config-dev.xml
