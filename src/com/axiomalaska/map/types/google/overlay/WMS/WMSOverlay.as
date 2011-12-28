@@ -17,8 +17,6 @@ package com.axiomalaska.map.types.google.overlay.WMS
 	import com.google.maps.overlays.Polygon;
 	import com.google.maps.overlays.PolygonOptions;
 	import com.google.maps.styles.FillStyle;
-	import com.greensock.*;
-	import com.greensock.easing.*;
 	
 	import flash.display.DisplayObject;
 	import flash.display.Loader;

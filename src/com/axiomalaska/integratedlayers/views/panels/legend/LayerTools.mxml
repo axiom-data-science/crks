@@ -61,7 +61,7 @@
 			<s:HSlider width="100%" maximum="100" minimum="0" value="@{layer.alpha}" />	
 		</s:HGroup>
 		<s:HGroup width="100%" verticalAlign="middle"  buttonMode="true" click="onDownloadLayerData()" visible="{layer is VectorLayer}" includeInLayout="{layer is VectorLayer}">
-			<mx:Image source="@Embed('E:/flex/AxiomMaps/src/assets/images/button_download_small.png')" />
+			<mx:Image source="@Embed('/assets/images/button_download_small.png')" />
 			<s:Label text="Download layer data" color="0x006699" fontSize="11" />
 		</s:HGroup>
 		<s:VGroup width="100%" verticalAlign="middle" buttonMode="true" click="onFilterDataLayer()" includeInLayout="{layer is DataLayer}" visible="{layer is DataLayer}">

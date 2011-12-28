@@ -178,7 +178,7 @@
 				
 				<ns2:TimeSlider 
 					id="boundedSlider"
-					thumbSkin="@Embed(source='E:/flex/SwizIntegratedMap/src/assets/images/carrot_down_red.png')"
+					thumbSkin="@Embed(source='/assets/images/carrot_down_red.png')"
 					showTrackHighlight="true"
 					thumbCount="2" values="{[
 					(timeData.minimum_date ? timeData.minimum_date.getTime() : 0),
@@ -223,7 +223,7 @@
 				<ns2:TimeSlider 
 					id="sliceSlider"
 					width="100%" 
-					thumbSkin="@Embed(source='E:/flex/SwizIntegratedMap/src/assets/images/carrot_up_red.png')"
+					thumbSkin="@Embed(source='/assets/images/carrot_up_red.png')"
 					minimum="{timeData.minimum_date.getTime()}" maximum="{timeData.maximum_date.getTime()}" value="{timeData.time_slice ? timeData.time_slice.getTime() : 0}"
 					thumbPress="onStartSlide()" thumbRelease="onEndSliceSlide()" change="onSliceSliderChange();"
 				/>

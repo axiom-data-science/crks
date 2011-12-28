@@ -47,11 +47,11 @@ package com.axiomalaska.integratedlayers.controllers
 		[Inject("mapData")]
 		public var mapData:MapData;
 		
-		[Embed(source="E:/flex/AxiomMaps/src/assets/images/wms-info-icon.png")]
+		[Embed(source="/assets/images/wms-info-icon.png")]
 		[Bindable]
 		public var wmsInfoIcon:Class;
 		
-		[Embed(source="E:/flex/AxiomMaps/src/assets/images/wms-info-cursor.png")]
+		[Embed(source="/assets/images/wms-info-cursor.png")]
 		[Bindable]
 		private var cursor:Class;
 		

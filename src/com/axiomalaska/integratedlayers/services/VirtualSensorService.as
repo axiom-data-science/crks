@@ -17,21 +17,22 @@ package com.axiomalaska.integratedlayers.services
 
 	public class VirtualSensorService
 	{
+		private var _ro:RemoteObject;		
 		
-		private var cs:ChannelSet = new ChannelSet();
-		private var amf:Channel = new AMFChannel('NetCDF',AppSettings.domain + '/virtualsensor/messagebroker/amf2/');
-		private var ro:RemoteObject = new RemoteObject();
-		
-		private var mockHelper:MockDelegateHelper;
-		
-		public function VirtualSensorService():void{
-			cs.addChannel(amf);
-			ro.channelSet = cs;
-			ro.showBusyCursor = true;
-			ro.destination = 'NetCDFService';
+		private function get ro():RemoteObject{
+			if( _ro == null ){
+				var amf:Channel = new AMFChannel('NetCDF',AppSettings.domain + '/virtualsensor/messagebroker/amf2/'); 
+				var cs:ChannelSet = new ChannelSet();
+				cs.addChannel(amf);
+				_ro = new RemoteObject();
+				_ro.channelSet = cs;
+				_ro.showBusyCursor = true;
+				_ro.destination = 'NetCDFService';
+			}
 			
+			return _ro;
 		}
-		
+				
 		public function getVirtualSensorData($layer_id:int,$spatial:Spatial,$time_bounds:Temporal = null):AsyncToken{
 			var _params:Array = [];
 			

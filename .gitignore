@@ -3,4 +3,8 @@ bin-debug
 bin-release
 target
 build.properties
-libs
+.project
+.settings
+.actionScriptProperties
+.flexProperties
+config-dev.xml

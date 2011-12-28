@@ -5,11 +5,5 @@
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
-	<!--<s:Ellipse width="15" height="15">
-		<s:fill>
-			<s:SolidColor color="0x330000" />
-		</s:fill>
-	</s:Ellipse>-->
-	<!--<mx:Image source="@Embed('E:/flex/AxiomMaps/src/assets/images/loader-small.gif')" />-->
 	<map:Spinner spinnerHighlightColor="0x999999" spinnerColor="0xCCCCCC" startImmediately="true" />
 </s:Group>

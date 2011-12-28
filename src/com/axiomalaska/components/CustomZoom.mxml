@@ -128,18 +128,18 @@
 		/*
 		.zoomOut
 		{
-			upSkin: Embed('E:/flex/AxiomMaps/src/assets/images/mapZoomOut-upskin.png');
-			overSkin: Embed('E:/flex/AxiomMaps/src/assets/images/mapZoomOut-upskin.png');
-			downSkin: Embed('E:/flex/AxiomMaps/src/assets/images/mapZoomOut-upskin.png');
-			disabledSkin: Embed('E:/flex/AxiomMaps/src/assets/images/mapZoomOut-upskin.png');
+			upSkin: Embed('assets/images/mapZoomOut-upskin.png');
+			overSkin: Embed('assets/images/mapZoomOut-upskin.png');
+			downSkin: Embed('assets/images/mapZoomOut-upskin.png');
+			disabledSkin: Embed('assets/images/mapZoomOut-upskin.png');
 		}
 		
 		.zoomIn
 		{
-			upSkin: Embed('E:/flex/AxiomMaps/src/assets/images/mapZoomIn-upskin.png');
-			overSkin: Embed('E:/flex/AxiomMaps/src/assets/images/mapZoomIn-upskin.png');
-			downSkin: Embed('E:/flex/AxiomMaps/src/assets/images/mapZoomIn-upskin.png');
-			disabledSkin: Embed('E:/flex/AxiomMaps/src/assets/images/mapZoomIn-upskin.png');
+			upSkin: Embed('assets/images/mapZoomIn-upskin.png');
+			overSkin: Embed('assets/images/mapZoomIn-upskin.png');
+			downSkin: Embed('assets/images/mapZoomIn-upskin.png');
+			disabledSkin: Embed('assets/images/mapZoomIn-upskin.png');
 		}
 		*/
 	</mx:Style>

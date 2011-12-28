@@ -1,8 +1,26 @@
-build.test.flex.host = 192.168.1.199
-build.test.flex.path = /var/www/crks-test
-build.test.flex.user = root
-build.test.flex.pass = PASSWORD
-build.live.flex.host = 192.168.1.199
-build.live.flex.path = /var/www/crks
-build.live.flex.user = root
-build.live.flex.pass = PASSWORD
+# the location of the target Flex SDK (inside Flash Builder folder if using Flash Builder) 
+flex.home = /home/user/flex/sdks/flex_sdk_4.1.0.16076A
+
+# directory containing swc libraries
+swc.dir = /home/user/flex/swcs
+
+# Google Maps API key
+mapKey = ABQIAAAAUENBTfn10ozNz_pTJYNI4xT3gXdlWssAMx7MYfe8zVOjezGVfhSGlArKRQ9zt-FXBZLbt_4uqNwSZA
+
+# Application page title
+pageTitle = Copper River Knowledge System Mapping Application
+
+# Root URL where Java metadata service is installed
+servicesDomain = http://data.crks.org/
+
+# Java metadata service path
+servicesPath = /crks-service
+
+# Portal ID in metadata database
+portalId = 10
+
+# SCP deployment settings 
+deploy.host = data.crks.org
+deploy.path = /var/www
+deploy.user = USER
+deploy.pass = PASSWORD

@@ -17,24 +17,23 @@ package com.axiomalaska.integratedlayers.services
 	import org.swizframework.utils.services.MockDelegateHelper;
 
 	public class ApplicationService
-	{
-		
-		private var cs:ChannelSet = new ChannelSet();
-		private var amf:Channel = new AMFChannel('crks-amf', AppSettings.domain + AppSettings.crks_service_path + '/messagebroker/amf');
-		private var ro:RemoteObject = new RemoteObject();
+	{		
+		private var _ro:RemoteObject;
 		private var crks_service:String = 'CrksService';
 		private var wfs_service:String = 'WfsProxy';
+		private var mockHelper:MockDelegateHelper = new MockDelegateHelper(true);
 		
-		
-		private var mockHelper:MockDelegateHelper;
-		
-		public function ApplicationService():void{
-			cs.addChannel(amf);
-			ro.channelSet = cs;
-			ro.showBusyCursor = true;
+		private function get ro():RemoteObject{
+			if( _ro == null ){
+				var amf:Channel = new AMFChannel('crks-amf', AppSettings.domain + AppSettings.crks_service_path + '/messagebroker/amf');			
+				var cs:ChannelSet = new ChannelSet();
+				cs.addChannel(amf);
+				_ro = new RemoteObject();
+				_ro.channelSet = cs;
+				_ro.showBusyCursor = true;				
+			}
 			
-			mockHelper = new MockDelegateHelper(true);
-			
+			return _ro;
 		}
 		
 		

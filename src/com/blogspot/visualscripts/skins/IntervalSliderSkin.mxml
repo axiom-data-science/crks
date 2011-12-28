@@ -32,9 +32,9 @@ components.
 	</s:Group>
 	
 	<!--
-	<mx:Image source="@Embed(source='E:/flex/SwizIntegratedMap/src/assets/images/carrot_up_red.png')"
+	<mx:Image source="@Embed(source='/assets/images/carrot_up_red.png')"
 		id="thumb1" toolTip="{new Date(hostComponent.thumb1Value).toDateString()}" buttonMode="true"  alpha="0.8" />
-	<mx:Image source="@Embed(source='E:/flex/SwizIntegratedMap/src/assets/images/carrot_up_red.png')"
+	<mx:Image source="@Embed(source='/assets/images/carrot_up_red.png')"
 		id="thumb2" toolTip="{new Date(hostComponent.thumb2Value).toDateString()}" buttonMode="true" alpha="0.8" />
 	-->
 	

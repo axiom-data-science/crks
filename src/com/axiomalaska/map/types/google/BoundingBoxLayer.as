@@ -33,7 +33,7 @@ package com.axiomalaska.map.types.google
 		public var modal:Sprite = new Sprite();
 		public var brdr:Sprite = new Sprite();
 		
-		[Embed(source="E:/flex/AxiomMaps/src/assets/utilities/draggable-corner.png")]
+		[Embed(source="/assets/utilities/draggable-corner.png")]
 		public var draggableCorner:Class;
 		
 		

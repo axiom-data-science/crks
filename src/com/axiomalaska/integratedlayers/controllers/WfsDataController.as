@@ -41,10 +41,10 @@ package com.axiomalaska.integratedlayers.controllers
 		
 		
 		
-		[Embed(source='E:/flex/AxiomMaps/src/assets/images/button_download_small.png')]
+		[Embed(source='/assets/images/button_download_small.png')]
 		private var downloadButton:Class;
 		
-		[Embed(source='E:/flex/AxiomMaps/src/assets/images/button_download_cursor.png')]
+		[Embed(source='/assets/images/button_download_cursor.png')]
 		private var cursor:Class;
 		
 		[Inject("mapData")]
@@ -164,7 +164,7 @@ package com.axiomalaska.integratedlayers.controllers
 			close.graphics.drawRect(0,0,20,20);
 			close.buttonMode = true;
 			
-			[Embed(source='E:/flex/AKNHP_Shared/src/aknhp/assets/images/close.png')]
+			[Embed(source='/assets/images/close.png')]
 			var closeButton:Class;
 			var cl:Sprite = new Sprite();
 			cl.addChild(new closeButton());
