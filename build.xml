@@ -2,6 +2,7 @@
 	<property file="build.properties" />
 	<property name="FLEX_HOME" value="${flex.home}" />
 	<taskdef resource="flexTasks.tasks" />
+	<taskdef name="mxmlc" classname="flex.ant.MxmlcTask" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
 
 	<tstamp>
 		<format property="NOW" pattern="yyyy.MM.dd.hhmmss" />
